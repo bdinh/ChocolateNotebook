@@ -5,8 +5,9 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import Journal from './Journal/Journal'
-
+import Journal from './Journal/Journal';
+import Subscription from './Subscription/Subscription';
+import Subscribe from './Subscription/Subscribe';
 
 class App extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Journal.css";
-import { Input, InputGroup,} from 'reactstrap';
+// import { Input, InputGroup,} from 'reactstrap';
 
 // Needs make new entry callback
 class Journal extends Component {
@@ -22,7 +22,7 @@ class JournalEntryItem extends Component {
       <div className="header-field">Kokoa Kamili 70% Dark Chocolate</div>
       <div className="header-field">11/18/2017</div>
       </div>
-      
+
       <div className="journal-entry-main">
       <div className="chocolate-detail">
       <i className="fa fa-globe" aria-label="Origin"></i><p> Africa </p>
@@ -35,7 +35,7 @@ class JournalEntryItem extends Component {
       <p>Tastes delicious! Best chocolate bar I've ever had!</p>
       </div>
       </div>
-      
+
       </div>
     );
   }
@@ -46,7 +46,7 @@ class NewJournalEntry extends Component {
   render() {
     return (
       <div className="App">
-      
+
       </div>
     );
   }
@@ -58,7 +58,7 @@ class PopupJournalPropertySelector extends Component {
   render() {
     return (
       <div className="App">
-      
+
       </div>
     );
   }
