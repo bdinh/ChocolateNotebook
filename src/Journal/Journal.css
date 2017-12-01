@@ -1,0 +1,53 @@
+:root {
+    --main-color: #7F524E;
+    --background-color: #5E7A99;
+    --accent-green: #CFD4AD;
+    --accent-pink: #CC9692;
+    --dark-blue: #55697F
+}
+
+#foo {
+    color: var(--main-color);
+}
+
+.journal-item {
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+    margin: 10%;
+    padding-bottom: 1%;
+}
+
+.journal-entry-header {
+    background-color: var(--main-color);
+    border-radius: 5px 5px 0 0;    
+    padding: 2%;   
+}
+
+.header-field {
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+    margin: 10px;
+    display: inline;
+    padding: 3px;
+}
+
+.journal-entry-main {
+
+}
+
+.chocolate-rating-text-container {
+    border: 1px solid var(--dark-blue);
+    border-radius: 5px;
+    padding-bottom: 5%;
+    margin: 0 10px 0 10px;
+}
+
+.chocolate-rating-text-container > p {
+    padding-left: 1%;
+    margin-top: .5%;
+}
+
+.chocolate-detail > p {
+    display: inline;
+    padding-left: 5%;
+}

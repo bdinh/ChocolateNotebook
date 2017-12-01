@@ -1,21 +1,19 @@
-.App {
-  text-align: center;
+:root {
+  --main-color: #7F524E;
+  --background-color: #5E7A99;
+  --accent-green: #CFD4AD;
+  --accent-pink: #CC9692;
+  --dark-blue: #55697F
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+body {
+  background-color: var(--background-color);  
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: var(--main-color);
+  height: 30px;
   padding: 20px;
   color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
 }
 
 .App-intro {
