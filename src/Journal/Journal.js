@@ -32,6 +32,7 @@ class SearchJournal extends Component {
       <span className="search-elements"> 
       <i className="fa fa-search" aria-hidden="true"></i>
       <p>Search Journal</p>
+      <input type="search" id="search-box" placeholder="Search..." />
       </span>
     );
   }
