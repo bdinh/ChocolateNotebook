@@ -2,6 +2,7 @@ body  {
   text-align: center;
   margin-left: 5rem;
   margin-right: 5rem;
+  font-size: 14pt;
 }
 
 h1  {
@@ -60,6 +61,7 @@ header  {
   margin-right: 5rem;
   background-color: var(--dark-blue);
   padding: 2rem;
+  font-size: 16pt;
 }
 
 button  {
@@ -71,6 +73,7 @@ button  {
   margin: 0.5rem;
   color: white;
   font-size: 12pt;
+  text-shadow: 0px 0.5px 5px #000000;
 }
 
 button:hover  {
@@ -91,6 +94,10 @@ button:active  {
 
 .confirmation h4 {
   font-size: 16pt;
+}
+
+.subscribe h2  {
+  color: white;
 }
 
 .subscribe h3  {

@@ -82,5 +82,5 @@ import './Subscription.css';
       );
     }
   }
-  
+
   export default Subscription;

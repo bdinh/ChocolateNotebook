@@ -17,6 +17,8 @@ class App extends Component {
         Home Chocobook Catalog Choco Box Login
         </header>
         <Journal />
+        <Subscription />
+        <Subscribe />
       </div>
     );
   }
