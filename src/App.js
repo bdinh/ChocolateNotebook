@@ -1,19 +1,25 @@
+// TO DO Componentss:
+  // Nav bar
+  // Footer
+  // Login / signup
+
 import React, { Component } from 'react';
 import './App.css';
+import Journal from './Journal/Journal'
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+        Home Chocobook Catalog Choco Box Login
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Journal />
       </div>
     );
   }
 }
+
 
 export default App;
