@@ -1,0 +1,89 @@
+body {
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
+
+.navbar {
+    background-color: rgba(127, 82, 78, 0.6);
+}
+
+.navbar-brand {
+    color: #FFFFFF;
+    
+}
+
+.test {
+    height: 100%;
+}
+
+.landing-image {
+    /*margin-top: 4em;*/
+    height: 800px;
+    width: 100%;
+    padding-top: 5em;
+    background-image: url("../img/hand-holding-coffee.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: left;
+}
+
+.quote {
+    margin-top: 1em;
+    width: 60%;
+    font-size: 3em;
+    margin-left: 2em;
+    margin-bottom: 0;
+}
+
+.cited {
+    font-size: 2em;
+    margin-left: 6em;
+}
+
+.login-button {
+    width: 15%;
+    background-color: transparent;
+    border: 3px solid #CFD4AD;
+    border-radius: 50px;
+}
+
+.get-started-button {
+    background-color: transparent;
+    border: 3px solid #CFD4AD;
+    border-radius: 50px;
+    width: 25%;
+    position: absolute;
+    bottom: 50px;
+    left: 38.5%;
+}
+
+.section-block {
+    height: 700px;
+    width: 100%;
+    text-align: left;
+    padding-top: 2em;
+    padding-left: 2em;
+}
+
+.our-story {
+    background-color: #7F524E;
+}
+
+.history {
+    background-color: #CFD4AD;
+}
+
+.section-title {
+    font-size: 2em;
+}
+
+.footer {
+    height: 200px;
+    width: 100%;
+    background-color: #CC9692;
+    text-align: left;
+    padding-top: 2em;
+    padding-left: 2em;
+}
+

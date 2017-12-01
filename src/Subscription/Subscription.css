@@ -1,14 +1,138 @@
-.cards  {
-  display: inline-flex;
-  margin-left: 3rem;
-  margin-right: 3rem;
+body  {
+  text-align: center;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  font-size: 14pt;
 }
 
-.card  {
-  border-style: groove;
-  border-width: thick;
-  padding: 2rem;
+h1  {
+  color: white;
 }
+p  {
+  color: white;
+}
+.cards  {
+  display: inline-flex;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+.card  {
+  margin: 1rem;
+}
+
+.card, .chocolate-card  {
+  background-color: white;
+  border-radius: 5px 5px 5px 5px;
+  padding: 1rem;
+}
+
+.chocolate-card   {
+  width: 250px;
+  margin: 0.2rem;
+}
+
+.chocolate-card p  {
+  color: black;
+  text-align: left;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.card p  {
+  color: black;
+}
+
+.learn-card  {
+  display: inline-flex;
+}
+
+header  {
+  margin-bottom: 2rem;
+}
+
+.description  {
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+.learn-more  {
+  margin-left: 5rem;
+  margin-right: 5rem;
+  background-color: var(--dark-blue);
+  padding: 2rem;
+  font-size: 16pt;
+}
+
 button  {
-  color: red;
+  color: black;
+  background-color: var(--accent-green);
+  border-radius: 5px 5px 5px 5px;
+  border: none;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  color: white;
+  font-size: 12pt;
+  text-shadow: 0px 0.5px 5px #000000;
+}
+
+button:hover  {
+  background-color: var(--accent-pink);
+}
+
+button:focus  {
+  outline: 0;
+}
+
+button:active  {
+  box-shadow: 0 0 1px 1px black inset;
+}
+
+.confirmation  {
+  margin: 2rem;
+}
+
+.confirmation h4 {
+  font-size: 16pt;
+}
+
+.subscribe h2  {
+  color: white;
+}
+
+.subscribe h3  {
+  font-size: 24pt;
+}
+
+input  {
+  padding: 0.25rem;
+  margin: 0.5rem;
+  border-radius: 5px 5px 5px 5px;
+  border-color: none;
+  font-size: 14pt;
+}
+
+ul  {
+  margin: 2rem;
+  text-align: left;
+}
+
+li  {
+  margin: 1rem;
+}
+
+label  {
+  color: white;
+}
+
+h3  {
+  color: white;
+}
+
+.row  {
+  display: inline-flex;
+}
+
+.choose  {
+  margin: 2rem;
 }
