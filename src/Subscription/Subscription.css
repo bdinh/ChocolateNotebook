@@ -1,0 +1,14 @@
+.cards  {
+  display: inline-flex;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.card  {
+  border-style: groove;
+  border-width: thick;
+  padding: 2rem;
+}
+button  {
+  color: red;
+}
