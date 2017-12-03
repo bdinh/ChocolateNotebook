@@ -15,13 +15,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/*<LandingPage/>*/}
-        {/*<MapView/>*/}
-        <header className="App-header">
+        {/* <LandingPage/> */}
+        {/* <MapView/> */}
+        {/*<header className="App-header">*/}
         {/*Home Chocobook Catalog Choco Box Login*/}
-        </header>
-        <JournalNewEntry />
-        {/*<Subscription />*/}
+        {/*</header>*/}
+        {/*<Journal />*/}
+        {/* <Subscription /> */}
         {/*<Subscribe />*/}
       </div>
     );
