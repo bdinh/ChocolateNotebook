@@ -12,6 +12,7 @@ import {Journal, JournalNewEntry} from './Journal/Journal';
 // import Subscribe from './Subscription/Subscribe';
 
 class App extends Component {
+
   render() {
     return (
       <div>

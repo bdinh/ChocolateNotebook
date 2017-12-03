@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import "./Journal.css";
-import { InputGroup, InputGroupAddon, Input, FormGroup } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input, FormGroup, Button } from 'reactstrap';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-
+import { addJournalEntry } from './CreateJournalEntry';
 
 const TASTINGNOTES = [
 	{ label: 'Chocolate', value: 'chocolate' },
@@ -45,13 +45,19 @@ export class Journal extends Component {
 }
 
 export class JournalNewEntry extends Component {
+  
+  // Call back to add new entry to database
+  addNewEntry(entryDetails) {
+    this.props.addEntryCallback(entryDetails);
+  }
+  
   render() {
     return (
       <div>
       <div className="entry-search-row" >
       <SearchJournal />
       </div>
-      <NewJournalEntryCard />
+      <NewJournalEntryCard newEntryCallback={(entryDetails) => this.addNewEntry(entryDetails)}/>
       </div>
     );
   }
@@ -59,20 +65,57 @@ export class JournalNewEntry extends Component {
 
 // Displays the input form for making a new journal entry
 class NewJournalEntryCard extends Component {
+  constructor() {
+    super();
+    this.producer = "none";
+    this.origin = "none";
+    this.tastingNotes;
+    this.rating = 0;
+    this.text = "";
+    this.date = "";
+    this.barName = "";
+  }
+  
+  // Update in response to textarea typing
+  updatePost(e) {
+    this.text = e.target.value;
+  }
+  
+  updateDateAndTitle (details) {
+    this.date = details.date;
+    this.barName = details.barName;
+  }
+  
+  updateChocolateDetails(details) {
+    this.origin = details.origin;
+    this.producer = details.producer;
+    this.tastingNotes = details.tastingNotes;
+  }
+  
+  updateRating(rating) {
+    this.rating = rating;
+  }
+  
+  addEntry(e) {
+    e.preventDefault();
+    addJournalEntry({producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
+    // Call w/ state and UID to createjournalentry
+  }
   
   render() {
     return (
       <div className="journal-item">
-      <NewJournalCardHeader  />
+      <NewJournalCardHeader  passUpStateCallback={(state) => this.updateDateAndTitle(state)}/>
       
       <div className="journal-entry-main">
       <div className="chocolate-detail-container">
-      <ChocolateDetailsEntry />
-      <p>Rating: <ChocolateRatingEntry /> </p>
+      <ChocolateDetailsEntry passUpStateCallback={(state) => this.updateChocolateDetails(state)}/>
+      <p>Rating: <ChocolateRatingEntry passUpStateCallback={(rating) => this.updateRating(rating)}/> </p>
       </div>
-      <textarea name="text" className="new-chocolate-rating-text-container" placeholder="What's Happening...?"
+      <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} />
       </div>
+      <button id="submit-entry-button" onClick={(e) => this.addEntry(e)}>Submit Entry</button>
       </div>
     );
   }
@@ -90,6 +133,7 @@ class ChocolateRatingEntry extends Component {
   updateRating(value, event) {
     event.preventDefault();
     this.setState({rating : value.num});
+    this.props.passUpStateCallback(value.num);
   }
   
   render() {
@@ -125,23 +169,19 @@ class ChocolateDetailsEntry extends Component {
   }
   
   handleSelectChangeNotes = (value) => {
-    console.log(value);
-    console.log(this.state);
-		this.setState({origin: this.state.origin, producer: this.state.producer, tastingNotes: value});
+    this.setState({origin: this.state.origin, producer: this.state.producer, tastingNotes: value});
   }
   
   updateValueOrigin = (origin) => {
-    console.log(origin);
-		this.setState({origin: origin, producer: this.state.producer, tastingNotes: this.state.tastingNotes});
+    this.setState({origin: origin, producer: this.state.producer, tastingNotes: this.state.tastingNotes});
   }
   
   updateValueProducer = (producer) => {
-    console.log(producer);
-		this.setState({origin: this.state.origin, producer: producer, tastingNotes: this.state.tastingNotes});
-	}
+    this.setState({origin: this.state.origin, producer: producer, tastingNotes: this.state.tastingNotes});
+  }
   
-  render() {
-    console.log(this.state);
+  render() {    
+    this.props.passUpStateCallback(this.state);
     
     return (
       <div className="chocolate-detail">
@@ -197,12 +237,31 @@ class ChocolateDetailsEntry extends Component {
 
 // Renders card header that info can be entered in
 class NewJournalCardHeader extends Component {
+  constructor() {
+    super();
+    this.state = {
+      date: "",
+      barName: ""
+    }
+  }
+  
+  handleChangeName(e) {
+    this.setState({date : this.state.date, barName : e.target.value});  
+    this.props.passUpStateCallback(this.state);
+  } 
+  
+  handleChangeDate(e) {
+    this.setState({date : e.target.value, barName : this.state.barName});
+    this.props.passUpStateCallback(this.state)
+  }
+  
+  
   render() {
     return(
       <div className="journal-new-entry-header">
       <InputGroup>
-      <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name"/>
-      <Input className="header-entry-field" placeholder="Date:       /        /  " aria-label="Input the date the bar was tasted"/>
+      <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
+      <Input className="header-entry-field" placeholder="Date:       /        /  " aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)}/>
       </InputGroup>
       </div>
     );
