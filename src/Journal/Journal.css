@@ -1,12 +1,3 @@
-:root {
-    --main-color: #7F524E;
-    --background-color: #5E7A99;
-    --accent-green: #CFD4AD;
-    --accent-pink: #CC9692;
-    --dark-blue: #55697F;
-    --font-color: #535353;
-}
-
 .journal-item {
     background-color: white;
     border-radius: 5px 5px 5px 5px;
@@ -21,6 +12,12 @@
     padding: 2%;   
 }
 
+.journal-new-entry-header {
+    background-color: var(--main-color);
+    border-radius: 5px 5px 0 0;    
+    padding: 1% 0 1% 3%;   
+}
+
 .header-field {
     background-color: white;
     border-radius: 5px 5px 5px 5px;
@@ -29,8 +26,16 @@
     padding: .7% .95% .7% .95%;
 }
 
+.header-entry-field {
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+    margin-right: 4%;
+    display: inline;
+    padding: .7% .95% .7% .95%;
+}
+
 .chocolate-rating-text-container {
-    border: 1px solid var(--accent-pink);
+    border: 1px solid var(--font-color);
     border-radius: 5px;
     padding-bottom: 5%;
     margin: 2% 2% 0 2%;
@@ -94,4 +99,23 @@
     font-weight: 500;
     vertical-align: middle;
     padding-left: 1%;
+}
+
+#search-box {
+    border-radius:15px; 
+	-moz-border-radius:15px; 
+    -webkit-border-radius:15px; 
+    padding:.5% 4% .5% 1%;
+    margin: 0 0 0 3%;
+}
+
+#bar-name-input-field {
+    padding-right: 8%;
+}
+
+.select-box {
+    width: 300px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 3%;
 }

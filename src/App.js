@@ -5,11 +5,11 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import LandingPage from './Landing/landingView'
-import MapView from './Map/mapView';
-import Journal from './Journal/Journal';
-import Subscription from './Subscription/Subscription';
-import Subscribe from './Subscription/Subscribe';
+// import LandingPage from './Landing/landingView'
+// import MapView from './Map/mapView';
+import {Journal, JournalNewEntry} from './Journal/Journal';
+// import Subscription from './Subscription/Subscription';
+// import Subscribe from './Subscription/Subscribe';
 
 class App extends Component {
 
