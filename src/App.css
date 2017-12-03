@@ -3,8 +3,10 @@
   --background-color: #5E7A99;
   --accent-green: #CFD4AD;
   --accent-pink: #CC9692;
-  --dark-blue: #55697F
+  --dark-blue: #55697F;
+  --font-color: #535353;
 }
+
 body {
   background-color: var(--background-color);
 }
@@ -14,13 +16,4 @@ body {
   height: 30px;
   padding: 20px;
   color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
