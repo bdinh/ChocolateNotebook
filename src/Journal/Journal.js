@@ -70,10 +70,8 @@ class NewJournalEntryCard extends Component {
       <ChocolateDetailsEntry />
       <p>Rating: <ChocolateRatingEntry /> </p>
       </div>
-      <textarea name="text" className="chocolate-rating-text-container" placeholder="What's Happening...?"
-      value={"E"}
+      <textarea name="text" className="new-chocolate-rating-text-container" placeholder="What's Happening...?"
       onChange={(e) => this.updatePost(e)} />
-
       </div>
       </div>
     );

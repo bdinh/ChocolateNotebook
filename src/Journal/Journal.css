@@ -39,11 +39,22 @@
     border-radius: 5px;
     padding-bottom: 5%;
     margin: 2% 2% 0 2%;
+    width: 96%;
+    font-size: 1em;
 }
-
-.chocolate-rating-text-container > p {
+.chocolate-rating-text-container > p {    
     padding-left: 1%;
     margin-top: .5%;    
+}
+
+
+.new-chocolate-rating-text-container {
+    border: 1px solid var(--font-color);
+    border-radius: 5px;
+    padding-bottom: 5%;
+    margin: 2% 2% 0 2%;
+    width: 96%;
+    font-size: 1em;
 }
 
 .chocolate-detail > p {
@@ -114,7 +125,7 @@
 }
 
 .select-box {
-    width: 300px;
+    width: 24%;
     display: inline-block;
     vertical-align: middle;
     padding-right: 3%;

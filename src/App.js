@@ -17,10 +17,10 @@ class App extends Component {
       <div>
         {/* <LandingPage/> */}
         {/* <MapView/> */}
-        {/*<header className="App-header">*/}
-        {/*Home Chocobook Catalog Choco Box Login*/}
-        {/*</header>*/}
-        {/*<Journal />*/}
+        <header className="App-header">
+        Home Chocobook Catalog Choco Box Login
+        </header>
+        <JournalNewEntry />
         {/* <Subscription /> */}
         {/*<Subscribe />*/}
       </div>
