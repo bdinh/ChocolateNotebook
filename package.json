@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
+    "firebase": "^4.7.0",
     "jquery": "^3.2.1",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",

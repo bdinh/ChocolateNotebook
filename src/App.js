@@ -12,14 +12,19 @@ import Subscription from './Subscription/Subscription';
 import Subscribe from './Subscription/Subscribe';
 
 class App extends Component {
+
+  handleSignUp(email, password)  {
+
+  }
+
   render() {
     return (
       <div>
         {/* <LandingPage/> */}
-        {/* <MapView/> */}
-        {/*<header className="App-header">*/}
-        {/*Home Chocobook Catalog Choco Box Login*/}
-        {/*</header>*/}
+        <MapView/>
+        {/* <header className="App-header">*/}
+        {/* Home Chocobook Catalog Choco Box Login */}
+        {/* </header> */}
         {/*<Journal />*/}
         {/* <Subscription /> */}
         {/*<Subscribe />*/}
