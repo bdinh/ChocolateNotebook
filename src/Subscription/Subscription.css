@@ -3,6 +3,7 @@ body  {
   margin-left: 5rem;
   margin-right: 5rem;
   font-size: 14pt;
+  background-color: var(--background-color);
 }
 
 h1  {
