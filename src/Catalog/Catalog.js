@@ -15,7 +15,7 @@ export class Catalog extends Component {
                     <div className="col-m-8">
                     <CatalogItem rating={3}/>
                     <CatalogItem />
-                    
+
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ class CatalogFilter extends Component {
 }
 
 export class CatalogItem extends Component {
-    
+
     render() {
         let itemName = this.props.item || "Item Name";
         return (
@@ -72,7 +72,7 @@ export class ProductPage extends Component {
     render() {
         return (
             <div>
-            
+
             </div>
         );
     }
@@ -104,7 +104,7 @@ class SearchCatalog extends Component {
           return(<i key={++i} className="fa fa-star-o" aria-hidden="true"></i>)
         }
       })
-      
+
       return (
         <span>
         {rating} {ratingStars}
@@ -112,3 +112,4 @@ class SearchCatalog extends Component {
       );
     }
   }
+export default Catalog;

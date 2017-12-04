@@ -5,7 +5,8 @@
 import Nav from './Nav/Nav';
 import React, { Component } from 'react';
 import './App.css';
-import LandingPage from './Landing/landingView'
+import LandingPage from './Landing/landingView';
+import Catalog from './Catalog/Catalog';
 // import MapView from './Map/mapView';
 import {Journal, JournalNewEntry} from './Journal/Journal';
 // import Subscription from './Subscription/Subscription';
@@ -95,7 +96,7 @@ class App extends Component {
       contents = (
         <div>
           <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
-          <Journal />
+          <Catalog />
         </div>
       );
     }
