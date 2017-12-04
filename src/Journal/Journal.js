@@ -4,30 +4,9 @@ import { InputGroup, InputGroupAddon, Input, FormGroup, Button } from 'reactstra
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { addJournalEntry } from './CreateJournalEntry';
-
-const TASTINGNOTES = [
-	{ label: 'Chocolate', value: 'chocolate' },
-	{ label: 'Vanilla', value: 'vanilla' },
-	{ label: 'Strawberry', value: 'strawberry' },
-	{ label: 'Caramel', value: 'caramel' },
-	{ label: 'Cookies and Cream', value: 'cookiescream' },
-	{ label: 'Peppermint', value: 'peppermint' },
-];
-
-
-const ORIGINS = [
-	{ label: 'Africa', value: 'africa' },
-	{ label: 'Madagascar', value: 'Madagascar' },
-  { label: 'Vietnam', value: 'vietnam' },
-  { label: 'Blend', value: 'blend' },
-];
-
-const PRODUCERS = [
-	{ label: 'Valrhona', value: 'valrhona' },
-	{ label: 'Dandelion Chocolate', value: 'dandelionchocolate' },
-  { label: 'Labooko', value: 'labooko' },
-  { label: 'Guittard', value: 'guittard' },
-];
+import { PRODUCERS } from '../RDataWrangling/AllProducerNames';
+import { ORIGINS } from '../RDataWrangling/AllRegionNames';
+import { TASTINGNOTES } from '../RDataWrangling/AllTastingNotes'
 
 // Needs make new entry callback
 export class Journal extends Component {
