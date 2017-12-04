@@ -107,7 +107,7 @@ class App extends Component {
       contents = (
         <div>
           <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
-          <Journal />
+          <NewJournalEntry />
         </div>
       );
     }

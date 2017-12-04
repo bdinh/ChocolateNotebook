@@ -299,7 +299,7 @@ class JournalEntryItem extends Component {
       <div className="chocolate-detail-container">
       <ChocolateDetailsStatic region={"Africa"} producer={"Kokoa Kamili"} tastingNotes={"Floral, Roasted, Buttery"} />
       
-      <p>Rating: <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i></p>
+      <p className="label-font">Rating: <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i></p>
       </div>
       <JournalTextHolder text={"Tastes delicious! Best chocolate bar I've ever had!"} />
       </div>
@@ -337,11 +337,11 @@ class ChocolateDetailsStatic extends Component {
   render() {
     return (
       <div className="chocolate-detail">
-      <i className="fa fa-globe" aria-label="Origin"></i><p>{this.props.region}</p>
-      <i className="fa fa-industry" aria-label="Producer"></i><p>{this.props.producer}
+      <i className="fa fa-globe" aria-label="Origin"></i><p className="label-font">{this.props.region}</p>
+      <i className="fa fa-industry" aria-label="Producer"></i><p className="label-font">{this.props.producer}
       </p>
       <i className="fa fa-sticky-note" aria-label="Tasting notes"></i>
-      <p>{this.props.tastingNotes}</p>
+      <p className="label-font">{this.props.tastingNotes}</p>
       </div>
     );
   }
