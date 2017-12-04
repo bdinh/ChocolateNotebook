@@ -36,7 +36,7 @@ class Login extends Component {
       )
     } else {
       return (
-        <form>
+        <div id="login">
         {/* email */}
         <form>
         <label for="email">Email</label>
@@ -71,7 +71,7 @@ class Login extends Component {
 
         </button>
       </form>
-      </form>
+    </div>
       )
     }
   }

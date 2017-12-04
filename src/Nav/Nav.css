@@ -1,9 +1,14 @@
 .login-button {
-    background-color: transparent;
-    border: 3px solid #CFD4AD;
-    border-radius: 50px;
+  background-color: transparent;
+  border: 3px solid #CFD4AD;
+  border-radius: 50px;
 }
 
-a button:focus  {
+.login-button:focus  {
   outline: 0;
+  box-shadow: none;
+}
+
+.navbar  {
+  background-color: var(--main-color);
 }

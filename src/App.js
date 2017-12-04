@@ -47,8 +47,8 @@ class App extends Component {
     .then((firebaseUser) =>  {
       firebaseUser.updateProfile({
         displayName: email
-      });      
-      
+      });
+
       // Add to database a store for the user
       let newUserData = {
         userName : email,
@@ -56,14 +56,14 @@ class App extends Component {
       }
       let userDataRef = firebase.database().ref('userData');
       userDataRef.push(newUserData);
-      
+
     })
     .catch((error) =>  {
       this.setState({errorMessage : error.message});
       this.setState({loading:false});
     });
   }
-  
+
   //logs an existing user in.
   handleSignIn(email, password) {
     this.setState({errorMessage:null}); //clear old error
@@ -105,7 +105,7 @@ class App extends Component {
       contents = (
         <div>
           <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
-          <Catalog />
+          <Journal />
         </div>
       );
     }
