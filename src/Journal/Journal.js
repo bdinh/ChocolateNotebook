@@ -76,6 +76,7 @@ class NewJournalEntryCard extends Component {
   }
   
   addEntry(e) {
+    console.log(this.props.currentUser);
     e.preventDefault();
     addJournalEntry(this.props.currentUser, {producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
   }
