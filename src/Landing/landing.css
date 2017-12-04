@@ -3,13 +3,21 @@ body {
     margin-left: 0!important;
 }
 
+button a  {
+  color: white;
+}
+
+a:hover  {
+  color: white;
+}
+
 .navbar {
     background-color: rgba(127, 82, 78, 0.6);
 }
 
 .navbar-brand {
     color: #FFFFFF;
-    
+
 }
 
 .test {
@@ -86,4 +94,3 @@ body {
     padding-top: 2em;
     padding-left: 2em;
 }
-

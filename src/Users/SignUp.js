@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Subscription/Subscription.css';
-
+import { Link  } from 'react-router-dom';
+import './Auth.css';
 
 class SignUp extends Component {
   constructor(props){
@@ -81,7 +82,7 @@ class SignUp extends Component {
   /* SignUp#render() */
   render() {
     return (
-      <form>
+      <div id="signup">
       {/* email */}
       <form>
       <label for="email">Email</label>
@@ -112,10 +113,10 @@ class SignUp extends Component {
       Sign-up
     </button>
     <button className="mr-2" color="primary" >
-       Already have an account? Go to login
+      <Link to='/login'>Already have an account? Go to Login</Link>
     </button>
     </form>
-      </form>
+  </div>
     );
   }
 }
