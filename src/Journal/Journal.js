@@ -57,7 +57,7 @@ export class JournalNewEntry extends Component {
       <div className="entry-search-row" >
       <SearchJournal />
       </div>
-      <NewJournalEntryCard newEntryCallback={(entryDetails) => this.addNewEntry(entryDetails)}/>
+      <NewJournalEntryCard currentUser={this.props.currentUser} newEntryCallback={(entryDetails) => this.addNewEntry(entryDetails)}/>
       </div>
     );
   }
@@ -98,19 +98,18 @@ class NewJournalEntryCard extends Component {
   
   addEntry(e) {
     e.preventDefault();
-    addJournalEntry({producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
-    // Call w/ state and UID to createjournalentry
+    addJournalEntry(this.props.currentUser, {producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
   }
   
   render() {
     return (
-      <div className="journal-item">
+      <div className="journal-item ">
       <NewJournalCardHeader  passUpStateCallback={(state) => this.updateDateAndTitle(state)}/>
       
       <div className="journal-entry-main">
       <div className="chocolate-detail-container">
       <ChocolateDetailsEntry passUpStateCallback={(state) => this.updateChocolateDetails(state)}/>
-      <p>Rating: <ChocolateRatingEntry passUpStateCallback={(rating) => this.updateRating(rating)}/> </p>
+      <p className="label-font">Rating: <ChocolateRatingEntry passUpStateCallback={(rating) => this.updateRating(rating)}/> </p>
       </div>
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} />
@@ -258,11 +257,9 @@ class NewJournalCardHeader extends Component {
   
   render() {
     return(
-      <div className="journal-new-entry-header">
-      <InputGroup>
+      <div className="journal-new-entry-header group-input">
       <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
       <Input className="header-entry-field" placeholder="Date:       /        /  " aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)}/>
-      </InputGroup>
       </div>
     );
   }

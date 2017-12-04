@@ -14,7 +14,7 @@
 
 .journal-new-entry-header {
     background-color: var(--main-color);
-    border-radius: 5px 5px 0 0;    
+    border-radius: 5px 5px 0 0;
     padding: 1% 0 1% 3%;   
 }
 
@@ -140,4 +140,17 @@
     text-decoration: none;
     font-size: 1.1em;
     margin: 0 45% 0 45%;
+}
+
+.label-font {
+    color: var(--font-color);
+}
+
+.group-input {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: stretch;
+    align-items: center;
+    width: 100%;
 }
