@@ -18,3 +18,13 @@ body {
   padding: 20px;
   color: white;
 }*/
+
+.fa-chocolate {
+  margin-right: 8px;
+  padding-right: 0;
+  width: 26px;
+  height: 26px;
+  background: url("./img/flaticonchocolateicon.png") right top;
+  background-position: 100% 100%;
+  background-size: 100% 100%;
+}

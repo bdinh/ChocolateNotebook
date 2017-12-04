@@ -1,7 +1,3 @@
-// TO DO Componentss:
-// Nav bar
-// Footer
-// Login / signup
 import Nav from './Nav/Nav';
 import React, { Component } from 'react';
 import './App.css';
