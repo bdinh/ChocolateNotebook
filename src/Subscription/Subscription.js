@@ -26,18 +26,21 @@ import './Subscription.css';
               <img src="" alt="chocolate bars"/>
               <p>9.99$ A Month for 6 different chocolate bars of your choosing!</p>
               <button>Subscribe Now!</button>
+              {/* add onClick */}
             </div>
             <div className="card">
               <h2>Option Two: <br/> ChocoBox Premium</h2>
               <img src="" alt="chocolate bars"/>
               <p>14.99$ A Month for 10 different chocolate bars of your choosing!</p>
               <button>Subscribe Now!</button>
+              {/* add onClick */}
             </div>
             <div className="card">
               <h2>Option Three: <br/> ChocoBox Deluxe</h2>
               <img src="" alt="chocolate bars"/>
               <p>19.99$ A Month for 15 different chocolate bars of your choosing!</p>
               <button>Subscribe Now!</button>
+              {/* add onClick */}
             </div>
           </div>
           <div className="learn-more">
