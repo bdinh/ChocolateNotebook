@@ -1,7 +1,7 @@
 // TO DO Componentss:
-  // Nav bar
-  // Footer
-  // Login / signup
+// Nav bar
+// Footer
+// Login / signup
 
 import React, { Component } from 'react';
 import './App.css';
@@ -22,7 +22,7 @@ class App extends Component {
       errorMessage : null
     };
   }
-
+  
   //signs up a new user.
   handleSignUp(email, password)  {
     this.setState({errorMessage:null});
@@ -31,14 +31,23 @@ class App extends Component {
     .then((firebaseUser) =>  {
       firebaseUser.updateProfile({
         displayName: email
-      });
+      });      
+      
+      // Add to database a store for the user
+      let newUserData = {
+        userName : email,
+        userJournalEntries : {}
+      }
+      let userDataRef = firebase.database().ref('userData');
+      userDataRef.push(newUserData);
+      
     })
     .catch((error) =>  {
       this.setState({errorMessage : error.message});
       this.setState({loading:false});
     });
   }
-
+  
   //logs an existing user in.
   handleSignIn(email, password) {
     this.setState({errorMessage:null}); //clear old error
@@ -49,23 +58,23 @@ class App extends Component {
       this.setState({loading:false});
     });
   }
-
+  
   render() {
-    return (
-      <div>
+      return (
+        <div>
         {/* <LandingPage/> */}
         {/* <MapView/> */}
         {/* <header className="App-header">*/}
         {/* Home Chocobook Catalog Choco Box Login */}
         {/* </header> */}
-        {/*<Journal />*/}
+        {/* <Journal currentUser={this.state}/> */}
         {/* <Subscription /> */}
         {/* <Subscribe /> */}
         <SignUp signUpCallback={(e,p) => this.handleSignUp(e,p)}/>
         <Login signInCallback={(e,p) => this.handleSignIn(e,p)}/>
-      </div>
-    );
-  }
+        </div>
+      );
+    }
 }
 
 
