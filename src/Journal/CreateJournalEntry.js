@@ -11,8 +11,6 @@ export function addJournalEntry(userID, entryDetails) {
             date : entryDetails.date,
             barName : entryDetails.barName
         }
-        console.log(newEntry);
-        // let channelsRef = firebase.database().ref('channels');
-        // channelsRef.push(newChannel);
-        // return newChannel;
+        let userJournalRef = firebase.database().ref('userData/' + userID + '/userJournalEntries/');
+        userJournalRef.push(newEntry);
     }
