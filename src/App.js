@@ -1,7 +1,3 @@
-// TO DO Componentss:
-// Nav bar
-// Footer
-// Login / signup
 import Nav from './Nav/Nav';
 import React, { Component } from 'react';
 import './App.css';
@@ -107,7 +103,7 @@ class App extends Component {
       contents = (
         <div>
           <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
-          <NewJournalEntry />
+          <JournalNewEntry />
         </div>
       );
     }
