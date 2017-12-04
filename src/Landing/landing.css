@@ -49,13 +49,6 @@ a:hover  {
     margin-left: 6em;
 }
 
-.login-button {
-    width: 15%;
-    background-color: transparent;
-    border: 3px solid #CFD4AD;
-    border-radius: 50px;
-}
-
 .get-started-button {
     background-color: transparent;
     border: 3px solid #CFD4AD;

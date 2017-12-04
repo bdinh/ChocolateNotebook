@@ -1,0 +1,9 @@
+.login-button {
+    background-color: transparent;
+    border: 3px solid #CFD4AD;
+    border-radius: 50px;
+}
+
+a button:focus  {
+  outline: 0;
+}
