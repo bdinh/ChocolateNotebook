@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../Subscription/Subscription.css';
+import { Link  } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -66,7 +67,8 @@ class Login extends Component {
           Sign-in
         </button>
         <button color="primary">
-          Need to make an account? Sign Up Here
+          <Link to='/signup'>Need to make an account? Sign Up Here</Link>
+
         </button>
       </form>
       </form>

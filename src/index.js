@@ -5,6 +5,7 @@ import App from './App';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database'
+import { BrowserRouter } from 'react-router-dom';
 
 // Initialize Firebase
 var config = {
@@ -16,4 +17,4 @@ var config = {
   messagingSenderId: "491534616181"
 };
 firebase.initializeApp(config);
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
