@@ -10,7 +10,7 @@ import Catalog from './Catalog/Catalog';
 // import MapView from './Map/mapView';
 import {Journal, JournalNewEntry} from './Journal/Journal';
 import Subscription from './Subscription/Subscription';
-// import Subscribe from './Subscription/Subscribe';
+import Subscribe from './Subscription/Subscribe';
 import SignUp from './Users/SignUp';
 import Login from './Users/Login';
 import firebase from 'firebase/app';
@@ -106,7 +106,12 @@ class App extends Component {
           contents = (
             <div>
             <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
-            <Journal />
+            <Switch>
+              <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
+              <Route exact path="/journal" component={(props) => <Journal />}></Route>
+              <Route exact path="/subscription" component={(props) => <Subscription />}></Route>
+              <Redirect to ="/journal"></Redirect>
+            </Switch>
             </div>
           );
         }

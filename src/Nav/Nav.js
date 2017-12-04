@@ -10,17 +10,24 @@ export class Nav extends Component  {
     return(
       <div id="nav">
           <nav className="navbar">
-              <a className="navbar-brand"><Link to='/'>(Logo Goes Here)</Link></a>
+              <Link to='/'>(Logo Goes Here)</Link>
               {!this.props.user ?
-                <div>
+                <div className="nav-item">
                   <Link to='/login'><button className="btn login-button" type="button">
                   Login</button></Link>
                   <Link to='/signup'><button className="btn login-button" type="button">
                   Sign Up</button></Link>
                 </div>
               :
-              <button className="btn login-button" type="button" onClick={(e) => this.props.handleSignOutCallback(e)}>
-              Sign Out</button>}
+                [<div className="nav-item">
+                  <Link to="/catalog">Catalog</Link>
+                  <Link to="/journal">Journal</Link>
+                  <Link to="/subscription">Subscription</Link>
+                </div>,
+                <div className="nav-item">
+                  <button className="btn login-button" type="button" onClick={(e) => this.props.handleSignOutCallback(e)}>
+                  Sign Out</button>
+                </div>]}
           </nav>
       </div>
     );

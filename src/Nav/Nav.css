@@ -11,4 +11,15 @@
 
 .navbar  {
   background-color: var(--main-color);
+  display: flex;
+}
+
+.nav-item  {
+    display: inline-flex;
+}
+
+a  {
+  color: white;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
