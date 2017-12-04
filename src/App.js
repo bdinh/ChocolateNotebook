@@ -5,7 +5,8 @@
 import Nav from './Nav/Nav';
 import React, { Component } from 'react';
 import './App.css';
-import LandingPage from './Landing/landingView'
+import LandingPage from './Landing/landingView';
+import Catalog from './Catalog/Catalog';
 // import MapView from './Map/mapView';
 import {Journal, JournalNewEntry} from './Journal/Journal';
 // import Subscription from './Subscription/Subscription';
@@ -95,6 +96,7 @@ class App extends Component {
           <Route exact path="/login" component={(props) => <Login signInCallback={(e,p) =>
             this.handleSignIn(e,p)}/>}></Route>
             <Route exact path="/signup" component={(props) => <SignUp signUpCallback={(e,p) =>
+<<<<<<< HEAD
               this.handleSignUp(e,p)}/>}></Route>
               <Redirect to="/"></Redirect>
               </Switch>
@@ -127,3 +129,37 @@ class App extends Component {
         
         export default App;
         
+=======
+               this.handleSignUp(e,p)}/>}></Route>
+            <Redirect to="/"></Redirect>
+          </Switch>
+
+
+          <p>{this.state.errorMessage}</p>
+        </div>);
+    } else {
+      contents = (
+        <div>
+          <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
+          <Catalog />
+        </div>
+      );
+    }
+    return (
+      <div>
+        {/* <LandingPage/> */}
+        {/* <MapView/> */}
+        {/* <header className="App-header">*/}
+        {/* Home Chocobook Catalog Choco Box Login */}
+        {/* </header> */}
+        {/* <Subscription /> */}
+        {/* <Subscribe /> */}
+        {contents}
+      </div>
+    );
+  }
+}
+
+
+export default App;
+>>>>>>> dbd42dbf0b671cd4e441d61a7ab58c6dad9ae133
