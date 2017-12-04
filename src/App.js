@@ -123,15 +123,6 @@ class App extends Component {
           </div>
         );
       }
-=======
-    } else {
-      contents = (
-        <div>
-          <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
-          <NewJournalEntry />
-        </div>
-      );
->>>>>>> 870cb0f5efbf9cce2011f2f520b4e5546a8e7f49
     }
 
 export default App;
