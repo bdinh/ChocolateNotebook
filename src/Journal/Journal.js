@@ -6,7 +6,9 @@ import 'react-select/dist/react-select.css';
 import { addJournalEntry } from './CreateJournalEntry';
 import { PRODUCERS } from '../RDataWrangling/AllProducerNames';
 import { ORIGINS } from '../RDataWrangling/AllRegionNames';
-import { TASTINGNOTES } from '../RDataWrangling/AllTastingNotes'
+import { TASTINGNOTES } from '../RDataWrangling/AllTastingNotes';
+import Cleave from 'cleave.js/react'; // For date formatting
+
 
 // Needs make new entry callback
 export class Journal extends Component {
@@ -238,7 +240,9 @@ class NewJournalCardHeader extends Component {
     return(
       <div className="journal-new-entry-header group-input">
       <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
-      <Input className="header-entry-field" placeholder="Date:       /        /  " aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)}/>
+      <Cleave 
+      options={{date: true, delimiter: "."}}
+      className="header-entry-field" placeholder="Date: MM.DD.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)}/>
       </div>
     );
   }

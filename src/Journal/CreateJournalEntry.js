@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 // Adds a new journal entry to the data base
-export function addJournalEntry(userID, entryDetails) {
+export function addJournalEntry(user, entryDetails) {
         let newEntry = {
             producer : entryDetails.producer,
             origin : entryDetails.origin,
@@ -11,6 +11,7 @@ export function addJournalEntry(userID, entryDetails) {
             date : entryDetails.date,
             barName : entryDetails.barName
         }
-        let userJournalRef = firebase.database().ref('userData/' + userID + '/userJournalEntries/');
+        console.log(user);
+        let userJournalRef = firebase.database().ref('userData/' + user.uid + '/userJournalEntries/');
         userJournalRef.push(newEntry);
     }
