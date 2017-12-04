@@ -1,0 +1,40 @@
+.row  {
+    display: inline-flex;
+}
+
+.catalog-item {
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+    margin: 3% 10% 0 10%;
+    padding-bottom: 1%;
+    color: var(--font-color);
+}
+
+.catalog-item-header {
+    background-color: var(--accent-pink);
+    border-radius: 5px 5px 0 0;    
+    padding: 2%;   
+    color: white;
+}
+
+.catalog-item-content { 
+    padding: 12px;   
+}
+
+.catalog-item-content > img {
+    width: 100%;
+}
+
+.fa-chocolate {
+    margin-right: 8px;
+    padding-right: 0;
+    width: 26px;
+    height: 26px;
+    background: url("../img/flaticonchocolateicon.png") right top;
+    background-position: 100% 100%;
+    background-size: 100% 100%;
+}
+
+.catalogfilter-items {
+    text-align: left;
+}
