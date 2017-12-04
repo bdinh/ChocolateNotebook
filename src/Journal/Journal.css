@@ -39,11 +39,22 @@
     border-radius: 5px;
     padding-bottom: 5%;
     margin: 2% 2% 0 2%;
+    width: 96%;
+    font-size: 1em;
 }
-
-.chocolate-rating-text-container > p {
+.chocolate-rating-text-container > p {    
     padding-left: 1%;
     margin-top: .5%;    
+}
+
+
+.new-chocolate-rating-text-container {
+    border: 1px solid var(--font-color);
+    border-radius: 5px;
+    padding-bottom: 5%;
+    margin: 2% 2% 0 2%;
+    width: 96%;
+    font-size: 1em;
 }
 
 .chocolate-detail > p {
@@ -114,8 +125,19 @@
 }
 
 .select-box {
-    width: 300px;
+    width: 24%;
     display: inline-block;
     vertical-align: middle;
     padding-right: 3%;
+}
+
+#submit-entry-button {
+    background-color: var(--main-color);
+    border: none;
+    color: var(--accent-green);
+    text-align: center;
+    padding: .5%;
+    text-decoration: none;
+    font-size: 1.1em;
+    margin: 0 45% 0 45%;
 }
