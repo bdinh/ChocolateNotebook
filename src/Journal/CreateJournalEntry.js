@@ -11,7 +11,6 @@ export function addJournalEntry(user, entryDetails) {
         date : entryDetails.date,
         barName : entryDetails.barName
     }
-    console.log(user);
     let userJournalRef = firebase.database().ref('userData/' + user.uid + '/userJournalEntries/');
     userJournalRef.push(newEntry);
 }

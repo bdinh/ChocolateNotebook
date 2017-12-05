@@ -8,7 +8,7 @@ import { PRODUCERS } from '../RDataWrangling/AllProducerNames';
 import { ORIGINS } from '../RDataWrangling/AllRegionNames';
 import { TASTINGNOTES } from '../RDataWrangling/AllTastingNotes';
 import Cleave from 'cleave.js/react'; // For date formatting
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import firebase from 'firebase/app';
 import { renderRatingStars } from './RenderRating';
 
@@ -82,7 +82,6 @@ class NewJournalEntryCard extends Component {
   }
   
   addEntry(e) {
-    console.log(this.props.currentUser);
     e.preventDefault();
     addJournalEntry(this.props.currentUser, {producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
   }
@@ -100,7 +99,7 @@ class NewJournalEntryCard extends Component {
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} />
       </div>
-      <button id="submit-entry-button" onClick={(e) => this.addEntry(e)}>Submit Entry</button>
+      <button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></button>
       </div>
     );
   }
@@ -147,8 +146,8 @@ class ChocolateDetailsEntry extends Component {
   constructor() {
     super();
     this.state = {
-      origin: "Africa",
-      producer: "",
+      origin: "(None)",
+      producer: "(None)",
       tastingNotes: []
     }
   }
@@ -226,7 +225,7 @@ class NewJournalCardHeader extends Component {
     super();
     this.state = {
       date: "",
-      barName: ""
+      barName: "(None)"
     }
   }
   
@@ -292,7 +291,7 @@ class RenderJournalItems extends Component {
   }
   
   render() {
-    if (this.state.userData) {      
+    if (this.state.userData && this.state.userData !== "None") {      
       let output = Object.keys(this.state.userData).map((key) => {
         let item = this.state.userData[key];
         return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
@@ -304,9 +303,9 @@ class RenderJournalItems extends Component {
         </div>
       );
     } else if (this.state.userData === "None") {
-      return(<div>na</div>)
-    } else { // not loaded
-      return(<div>loading</div>)
+      return(<div className="journal-entry-header"><p>Your chocolate journal is empty.</p></div>)
+    } else { // not loaded or doesn't exist
+      return(<div className="journal-entry-header"><p>Hold tight! We're retrieving your chocolate journal.</p></div>)
     }
   }
 }
