@@ -13,7 +13,6 @@ a:hover, button a   {
 
 }
 
-
 .landing-image {
     background-image: url("../img/hand-holding-coffee.jpg");
     background-position: center;
@@ -79,10 +78,81 @@ button.get-started-button:hover {
 
 @media (min-width: 598px) {
 
+    .landing-image {
+        padding: 8em 2em 8em;
+    }
+
+    .quote {
+        font-size: 1.5em;
+        width: 70%;
+    }
+
+    .cited {
+        font-size: 1.5em;
+    }
+
+    .get-started-button {
+        font-size: 0.75em;
+    }
+
+    button.get-started-button:hover {
+        font-size: 0.75em;
+    }
+
+    .get-started-button-container {
+        display: flex;
+        justify-content: center;
+        padding-top: 5em;
+    }
+
+    .section-block, .footer {
+        text-align: left;
+        padding: 2em;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+
+    .section-text {
+        font-size: 1em;
+    }
+
+
 }
 
 
 @media (min-width: 768px) {
+
+    /*.landing-image {*/
+        /*padding: 8em 2em 8em;*/
+    /*}*/
+
+    .quote {
+        font-size: 2em;
+        width: 70%;
+    }
+
+    .cited {
+        font-size: 2em;
+    }
+
+    .get-started-button, button.get-started-button:hover {
+        font-size: 1em;
+    }
+
+    .section-block, .footer {
+        text-align: left;
+        padding: 2em;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+
+    .section-text {
+        font-size: 1em;
+    }
 
 }
 
