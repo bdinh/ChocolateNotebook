@@ -1,7 +1,8 @@
-.login-button {
+.login-button, .signup-button {
   background-color: transparent;
   border: 3px solid #CFD4AD;
   border-radius: 50px;
+  width: 100%;
 }
 
 .login-button:focus  {
@@ -9,13 +10,19 @@
   box-shadow: none;
 }
 
+#nav {
+  background-color: rgba(127, 82, 78, 0.5);
+  position: absolute;
+  width: 100%;
+}
+
 .navbar  {
-  background-color: var(--main-color);
   display: flex;
 }
 
 .nav-item  {
-    display: inline-flex;
+  display: inline-flex;
+  margin-right: 1em;
 }
 
 a  {

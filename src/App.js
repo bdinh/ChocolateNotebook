@@ -98,12 +98,12 @@ class App extends Component {
         <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
         <Switch>
           <Route exact path="/" component={(props) => <LandingPage
-            handleSignOutCallback={() => this.handleSignOut()}/>}></Route>
+            handleSignOutCallback={() => this.handleSignOut()}/>}/>
           <Route exact path="/login" component={(props) => <Login signInCallback={(e,p) =>
-              this.handleSignIn(e,p)}/>}></Route>
+              this.handleSignIn(e,p)}/>}/>
           <Route exact path="/signup" component={(props) => <SignUp signUpCallback={(e,p) =>
-                this.handleSignUp(e,p)}/>}></Route>
-          <Redirect to="/"></Redirect>
+                this.handleSignUp(e,p)}/>}/>
+          <Redirect to="/"/>
         </Switch>
         <p>{this.state.errorMessage}</p>
         </div>);

@@ -23,6 +23,7 @@ export default class LandingView extends Component {
                     <Link to='/signup'>Sign Up</Link></button>
                 </nav>
             </div> */}
+
             <div className="landing-image">
                 <p className="hero-text quote">"Seven days without Chocolate makes one weak"</p>
                 <p className="hero-text cited">- unknown author</p>

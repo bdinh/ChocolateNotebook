@@ -15,7 +15,7 @@ export class Nav extends Component  {
                 <div className="nav-item">
                   <Link to='/login'><button className="btn login-button" type="button">
                   Login</button></Link>
-                  <Link to='/signup'><button className="btn login-button" type="button">
+                  <Link to='/signup'><button className="btn signup-button" type="button">
                   Sign Up</button></Link>
                 </div>
               :
