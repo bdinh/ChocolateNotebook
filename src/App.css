@@ -11,6 +11,10 @@ body {
   background-color: var(--background-color);
 }
 
+.switch  {
+  padding-top: 5rem;
+}
+
 .fa-chocolate {
   margin-right: 8px;
   padding-right: 0;

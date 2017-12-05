@@ -2,22 +2,25 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import './Subscription.css';
 import { Link  } from 'react-router-dom';
-
+export function handleRows(subscription)  {
+  let bars = 0;
+  if (subscription === "Trials") {
+    bars = 6;
+  } else if (subscription === "Premium") {
+    bars = 9;
+  } else {
+    bars = 15;
+  }
+  let grid = [];
+  for (var i = 0; i < bars / 3; i++) {
+    grid.push(<ChooseRow bars={i}/>);
+  }
+  return ({bars, grid});
+}
 class Subscribe extends Component  {
 
   render()  {
-    let bars = 0;
-    if (this.props.routerprops.match.params.plan === "Trials") {
-      bars = 6;
-    } else if (this.props.routerprops.match.params.plan === "Premium") {
-      bars = 9;
-    } else {
-      bars = 15;
-    }
-    let grid = [];
-    for (var i = 0; i < bars / 3; i++) {
-      grid.push(<ChooseRow bars={i}/>);
-    }
+    let rows = handleRows(this.props.routerprops.match.params.plan);
     return(
       <div>
         <h1>Subscription Confirmation</h1>
@@ -25,7 +28,7 @@ class Subscribe extends Component  {
           <h2>ChocoBox {this.props.routerprops.match.params.plan}</h2>
           <img src="" alt="subscription"/>
           <p>
-            With ChocoBox {this.props.routerprops.match.params.plan}, you will receive {bars} bars of chocolate a month
+            With ChocoBox {this.props.routerprops.match.params.plan}, you will receive {rows.bars} bars of chocolate a month
             of your choosing.
             <ul>
               <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, ipsam.</li>
@@ -35,7 +38,7 @@ class Subscribe extends Component  {
             </ul>
           </p>
           <h3>Choose Your Chocolate</h3>
-          {grid}
+          {rows.grid}
           <div>
             <p>You can change your selections before the ship date under the ChocoBox tab!</p>
           </div>

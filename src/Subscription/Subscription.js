@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Subscription.css';
 import Subscribe from './Subscribe';
+import { handleRows, ChooseRow } from './Subscribe';
 import { Link  } from 'react-router-dom';
 
   class Subscription extends Component  {
@@ -20,7 +21,7 @@ import { Link  } from 'react-router-dom';
                   excepturi eveniet voluptatem, culpa ratione id veritatis itaque
                   voluptatum modi unde cum inventore aliquam quisquam tenetur?
                 </p>
-                <button>View Our Catalogue</button>
+                <Link to="/catalog"><button>View Our Catalogue</button></Link>
                 <button>Learn More</button>
               </div>
             </header>
@@ -30,21 +31,18 @@ import { Link  } from 'react-router-dom';
                 <img src="" alt="chocolate bars"/>
                 <p>9.99$ A Month for 6 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Trials"}><button>Subscribe Now!</button></Link>
-                {/* add onClick */}
               </div>
               <div className="card">
                 <h2>Option Two: <br/> ChocoBox Premium</h2>
                 <img src="" alt="chocolate bars"/>
                 <p>14.99$ A Month for 9 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Premium"}><button>Subscribe Now!</button></Link>
-                {/* add onClick */}
               </div>
               <div className="card">
                 <h2>Option Three: <br/> ChocoBox Deluxe</h2>
                 <img src="" alt="chocolate bars"/>
                 <p>19.99$ A Month for 15 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Deluxe"}><button>Subscribe Now!</button></Link>
-                {/* add onClick */}
               </div>
             </div>
             <div className="learn-more">
@@ -88,8 +86,15 @@ import { Link  } from 'react-router-dom';
           </div>
         );
       } else  {
+        let rows = handleRows(this.props.subscription);
         content = (
-          <p>hi</p>
+          <div id='subscribed'>
+            <h1>Your Subscription</h1>
+            <h2>You are subscribed to ChocoBox {this.props.subscription}</h2>
+            {rows.grid}
+            <button onClick={() => this.props.handleUnsubscribe()}>Unsubscribe</button>
+          </div>
+
         );
       }
       return content;

@@ -17,7 +17,12 @@ class App extends Component {
     super(props);
     this.state = {
       loading : true,
-      errorMessage : null
+      errorMessage : null,
+      userData:  {
+        userName : null,
+        userJournalEntries : null,
+        plan : null
+      }
     };
   }
 
@@ -87,7 +92,13 @@ class App extends Component {
   }
 
   handleAddSubscription(plan)  {
-    let setPlan = firebase.database().ref('userData/' + this.state.user + '/plan').set(plan);
+    let setPlan = firebase.database().ref('userData/' + this.state.user.uid + '/plan')
+    .set(plan);
+  }
+
+  handleUnsubscribe()  {
+    let setNull = firebase.database().ref('userData/' + this.state.user.uid + '/plan')
+    .set(null);
   }
 
   render() {
@@ -95,7 +106,6 @@ class App extends Component {
     if (!this.state.user) {
       contents = (
         <div>
-        <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
         <Switch>
           <Route exact path="/" component={(props) => <LandingPage
             handleSignOutCallback={() => this.handleSignOut()}/>}/>
@@ -109,13 +119,13 @@ class App extends Component {
         </div>);
         } else {
           contents = (
-            <div>
-            <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
+            <div className='switch'>
+            {/* <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/> */}
             <Switch>
               <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
               <Route exact path="/journal" component={(props) => <Journal currentUser={this.state.user} />}></Route>
               <Route exact path="/subscription" component={(props) => <Subscription
-              subscription={this.state.userData.plan} routerprops={props} user={this.state.user}/>}></Route>
+              subscription={this.state.userData.plan} routerprops={props} user={this.state.user} handleUnsubscribe={() => this.handleUnsubscribe()}/>}></Route>
               {this.state.userData && !this.state.userData.plan ?
               <Route exact path="/subscribe/:plan" component={(props) =>
               <Subscribe routerprops={props} handleAddSubscription={(plan) => this.handleAddSubscription(plan)}/>}></Route>
@@ -128,7 +138,8 @@ class App extends Component {
         }
         return (
           <div>
-          {contents}
+            <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
+            {contents}
           </div>
         );
       }
