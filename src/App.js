@@ -53,7 +53,6 @@ class App extends Component {
       // Add to database a store for the user
       let newUserData = {
         userName : email,
-        uid : firebaseUser.uid,
         userJournalEntries : "None",
         plan : null
       }
@@ -121,6 +120,7 @@ class App extends Component {
               <Route exact path="/subscribe/:plan" component={(props) =>
               <Subscribe routerprops={props} handleAddSubscription={(plan) => this.handleAddSubscription(plan)}/>}></Route>
               : ''}
+              <Route exact path="/newjournalentry" component={() => <JournalNewEntry currentUser={this.state.user} />}></Route>
               <Redirect to="/journal"></Redirect>
             </Switch>
             </div>

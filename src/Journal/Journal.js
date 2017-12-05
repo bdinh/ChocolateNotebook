@@ -8,6 +8,10 @@ import { PRODUCERS } from '../RDataWrangling/AllProducerNames';
 import { ORIGINS } from '../RDataWrangling/AllRegionNames';
 import { TASTINGNOTES } from '../RDataWrangling/AllTastingNotes';
 import Cleave from 'cleave.js/react'; // For date formatting
+import { NavLink, Redirect } from 'react-router-dom';
+import firebase from 'firebase/app';
+import { renderRatingStars } from './RenderRating';
+
 
 
 // Needs make new entry callback
@@ -19,7 +23,7 @@ export class Journal extends Component {
       <NewEntryButton />
       <SearchJournal />
       </div>
-      <JournalEntryItem />
+      <RenderJournalItems user={this.props.currentUser} />
       </div>
     );
   }
@@ -78,7 +82,6 @@ class NewJournalEntryCard extends Component {
   }
   
   addEntry(e) {
-    console.log(this.props.currentUser);
     e.preventDefault();
     addJournalEntry(this.props.currentUser, {producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
   }
@@ -96,7 +99,7 @@ class NewJournalEntryCard extends Component {
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} />
       </div>
-      <button id="submit-entry-button" onClick={(e) => this.addEntry(e)}>Submit Entry</button>
+      <button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></button>
       </div>
     );
   }
@@ -143,8 +146,8 @@ class ChocolateDetailsEntry extends Component {
   constructor() {
     super();
     this.state = {
-      origin: "Africa",
-      producer: "",
+      origin: "(None)",
+      producer: "(None)",
       tastingNotes: []
     }
   }
@@ -222,7 +225,7 @@ class NewJournalCardHeader extends Component {
     super();
     this.state = {
       date: "",
-      barName: ""
+      barName: "(None)"
     }
   }
   
@@ -254,7 +257,7 @@ class NewJournalCardHeader extends Component {
 class NewEntryButton extends Component {
   render() {
     return(
-      <button id="entry-button">New Entry</button>
+      <button id="entry-button"><NavLink to="/newjournalentry" >New Entry</NavLink></button>
     );
   }
 }
@@ -271,21 +274,57 @@ class SearchJournal extends Component {
   }
 }
 
+class RenderJournalItems extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  
+  componentWillMount() {
+    this.userDataRef = firebase.database().ref('userData/' + this.props.user.uid + "/userJournalEntries");
+    this.userDataRef.on('value', (snapshot) => {
+      this.setState({userData : snapshot.val()});
+    });
+  }
+  componentWillUnmount() {
+    this.userDataRef.off();
+  }
+  
+  render() {
+    if (this.state.userData && this.state.userData !== "None") {      
+      let output = Object.keys(this.state.userData).map((key) => {
+        let item = this.state.userData[key];
+        return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
+      })
+      
+      return (
+        <div>
+        {output}
+        </div>
+      );
+    } else if (this.state.userData === "None") {
+      return(<div className="journal-entry-header"><p>Your chocolate journal is empty.</p></div>)
+    } else { // not loaded or doesn't exist
+      return(<div className="journal-entry-header"><p>Hold tight! We're retrieving your chocolate journal.</p></div>)
+    }
+  }
+}
+
 
 // Displays existing journal entry items
 class JournalEntryItem extends Component {
   render() {
     return (
       <div className="journal-item">
-      <JournalCardHeader date={"11/18/2017"} barName={"Kokoa Kamili 70% Dark Chocolate"} />
+      <JournalCardHeader date={this.props.date} barName={this.props.barName} />
       
       <div className="journal-entry-main">
       <div className="chocolate-detail-container">
-      <ChocolateDetailsStatic region={"Africa"} producer={"Kokoa Kamili"} tastingNotes={"Floral, Roasted, Buttery"} />
+      <ChocolateDetailsStatic region={this.props.region} producer={this.props.producer} tastingNotes={this.props.tastingNotes} />
       
-      <p className="label-font">Rating: <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i></p>
+      <p className="label-font">Rating: {renderRatingStars(this.props.rating)}</p>
       </div>
-      <JournalTextHolder text={"Tastes delicious! Best chocolate bar I've ever had!"} />
+      <JournalTextHolder text={this.props.text} />
       </div>
       </div>
     );
@@ -309,7 +348,7 @@ class JournalTextHolder extends Component {
   render() {
     return (
       <div className="chocolate-rating-text-container">
-      <p>{this.props.text}</p>
+      <p className="label-font">{this.props.text}</p>
       </div>
     );
   }
