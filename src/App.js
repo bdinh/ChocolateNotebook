@@ -25,6 +25,10 @@ class App extends Component {
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser){ // User logged in
         this.setState({user: firebaseUser, loading : false});
+        this.userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
+        this.userDataRef.on('value', (snapshot) => {
+          this.setState({userData: snapshot.val()});
+        });
       } else { // User logged out
         this.setState({user:null, loading : false});
       }
@@ -33,6 +37,7 @@ class App extends Component {
 
   componentWillUnmount() {
     this.authUnRegFunc();
+    this.userDataRef.off();
   }
 
   //signs up a new user.
@@ -49,7 +54,8 @@ class App extends Component {
       let newUserData = {
         userName : email,
         uid : firebaseUser.uid,
-        userJournalEntries : "None"
+        userJournalEntries : "None",
+        plan : null
       }
 
       let userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
@@ -81,6 +87,10 @@ class App extends Component {
     .catch((err) => this.setState({errorMessage: err.message}));
   }
 
+  handleAddSubscription(plan)  {
+    let setPlan = firebase.database().ref('userData/' + this.state.user.uid + '/plan').set(plan);
+  }
+
   render() {
     let contents = null;
     if (!this.state.user) {
@@ -105,21 +115,19 @@ class App extends Component {
             <Switch>
               <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
               <Route exact path="/journal" component={(props) => <Journal />}></Route>
-              <Route exact path="/subscription" component={(props) => <Subscription />}></Route>
-              <Redirect to ="/journal"></Redirect>
+              <Route exact path="/subscription" component={(props) => <Subscription
+              subscription={this.state.userData.plan} routerprops={props} user={this.state.user.uid}/>}></Route>
+              {this.state.userData && !this.state.userData.plan ?
+              <Route exact path="/subscribe/:plan" component={(props) =>
+              <Subscribe routerprops={props} handleAddSubscription={(plan) => this.handleAddSubscription(plan)}/>}></Route>
+              : ''}
+              <Redirect to="/journal"></Redirect>
             </Switch>
             </div>
           );
         }
         return (
           <div>
-          {/* <LandingPage/> */}
-          {/* <MapView/> */}
-          {/* <header className="App-header">*/}
-          {/* Home Chocobook Catalog Choco Box Login */}
-          {/* </header> */}
-          {/* <Subscription /> */}
-          {/* <Subscribe /> */}
           {contents}
           </div>
         );
