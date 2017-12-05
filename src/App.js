@@ -87,7 +87,7 @@ class App extends Component {
   }
 
   handleAddSubscription(plan)  {
-    let setPlan = firebase.database().ref('userData/' + this.state.user.uid + '/plan').set(plan);
+    let setPlan = firebase.database().ref('userData/' + this.state.user + '/plan').set(plan);
   }
 
   render() {
@@ -113,9 +113,9 @@ class App extends Component {
             <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
             <Switch>
               <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
-              <Route exact path="/journal" component={(props) => <Journal />}></Route>
+              <Route exact path="/journal" component={(props) => <Journal currentUser={this.state.user} />}></Route>
               <Route exact path="/subscription" component={(props) => <Subscription
-              subscription={this.state.userData.plan} routerprops={props} user={this.state.user.uid}/>}></Route>
+              subscription={this.state.userData.plan} routerprops={props} user={this.state.user}/>}></Route>
               {this.state.userData && !this.state.userData.plan ?
               <Route exact path="/subscribe/:plan" component={(props) =>
               <Subscribe routerprops={props} handleAddSubscription={(plan) => this.handleAddSubscription(plan)}/>}></Route>
