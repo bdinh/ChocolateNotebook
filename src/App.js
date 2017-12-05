@@ -48,7 +48,6 @@ class App extends Component {
       // Add to database a store for the user
       let newUserData = {
         userName : email,
-        uid : firebaseUser.uid,
         userJournalEntries : "None"
       }
 
@@ -104,8 +103,9 @@ class App extends Component {
             <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
             <Switch>
               <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
-              <Route exact path="/journal" component={(props) => <Journal />}></Route>
+              <Route exact path="/journal" component={(props) => <Journal currentUser={this.state.user} />}></Route>
               <Route exact path="/subscription" component={(props) => <Subscription />}></Route>
+              <Route exact path="/newjournalentry" component={() => <JournalNewEntry currentUser={this.state.user} />}></Route>
               <Redirect to ="/journal"></Redirect>
             </Switch>
             </div>

@@ -8,6 +8,10 @@ import { PRODUCERS } from '../RDataWrangling/AllProducerNames';
 import { ORIGINS } from '../RDataWrangling/AllRegionNames';
 import { TASTINGNOTES } from '../RDataWrangling/AllTastingNotes';
 import Cleave from 'cleave.js/react'; // For date formatting
+import { NavLink } from 'react-router-dom';
+import firebase from 'firebase/app';
+import { renderRatingStars } from './RenderRating';
+
 
 
 // Needs make new entry callback
@@ -19,7 +23,7 @@ export class Journal extends Component {
       <NewEntryButton />
       <SearchJournal />
       </div>
-      <JournalEntryItem />
+      <RenderJournalItems user={this.props.currentUser} />
       </div>
     );
   }
@@ -254,7 +258,7 @@ class NewJournalCardHeader extends Component {
 class NewEntryButton extends Component {
   render() {
     return(
-      <button id="entry-button">New Entry</button>
+      <button id="entry-button"><NavLink to="/newjournalentry" >New Entry</NavLink></button>
     );
   }
 }
@@ -271,21 +275,57 @@ class SearchJournal extends Component {
   }
 }
 
+class RenderJournalItems extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  
+  componentWillMount() {
+    this.userDataRef = firebase.database().ref('userData/' + this.props.user.uid + "/userJournalEntries");
+    this.userDataRef.on('value', (snapshot) => {
+      this.setState({userData : snapshot.val()});
+    });
+  }
+  componentWillUnmount() {
+    this.userDataRef.off();
+  }
+  
+  render() {
+    if (this.state.userData) {      
+      let output = Object.keys(this.state.userData).map((key) => {
+        let item = this.state.userData[key];
+        return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
+      })
+      
+      return (
+        <div>
+        {output}
+        </div>
+      );
+    } else if (this.state.userData === "None") {
+      return(<div>na</div>)
+    } else { // not loaded
+      return(<div>loading</div>)
+    }
+  }
+}
+
 
 // Displays existing journal entry items
 class JournalEntryItem extends Component {
   render() {
     return (
       <div className="journal-item">
-      <JournalCardHeader date={"11/18/2017"} barName={"Kokoa Kamili 70% Dark Chocolate"} />
+      <JournalCardHeader date={this.props.date} barName={this.props.barName} />
       
       <div className="journal-entry-main">
       <div className="chocolate-detail-container">
-      <ChocolateDetailsStatic region={"Africa"} producer={"Kokoa Kamili"} tastingNotes={"Floral, Roasted, Buttery"} />
+      <ChocolateDetailsStatic region={this.props.region} producer={this.props.producer} tastingNotes={this.props.tastingNotes} />
       
-      <p className="label-font">Rating: <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i> <i className="fa fa-star-o" aria-hidden="true"></i></p>
+      <p className="label-font">Rating: {renderRatingStars(this.props.rating)}</p>
       </div>
-      <JournalTextHolder text={"Tastes delicious! Best chocolate bar I've ever had!"} />
+      <JournalTextHolder text={this.props.text} />
       </div>
       </div>
     );
@@ -309,7 +349,7 @@ class JournalTextHolder extends Component {
   render() {
     return (
       <div className="chocolate-rating-text-container">
-      <p>{this.props.text}</p>
+      <p className="label-font">{this.props.text}</p>
       </div>
     );
   }
