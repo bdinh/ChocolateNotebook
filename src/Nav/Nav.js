@@ -7,11 +7,17 @@ import './Nav.css';
 
 export class Nav extends Component  {
   render()  {
+
+      const {
+          user,
+          handleSignOutCallback,
+      } = this.props;
+
     return(
       <div id="nav">
           <nav className="navbar">
               <Link to='/'>(Logo Goes Here)</Link>
-              {!this.props.user ?
+              {!user ?
                 <div className="nav-item">
                   <Link to='/login'><button className="btn login-button" type="button">
                   Login</button></Link>
@@ -25,7 +31,7 @@ export class Nav extends Component  {
                   <Link to="/subscription">Subscription</Link>
                 </div>,
                 <div className="nav-item">
-                  <button className="btn login-button" type="button" onClick={(e) => this.props.handleSignOutCallback(e)}>
+                  <button className="btn login-button" type="button" onClick={(e) => handleSignOutCallback(e)}>
                   Sign Out</button>
                 </div>]}
           </nav>

@@ -3,11 +3,8 @@ body {
     margin-left: 0!important;
 }
 
-button a  {
-  color: white;
-}
 
-a:hover  {
+a:hover, button a   {
   color: white;
 }
 
@@ -16,50 +13,46 @@ a:hover  {
 
 }
 
-.test {
-    height: 100%;
-}
 
 .landing-image {
-    /*margin-top: 4em;*/
-    /*height: 800px;*/
-    /*width: 100%;*/
-    /*padding-top: 5em;*/
     background-image: url("../img/hand-holding-coffee.jpg");
     background-position: center;
     background-size: cover;
-    padding: 12em 0 12em;
+    padding: 8em 2em 0em;
 }
 
 .quote {
-    margin-top: 1em;
-    width: 60%;
-    font-size: 3em;
-    margin-left: 2em;
-    margin-bottom: 0;
+    font-size: 1em;
 }
 
 .cited {
-    font-size: 2em;
-    margin-left: 6em;
+    font-size: 1em;
+    margin-bottom: 2em;
 }
 
 .get-started-button {
     background-color: transparent;
     border: 3px solid #CFD4AD;
     border-radius: 50px;
-    width: 25%;
-    position: absolute;
-    bottom: 50px;
-    left: 38.5%;
+    font-size: 0.5em;
 }
 
-.section-block {
-    height: 700px;
-    width: 100%;
+button.get-started-button:hover {
+    background-color: #d0d4ad36;
+    border: 3px solid #CFD4AD;
+    border-radius: 50px;
+    font-size: 0.5em;
+}
+
+.get-started-button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 5em;
+}
+
+.section-block, .footer {
     text-align: left;
-    padding-top: 2em;
-    padding-left: 2em;
+    padding: 2em;
 }
 
 .our-story {
@@ -71,14 +64,44 @@ a:hover  {
 }
 
 .section-title {
-    font-size: 2em;
+    font-size: 1em;
+}
+
+.section-text {
+    font-size: 0.75em;
 }
 
 .footer {
-    height: 200px;
-    width: 100%;
     background-color: #CC9692;
-    text-align: left;
-    padding-top: 2em;
-    padding-left: 2em;
 }
+
+
+
+@media (min-width: 598px) {
+
+}
+
+
+@media (min-width: 768px) {
+
+}
+
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+    .landing-image {
+        padding: 12em 0 12em;
+    }
+
+    .quote {
+        width: 70%;
+        font-size: 2.5em;
+        margin-left: 10%;
+        margin-bottom: 0;
+    }
+}
+
+
