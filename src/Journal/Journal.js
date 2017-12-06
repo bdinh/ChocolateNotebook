@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Journal.css";
-import { InputGroup, InputGroupAddon, Input, FormGroup, Button } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input, Button } from 'reactstrap';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { addJournalEntry } from './CreateJournalEntry';
@@ -292,12 +292,13 @@ class RenderJournalItems extends Component {
   }
   
   render() {
-    if (this.state.userData && this.state.userData !== "None") {      
+    if (this.state.userData && this.state.userData !== "None") {  
+      console.log(this.state);    
       let output = Object.keys(this.state.userData).map((key) => {
         let item = this.state.userData[key];
         return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
       })
-      
+      output.reverse();
       return (
         <div>
         {output}
@@ -361,11 +362,11 @@ class ChocolateDetailsStatic extends Component {
   render() {
     return (
       <div className="chocolate-detail">
-      <i className="fa fa-globe" aria-label="Origin"></i><p className="label-font">{this.props.region}</p>
-      <i className="fa fa-industry" aria-label="Producer"></i><p className="label-font">{this.props.producer}
+      <i className="fa fa-globe" aria-label="Origin"></i><p className="label-font">{toTitleCase(this.props.region)}</p>
+      <i className="fa fa-industry" aria-label="Producer"></i><p className="label-font">{toTitleCase(this.props.producer)}
       </p>
       <i className="fa fa-sticky-note" aria-label="Tasting notes"></i>
-      <p className="label-font">{this.props.tastingNotes}</p>
+      <p className="label-font">{formatTastingNotes(this.props.tastingNotes)}</p>
       </div>
     );
   }
@@ -376,7 +377,7 @@ class ChocolateDetailsStatic extends Component {
 function getCurrentDate() {
   let today = new Date();
   let dd = today.getDate();
-  let mm = today.getMonth()+1; //January is 0!
+  let mm = today.getMonth() + 1; //January is 0!
   let yyyy = today.getFullYear();
   
   if(dd < 10) {
@@ -386,6 +387,23 @@ function getCurrentDate() {
   if (mm < 10) {
     mm = '0' + mm
   } 
-  
   return mm + '.' + dd + '.' + yyyy;
+}
+
+
+// Formats input
+// Stack overflow 
+//https://stackoverflow.com/questions/4878756/how-to-capitalize-first-letter-of-each-word-like-a-2-word-city 
+function toTitleCase(str) {
+  if (str !== "(None)") {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  } 
+  return str;
+}
+
+// Takes in a string of tasting notes "note,note,note" format
+// Outputs "Note, Note, Note"
+function formatTastingNotes(notes) {
+  notes = notes.replace(/,/g , ", "); // Replace ',' with ', '
+  return toTitleCase(notes);
 }
