@@ -69,12 +69,12 @@ class NewJournalEntryCard extends Component {
   updateDateAndTitle (details) {
     this.date = details.date;
     this.barName = details.barName;
+    this.setState({});
   }
   
   updateChocolateDetails(details) {
     this.origin = details.origin;
     this.producer = details.producer;
-    this.tastingNotes = details.tastingNotes;
   }
   
   updateRating(rating) {
@@ -99,7 +99,7 @@ class NewJournalEntryCard extends Component {
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} />
       </div>
-      <button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></button>
+      {(this.barName !== "") ? <Button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></Button> : <Button id="submit-entry-button" disabled onClick={(e) => this.addEntry(e)}>Submit Entry</Button>}
       </div>
     );
   }
@@ -225,14 +225,15 @@ class NewJournalCardHeader extends Component {
     super();
     this.state = {
       date: "",
-      barName: "(None)",
+      barName: "",
       date: getCurrentDate()
     }
   }
   
   handleChangeName(e) {
-    this.setState({date : this.state.date, barName : e.target.value});  
-    this.props.passUpStateCallback(this.state);
+    let newState = {date : this.state.date, barName : e.target.value};
+    this.setState(newState);  
+    this.props.passUpStateCallback(newState);
   } 
   
   handleChangeDate(e) {
