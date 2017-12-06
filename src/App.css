@@ -7,11 +7,16 @@
   --font-color: #535353;
 }
 
+input  {
+  outline: 0;
+  box-shadow: none;
+}
+
 body {
   background-color: var(--background-color);
 }
 
-button:hover  {
+button:hover, a button:hover  {
   background-color: var(--accent-pink);
 }
 

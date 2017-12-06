@@ -20,6 +20,7 @@
   position: absolute;
   width: 100%;
   padding: 1rem;
+  font-size: 16pt;
 }
 
 .navbar  {
@@ -31,7 +32,7 @@
   margin-right: 1em;
 }
 
-a  {
+#nav a  {
   color: white;
   padding-right: 1rem;
   padding-left: 1rem;

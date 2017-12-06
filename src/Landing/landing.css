@@ -1,10 +1,10 @@
-body {
+.landing-body body {
     margin-right: 0!important;
     margin-left: 0!important;
 }
 
 
-a:hover, button a   {
+.landing-body a:hover, .landing-body button a   {
   color: white;
 }
 
@@ -13,7 +13,7 @@ a:hover, button a   {
 
 }
 
-p, h1, button  {
+.landing-body p, .landing-body h1, .landing-body button  {
   color: white;
 }
 
@@ -40,7 +40,7 @@ p, h1, button  {
     font-size: 0.5em;
 }
 
-button.get-started-button:hover {
+.landing-body button.get-started-button:hover {
     background-color: #d0d4ad36;
     border: 3px solid #CFD4AD;
     border-radius: 50px;
