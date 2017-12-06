@@ -91,7 +91,6 @@ class SignUp extends Component {
     this.setState(newState);
   }
 
-  /* SignUp#render() */
   render() {
     return (
       <div id="signup">
@@ -115,7 +114,7 @@ class SignUp extends Component {
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
                     onChange={this.handleChange}
-                    // valid={this.emailValid} what does this do actually?
+                    valid={this.emailValid}
                 />
               </div>
                 {this.emailErrors}
@@ -128,7 +127,7 @@ class SignUp extends Component {
                     className="form-control"
                     placeholder="Enter password"
                     onChange={this.handleChange}
-                    // valid={this.emailValid}
+                    valid={this.emailValid}
                 />
               </div>
                 {this.passwordErrors}
@@ -146,7 +145,6 @@ class SignUp extends Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }
