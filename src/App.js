@@ -113,7 +113,7 @@ class App extends Component {
             let contents = null;
             if (!this.state.user) {
                 contents = (
-                    <div>
+                    <div className="content-wrapper">
                       <Switch>
                         <Route exact path="/" component={(props) => <LandingPage/>}/>
                         <Route exact path="/login" component={(props) => <Login signInCallback={(e,p) =>
@@ -146,7 +146,7 @@ class App extends Component {
                 );
             }
             return (
-                <div>
+                <div className="app-wrapper">
                   <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/>
                     {contents}
                 </div>

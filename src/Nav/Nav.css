@@ -23,9 +23,14 @@
   font-size: 16pt;
 }
 
-.navbar  {
+#nav {
+  padding: 1em;
+}
+
+nav.navbar  {
   display: flex;
 }
+
 
 .nav-item  {
   display: inline-flex;

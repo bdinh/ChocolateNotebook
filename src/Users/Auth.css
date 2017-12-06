@@ -1,24 +1,25 @@
-html, body, #root, .row-container, .auth-container, .app-wrapper {
+html, body, #root, .row-container, .auth-container,
+.app-wrapper, .content-wrapper, #login, #signup {
   height: 100%;
 }
 
-#signup, #login  {
-  padding-top: 10rem;
-  text-align: center;
-}
+/*#signup, #login  {*/
+  /*padding-top: 10rem;*/
+  /*text-align: center;*/
+/*}*/
 
-#signup label, #login label  {
-  color: white;
-}
+/*#signup label, #login label  {*/
+  /*color: var(--font-color);*/
+/*}*/
 
 #signup button, #login button  {
   color: white;
   background-color: transparent;
   border-radius: 10px 10px 10px 10px;
-  border: 3px solid var(--accent-green);
+  border: 3px solid var(--main-color);
   padding: 0.5rem;
   margin: 0.5rem;
-  font-size: 12pt;
+  font-size: 1em;
   text-shadow: 0px 0.5px 5px #000000;
 }
 
@@ -39,17 +40,48 @@ input  {
   width: 60%;
 }
 
+.row-container {
+  margin: 0;
+}
 .user-login-container {
   padding: 3em;
-  width: 40%;
+  width: 35%;
   background-color: #eeeae347;
+}
 
+.form-labels, .title-text > p {
+  color: var(--font-color);
 }
 
 .email-form {
   margin-top: 4em;
 }
 
-.form-labels, .new-account-text {
-  color: black;
+.row-container {
+  background-color: #FFFFFF;
+  width: 100%;
+}
+
+.new-account-text > a {
+  color: var(--main-color);
+}
+
+.new-account-text-container {
+  text-align: center;
+}
+
+.title-text {
+  font-size: 2em;
+}
+
+.login-button-container, .signup-button-container {
+  text-align: center;
+}
+
+.login-button, .sign-up-button {
+  width: 50%;
+}
+
+.password-error, .email-error {
+  color: red;
 }
