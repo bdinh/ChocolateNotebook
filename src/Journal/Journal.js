@@ -280,7 +280,7 @@ class SearchJournal extends Component {
       <input type="search" id="search-box" placeholder="Search..." onChange={(e) => this.onChange(e)}/>
       </span>
       <div>
-      <RenderJournalItems user={this.props.currentUser} query={this.state.query}/>
+      <RenderJournalItems user={this.props.currentUser} query={this.state.query.split(" ")}/>
       </div>
       </span>
     );
@@ -307,7 +307,15 @@ class RenderJournalItems extends Component {
     if (this.state.userData && this.state.userData !== "None") {  
       let output = Object.keys(this.state.userData).map((key) => {
         let item = this.state.userData[key];
-        if (item.searchString.toLowerCase().includes(this.props.query.toLowerCase())) {
+        let includes = true; 
+
+        // Check if all words in query are included
+        for (let i = 0; i < this.props.query.length; i++) {
+          if (!item.searchString.toLowerCase().includes(this.props.query[i].toLowerCase())) {
+            includes = false; // If not included
+          }
+        }
+        if (includes) { // If journal entry includes all words inquery
         return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
         } else {
           return "";
