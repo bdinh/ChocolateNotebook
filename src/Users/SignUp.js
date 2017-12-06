@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../Subscription/Subscription.css';
 import { Link  } from 'react-router-dom';
 import './Auth.css';
+import $ from 'jquery';
+import { bindAll } from 'lodash';
 
 class SignUp extends Component {
   constructor(props){
@@ -14,6 +16,15 @@ class SignUp extends Component {
     this.passwordErrors=[];
     this.emailValid=undefined;
     this.passwordValid=undefined;
+    bindAll(this, [
+        'handleSignUp',
+        'validate',
+        'handleChange'
+    ])
+  }
+
+  componentDidMount() {
+      $('#nav').hide();
   }
 
   handleSignUp(event) {
@@ -33,7 +44,7 @@ class SignUp extends Component {
           this.passwordErrors.push(`Must be at least ${validations.minLength} characters.`);
           this.passwordValid = false;
           this.passwordErrors = this.passwordErrors.map((item) =>
-          {return <p key={item}>{item}</p>});
+          {return <p className="password-error" key={item}>{item}</p>});
           return this.passwordErrors;
         }
       }
@@ -55,13 +66,14 @@ class SignUp extends Component {
             this.emailValid = false;
           }
           this.emailErrors = this.emailErrors.map((item) =>
-          {return <p key={item}>{item}</p>});
+          {return <p className="email-error" key={item}>{item}</p>});
           return this.emailErrors;
         }
       }
     }
     return undefined; //no errors defined (because no value defined!)
   }
+
   handleChange(event) {
     if (event.target.name === "password") {
       this.validate(event.target, {required: true, minLength: 6});
@@ -83,40 +95,59 @@ class SignUp extends Component {
   render() {
     return (
       <div id="signup">
-      {/* email */}
-      <form>
-      <label>Email</label>
-      <input id="email"
-      type="email"
-      name="email"
-      onChange={((event) => {this.handleChange(event)}) }
-      valid={this.emailValid}
-      />
-      {this.emailErrors}
-    </form>
+        <div className="row row-container">
+          <div className="login-banner-container">
+          </div>
+          <div className="brown-vertical-stroke">
+          </div>
+          <div className="user-login-container">
+            <div className="title-text">
+              <p>Chocolate Notebook Sign Up</p>
+            </div>
+            <div className="login-form">
+              <div className="form-group email-form">
+                <label  className="form-labels" htmlFor="loginEmail">Email address</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email"
+                    onChange={this.handleChange}
+                    // valid={this.emailValid} what does this do actually?
+                />
+              </div>
+                {this.emailErrors}
+              <div className="form-group form-group-spacing">
+                <label className="form-labels" htmlFor="loginPassword">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    className="form-control"
+                    placeholder="Enter password"
+                    onChange={this.handleChange}
+                    // valid={this.emailValid}
+                />
+              </div>
+                {this.passwordErrors}
+              <div className="new-account-text-container">
+                <p className="new-account-text form-labels">Already have an account? <Link to='/login'>Login</Link></p>
+              </div>
+              <div className="signup-button-container">
+                <button
+                    className="btn btn-primary signup-button"
+                    onClick={this.handleSignUp}
+                    disabled={!(this.emailValid && this.passwordValid)}>
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      {/* password */}
-      <form>
-      <label>Password</label>
-      <input id="password"
-      type="password"
-      name="password"
-      onChange={((event) => {this.handleChange(event)}) }
-      valid={this.passwordValid}
-      />
-      {this.passwordErrors}
-    </form>
-
-      {/* Buttons */}
-      <form>
-    <button className="mr-2" color="primary" onClick={(e) => this.handleSignUp(e)} disabled={ !(this.emailValid && this.passwordValid) } >
-      Sign-up
-    </button>
-    <button className="mr-2" color="primary" >
-      <Link to='/login'>Already have an account? Go to Login</Link>
-    </button>
-    </form>
-  </div>
+      </div>
     );
   }
 }
