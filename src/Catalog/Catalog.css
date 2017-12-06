@@ -33,3 +33,11 @@
 .catalogfilter-items {
     text-align: left;
 }
+
+.catalog-container {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
