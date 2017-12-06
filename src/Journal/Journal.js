@@ -21,9 +21,8 @@ export class Journal extends Component {
       <div>
       <div className="entry-search-row" >
       <NewEntryButton />
-      <SearchJournal />
+      <SearchJournal currentUser={this.props.currentUser}/>
       </div>
-      <RenderJournalItems user={this.props.currentUser} />
       </div>
     );
   }
@@ -40,7 +39,6 @@ export class JournalNewEntry extends Component {
     return (
       <div>
       <div className="entry-search-row" >
-      <SearchJournal />
       </div>
       <NewJournalEntryCard currentUser={this.props.currentUser} newEntryCallback={(entryDetails) => this.addNewEntry(entryDetails)}/>
       </div>
@@ -265,12 +263,25 @@ class NewEntryButton extends Component {
 }
 
 class SearchJournal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {query : ""};
+  }
+  onChange(e) {
+    this.setState({ query : e.target.value});
+  }
+  
   render() {
     return (
+      <span>
       <span className="search-elements">
       <i className="fa fa-search" aria-hidden="true"></i>
       <p>Search Journal</p>
-      <input type="search" id="search-box" placeholder="Search..." />
+      <input type="search" id="search-box" placeholder="Search..." onChange={(e) => this.onChange(e)}/>
+      </span>
+      <div>
+      <RenderJournalItems user={this.props.currentUser} query={this.state.query}/>
+      </div>
       </span>
     );
   }
@@ -294,10 +305,13 @@ class RenderJournalItems extends Component {
   
   render() {
     if (this.state.userData && this.state.userData !== "None") {  
-      console.log(this.state);    
       let output = Object.keys(this.state.userData).map((key) => {
         let item = this.state.userData[key];
+        if (item.searchString.toLowerCase().includes(this.props.query.toLowerCase())) {
         return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
+        } else {
+          return "";
+        }
       })
       output.reverse();
       return (
