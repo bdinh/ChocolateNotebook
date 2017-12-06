@@ -6,7 +6,7 @@ import "./Catalog.css";
 export class Catalog extends Component {
     render() {
         return (
-            <div>
+            <div className="catalog-container">
                 <SearchCatalog />
                 <div className="row">
                     <div className="col-m-4">
