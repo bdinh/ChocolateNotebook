@@ -1,3 +1,8 @@
 #signup, #login  {
-  padding-top: 5rem;
+  padding-top: 10rem;
+}
+
+input  {
+  outline: 0;
+  box-shadow: none;
 }

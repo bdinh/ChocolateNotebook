@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import './Subscription.css';
 import { Link  } from 'react-router-dom';
+import chocolateBars from '../chocolate-bars.json';
 export function handleRows(subscription)  {
   let bars = 0;
   if (subscription === "Trials") {
@@ -12,8 +13,12 @@ export function handleRows(subscription)  {
     bars = 15;
   }
   let grid = [];
+  let start= 0;
+  let end = 3;
   for (var i = 0; i < bars / 3; i++) {
-    grid.push(<ChooseRow bars={i}/>);
+    grid.push(<ChooseRow chocolateBars={chocolateBars.slice(start, end)}/>);
+    start += 3;
+    end += 3;
   }
   return ({bars, grid});
 }
@@ -37,14 +42,14 @@ class Subscribe extends Component  {
               <li>Lorem ipsum dolor sit amet.</li>
             </ul>
           </p>
-          <h3>Choose Your Chocolate</h3>
+          <h3>Your Chocolates</h3>
           {rows.grid}
           <div>
             <p>You can change your selections before the ship date under the ChocoBox tab!</p>
           </div>
           <div className="confirmation">
-            <Link to='/subscriptions'><button onClick={() => this.props.handleAddSubscription(this.props.routerprops.match.params.plan)}>Confirm Your Subscription</button></Link>
-            <Link to='/subscriptions'><button>Cancel</button></Link>
+            <Link to='/subscription'><button onClick={() => this.props.handleAddSubscription(this.props.routerprops.match.params.plan)}>Confirm Your Subscription</button></Link>
+            <Link to='/subscription'><button>Cancel</button></Link>
           </div>
         </div>
       </div>
@@ -59,21 +64,24 @@ class ChooseRow extends Component  {
       <div className="choose">
         <div className="row">
           <div className="chocolate-card">
-            <h4>Add a Bar</h4>
+            <h4>{this.props.chocolateBars[0].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
             <img src="" alt="chocolate bar"/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, aliquam.</p>
+            <p>{(this.props.chocolateBars[0].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
+               (this.props.chocolateBars[0].fields.broad_bean_origin || 'Unkown Source')}</p>
             <button>Change</button>
           </div>
           <div className="chocolate-card">
-            <h4>Add a Bar</h4>
+            <h4>{this.props.chocolateBars[1].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
             <img src="" alt="chocolate bar"/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, expedita.</p>
+            <p>{(this.props.chocolateBars[1].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
+               (this.props.chocolateBars[1].fields.broad_bean_origin || 'Unkown Source')}</p>
             <button>Change</button>
           </div>
           <div className="chocolate-card">
-            <h4>Add a Bar</h4>
+            <h4>{this.props.chocolateBars[2].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
             <img src="" alt="chocolate bar"/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, voluptatum!</p>
+            <p>{(this.props.chocolateBars[2].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
+               (this.props.chocolateBars[2].fields.broad_bean_origin || 'Unkown Source')}</p>
             <button>Change</button>
           </div>
         </div>

@@ -107,8 +107,7 @@ class App extends Component {
       contents = (
         <div>
         <Switch>
-          <Route exact path="/" component={(props) => <LandingPage
-            handleSignOutCallback={() => this.handleSignOut()}/>}/>
+          <Route exact path="/" component={(props) => <LandingPage/>}/>
           <Route exact path="/login" component={(props) => <Login signInCallback={(e,p) =>
               this.handleSignIn(e,p)}/>}/>
           <Route exact path="/signup" component={(props) => <SignUp signUpCallback={(e,p) =>
@@ -119,18 +118,20 @@ class App extends Component {
         </div>);
         } else {
           contents = (
-            <div className='switch'>
+            <div className='logged'>
             {/* <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/> */}
             <Switch>
               <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
               <Route exact path="/journal" component={(props) => <Journal currentUser={this.state.user} />}></Route>
               <Route exact path="/subscription" component={(props) => <Subscription
-              subscription={this.state.userData.plan} routerprops={props} user={this.state.user} handleUnsubscribe={() => this.handleUnsubscribe()}/>}></Route>
+              subscription={this.state.userData.plan} routerprops={props}
+              user={this.state.user} handleUnsubscribe={() => this.handleUnsubscribe()}/>}></Route>
               {this.state.userData && !this.state.userData.plan ?
               <Route exact path="/subscribe/:plan" component={(props) =>
-              <Subscribe routerprops={props} handleAddSubscription={(plan) => this.handleAddSubscription(plan)}/>}></Route>
-              : ''}
-              <Route exact path="/newjournalentry" component={() => <JournalNewEntry currentUser={this.state.user} />}></Route>
+              <Subscribe routerprops={props} handleAddSubscription={(plan) =>
+                this.handleAddSubscription(plan)}/>}></Route> : ''}
+              <Route exact path="/newjournalentry" component={() => <JournalNewEntry
+                currentUser={this.state.user} />}></Route>
               <Redirect to="/journal"></Redirect>
             </Switch>
             </div>

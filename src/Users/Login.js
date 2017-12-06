@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../Subscription/Subscription.css';
 import { Link  } from 'react-router-dom';
-
+import './Auth.css';
 
 class Login extends Component {
   constructor(props){
@@ -40,14 +40,14 @@ class Login extends Component {
         {/* email */}
         <form>
         <label>Email</label>
-        <input id="email"
-        type="email"
-        name="email"
-        onChange={((event) => {this.handleChange(event)}) }
-        valid={this.emailValid}
-        />
-        {this.emailErrors}
-      </form>
+          <input id="email"
+          type="email"
+          name="email"
+          onChange={((event) => {this.handleChange(event)}) }
+          valid={this.emailValid}
+          />
+          {this.emailErrors}
+        </form>
 
         {/* password */}
         <form>

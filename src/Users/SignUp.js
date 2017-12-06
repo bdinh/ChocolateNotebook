@@ -85,7 +85,7 @@ class SignUp extends Component {
       <div id="signup">
       {/* email */}
       <form>
-      <label for="email">Email</label>
+      <label>Email</label>
       <input id="email"
       type="email"
       name="email"
@@ -97,7 +97,7 @@ class SignUp extends Component {
 
       {/* password */}
       <form>
-      <label for="password">Password</label>
+      <label>Password</label>
       <input id="password"
       type="password"
       name="password"

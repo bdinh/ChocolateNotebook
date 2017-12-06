@@ -5,9 +5,13 @@
   width: 100%;
 }
 
-.login-button:focus  {
+.login-button:focus, .signup-button:focus  {
   outline: 0;
   box-shadow: none;
+}
+
+.login-button:active, .signup-button:active  {
+  background-color: var(--accent-pink);
 }
 
 #nav {

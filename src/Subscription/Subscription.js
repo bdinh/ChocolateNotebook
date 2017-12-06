@@ -3,10 +3,12 @@ import './Subscription.css';
 import Subscribe from './Subscribe';
 import { handleRows, ChooseRow } from './Subscribe';
 import { Link  } from 'react-router-dom';
+import Search from '../Catalog/Search';
 
   class Subscription extends Component  {
 
     render()  {
+      console.log(Search('71'));
       let content = null;
       if (!this.props.subscription) {
         content = (
@@ -89,10 +91,10 @@ import { Link  } from 'react-router-dom';
         let rows = handleRows(this.props.subscription);
         content = (
           <div id='subscribed'>
-            <h1>Your Subscription</h1>
+            <h1>Your Subscription:</h1>
             <h2>You are subscribed to ChocoBox {this.props.subscription}</h2>
             {rows.grid}
-            <button onClick={() => this.props.handleUnsubscribe()}>Unsubscribe</button>
+            <Link to="subscription"><button onClick={() => this.props.handleUnsubscribe()}>Unsubscribe</button></Link>
           </div>
 
         );

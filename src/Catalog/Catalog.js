@@ -28,7 +28,7 @@ class CatalogSidebar extends Component {
         return (
             <div>
                 <CatalogFilter name="Origin" icon="globe" />
-                <CatalogFilter name="Tasting Notes" icon="chocolate" />
+                <CatalogFilter name="Cocoa Percentage" icon="chocolate" />
                 <CatalogFilter name="Producer" icon="industry" />
             </div>
         );
@@ -95,7 +95,9 @@ class SearchCatalog extends Component {
     render() {
         let rating = this.props.rating || 1;
 
-      let ratingStars = [{star : rating >= 1, num : 1}, {star : rating >= 2, num : 2}, {star : rating >= 3, num : 3}, {star : rating >= 4, num : 4}, {star : rating >= 5, num : 5}];
+      let ratingStars = [{star : rating >= 1, num : 1}, {star : rating >= 2,
+        num : 2}, {star : rating >= 3, num : 3}, {star : rating >= 4, num : 4},
+         {star : rating >= 5, num : 5}];
       let i = 0;
       ratingStars = ratingStars.map((item) => {
         if (item.star) {

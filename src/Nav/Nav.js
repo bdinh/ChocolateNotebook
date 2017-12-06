@@ -28,7 +28,7 @@ export class Nav extends Component  {
                 [<div className="nav-item">
                   <Link to="/catalog">Catalog</Link>
                   <Link to="/journal">Journal</Link>
-                  <Link to="/subscription">Subscription</Link>
+                  <Link to="/subscription">ChocoBox</Link>
                 </div>,
                 <div className="nav-item">
                   <button className="btn login-button" type="button" onClick={(e) => handleSignOutCallback(e)}>
