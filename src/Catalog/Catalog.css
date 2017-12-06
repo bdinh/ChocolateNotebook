@@ -2,6 +2,11 @@
     display: inline-flex;
 }
 
+.catalog-body  {
+  text-align: center;
+  padding-top: 5rem;
+}
+
 .catalog-item {
     background-color: white;
     border-radius: 5px 5px 5px 5px;
@@ -12,13 +17,13 @@
 
 .catalog-item-header {
     background-color: var(--accent-pink);
-    border-radius: 5px 5px 0 0;    
-    padding: 2%;   
+    border-radius: 5px 5px 0 0;
+    padding: 2%;
     color: white;
 }
 
-.catalog-item-content { 
-    padding: 12px;   
+.catalog-item-content {
+    padding: 12px;
 }
 
 .catalog-item-content > img {

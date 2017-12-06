@@ -13,7 +13,7 @@ export default class LandingView extends Component {
 
     render() {
         return(
-        <div>
+        <div className="landing-body">
             {/* <div className="navbar-container">
                 <nav className="navbar navbar-toggleable-sm navbar-inverse fixed-top">
                     <a className="navbar-brand" href="#home">(Logo Goes Here)</a>

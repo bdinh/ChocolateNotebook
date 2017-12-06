@@ -85,7 +85,7 @@
     text-align: left;
 }
 
-header  {
+.subscription-bar header  {
   margin-bottom: 2rem;
 }
 
@@ -124,6 +124,10 @@ header  {
   text-shadow: 0px 0.5px 5px #000000;
 }
 
+.cards button:hover, .chocolate-card button:hover  {
+  background-color: var(--accent-pink);
+}
+
 .subscription-body h1  {
   background-color: var(--main-color);
   margin: 0;
@@ -148,7 +152,7 @@ header  {
 
 
 
-input  {
+.subscription-bar input  {
   padding: 0.25rem;
   margin: 0.5rem;
   border-radius: 5px 5px 5px 5px;
@@ -156,12 +160,12 @@ input  {
   font-size: 14pt;
 }
 
-ul  {
+.subscription-bar ul  {
   margin: 2rem;
   text-align: left;
 }
 
-li  {
+.subscription-bar li  {
   margin: 1rem;
 }
 
