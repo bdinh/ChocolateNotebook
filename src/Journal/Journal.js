@@ -55,7 +55,7 @@ class NewJournalEntryCard extends Component {
     this.producer = "none";
     this.origin = "none";
     this.tastingNotes;
-    this.rating = 0;
+    this.rating = 1;
     this.text = "";
     this.date = "";
     this.barName = "";
@@ -225,7 +225,8 @@ class NewJournalCardHeader extends Component {
     super();
     this.state = {
       date: "",
-      barName: "(None)"
+      barName: "(None)",
+      date: getCurrentDate()
     }
   }
   
@@ -246,7 +247,7 @@ class NewJournalCardHeader extends Component {
       <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
       <Cleave 
       options={{date: true, delimiter: "."}}
-      className="header-entry-field" placeholder="Date: MM.DD.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)}/>
+      className="header-entry-field" placeholder="Date: DD.MM.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)} value={this.state.date}/>
       </div>
     );
   }
@@ -305,9 +306,9 @@ class RenderJournalItems extends Component {
     } else if (this.state.userData === "None") {
       return(<div className="journal-entry-header"><p>Your chocolate journal is empty.</p></div>)
     } else { // not loaded or doesn't exist
-      return(<div className="journal-entry-header"><p>Hold tight! We're retrieving your chocolate journal.</p></div>)
-    }
+    return(<div className="journal-entry-header"><p>Hold tight! We're retrieving your chocolate journal.</p></div>)
   }
+}
 }
 
 
@@ -368,4 +369,23 @@ class ChocolateDetailsStatic extends Component {
       </div>
     );
   }
+}
+
+// From stack overflow
+// https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
+function getCurrentDate() {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //January is 0!
+  let yyyy = today.getFullYear();
+  
+  if(dd < 10) {
+    dd = '0' + dd
+  } 
+  
+  if (mm < 10) {
+    mm = '0' + mm
+  } 
+  
+  return mm + '.' + dd + '.' + yyyy;
 }
