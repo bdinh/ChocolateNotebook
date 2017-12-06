@@ -12,6 +12,10 @@ class Login extends Component {
             email: undefined,
             password: undefined
         };
+        this.emailErrors= [];
+        this.passwordErrors=[];
+        this.emailValid=undefined;
+        this.passwordValid=undefined;
         bindAll(this, [
             'handleSignIn',
             'handleChange'
@@ -21,6 +25,12 @@ class Login extends Component {
 
     componentDidMount() {
         $('#nav').hide();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.errorMessage !== nextProps.props.errorMessage ) {
+            this.props.errorMessage = nextProps.props.errorMessage;
+        }
     }
 
     //handle signIn Button
@@ -37,6 +47,10 @@ class Login extends Component {
 
     /* SignUpForm#render() */
     render() {
+        const {
+            errorMessage
+        } = this.props;
+
         if (this.state.loading) {
             return (
                 <div className="text-center">
@@ -66,7 +80,7 @@ class Login extends Component {
                                             aria-describedby="emailHelp"
                                             placeholder="Enter email"
                                             onChange={this.handleChange}
-                                            // valid={this.emailValid} what does this do actually?
+                                            valid={this.emailValid}
                                         />
                                     </div>
                                     {this.emailErrors}
@@ -79,7 +93,7 @@ class Login extends Component {
                                             className="form-control"
                                             placeholder="Enter password"
                                             onChange={this.handleChange}
-                                            // valid={this.emailValid}
+                                            valid={this.emailValid}
                                         />
                                     </div>
                                     {this.passwordErrors}
@@ -94,6 +108,8 @@ class Login extends Component {
                                         </button>
                                     </div>
                                 </div>
+                            <p className="email-error">{errorMessage ? errorMessage : ""}</p>
+
                         </div>
                     </div>
                 </div>

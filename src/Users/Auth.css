@@ -3,15 +3,6 @@ html, body, #root, .row-container, .auth-container,
   height: 100%;
 }
 
-/*#signup, #login  {*/
-  /*padding-top: 10rem;*/
-  /*text-align: center;*/
-/*}*/
-
-/*#signup label, #login label  {*/
-  /*color: var(--font-color);*/
-/*}*/
-
 #signup button, #login button  {
   color: white;
   background-color: transparent;
@@ -44,7 +35,7 @@ input  {
   margin: 0;
 }
 .user-login-container {
-  padding: 3em;
+  padding: 10em 3em 3em 3em;
   width: 35%;
   background-color: #eeeae347;
 }
@@ -63,7 +54,7 @@ input  {
 }
 
 .new-account-text > a {
-  color: var(--main-color);
+  color: var(--accent-green);
 }
 
 .new-account-text-container {
@@ -78,10 +69,11 @@ input  {
   text-align: center;
 }
 
-.login-button, .sign-up-button {
+.login-button, .signup-button {
   width: 50%;
 }
 
 .password-error, .email-error {
   color: red;
 }
+
