@@ -5,7 +5,7 @@ export function addJournalEntry(user, entryDetails) {
     let newEntry = {
         producer : entryDetails.producer,
         origin : entryDetails.origin,
-        tastingNotes : entryDetails.tastingNotes.length > 0 ? entryDetails.tastingNotes : "None",
+        tastingNotes : ((entryDetails.tastingNotes) ? entryDetails.tastingNotes : "(None)"),
         rating : entryDetails.rating,
         text : entryDetails.text,
         date : entryDetails.date,

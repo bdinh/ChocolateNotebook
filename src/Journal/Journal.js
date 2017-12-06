@@ -327,7 +327,7 @@ class JournalEntryItem extends Component {
       
       <p className="label-font">Rating: {renderRatingStars(this.props.rating)}</p>
       </div>
-      <JournalTextHolder text={this.props.text} />
+      {this.props.text ?  <JournalTextHolder text={this.props.text} /> : ""}
       </div>
       </div>
     );
