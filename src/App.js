@@ -29,13 +29,13 @@ class App extends Component {
   componentDidMount() {
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser){ // User logged in
-        this.setState({user: firebaseUser, loading : false});
+        this.setState({user: firebaseUser});
         this.userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
         this.userDataRef.on('value', (snapshot) => {
-          this.setState({userData: snapshot.val()});
+          this.setState({userData: snapshot.val(), loading: false});
         });
       } else { // User logged out
-        this.setState({user:null, loading : false});
+        this.setState({user:null, loading: false});
       }
     });
   }
@@ -85,10 +85,11 @@ class App extends Component {
   }
 
   handleSignOut() {
-    this.setState({errorMessage:null});
-
+    this.setState({loading: true, errorMessage:null});
     firebase.auth().signOut()
-    .catch((err) => this.setState({errorMessage: err.message}));
+    .catch((err) =>   {
+      this.setState({loading: false, errorMessage: err.message});
+    });
   }
 
   handleAddSubscription(plan)  {
@@ -102,6 +103,13 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.loading) { // If loading, display spinner
+      return (
+        <div className="loading-screen">
+        <i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
+        </div>
+      )
+    } else {
     let contents = null;
     if (!this.state.user) {
       contents = (
@@ -124,7 +132,7 @@ class App extends Component {
               <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
               <Route exact path="/journal" component={(props) => <Journal currentUser={this.state.user} />}></Route>
               <Route exact path="/subscription" component={(props) => <Subscription
-              subscription={this.state.userData.plan} routerprops={props}
+              loading={this.state.loading} subscription={this.state.userData.plan} routerprops={props}
               user={this.state.user} handleUnsubscribe={() => this.handleUnsubscribe()}/>}></Route>
               {this.state.userData && !this.state.userData.plan ?
               <Route exact path="/subscribe/:plan" component={(props) =>
@@ -145,5 +153,6 @@ class App extends Component {
         );
       }
     }
+  }
 
 export default App;

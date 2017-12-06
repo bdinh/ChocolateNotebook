@@ -11,6 +11,18 @@ body {
   background-color: var(--background-color);
 }
 
+button:hover  {
+  background-color: var(--accent-pink);
+}
+
+button:focus  {
+  outline: 0;
+}
+
+button:active  {
+  box-shadow: 0 0 1px 1px black inset;
+}
+
 .logged {
   padding-top: 5rem;
 }
@@ -23,4 +35,9 @@ body {
   background: url("./img/flaticonchocolateicon.png") right top;
   background-position: 100% 100%;
   background-size: 100% 100%;
+}
+
+.loading-screen  {
+  margin-top: 10rem;
+  text-align: center;
 }

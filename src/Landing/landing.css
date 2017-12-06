@@ -13,6 +13,10 @@ a:hover, button a   {
 
 }
 
+p, h1, button  {
+  color: white;
+}
+
 .landing-image {
     background-image: url("../img/hand-holding-coffee.jpg");
     background-position: center;
@@ -173,5 +177,3 @@ button.get-started-button:hover {
         margin-bottom: 0;
     }
 }
-
-

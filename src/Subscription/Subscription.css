@@ -1,16 +1,41 @@
-body  {
+.subscription-body {
   text-align: center;
-  margin-left: 5rem;
-  margin-right: 5rem;
   font-size: 14pt;
-  background-color: var(--background-color);
+  margin-bottom: 5rem;
 }
 
-h1  {
+.subscription-body .card img  {
+  height: 250px;
+  width: 200px;
+  padding: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subscription-body h2  {
+  margin-bottom: 2rem;
+}
+
+#subscribe-img  {
+  background: linear-gradient( rgba(0, 0, 0, 0.7),
+  rgba(0, 0, 0, 0.5) ), url('/subscribe-background.jpg');
+  background-repeat: no-repeat;
+  padding: 5rem;
+  margin: none;
+}
+
+.learn-image  {
+  height: 150px;
+  padding: 1rem;
+}
+
+.subscription-body h1  {
   color: white;
   padding: 2rem;
 }
-p  {
+
+.learn-more p, .description p,
+.subscribe p, .subscription-body h3  {
   color: white;
 }
 
@@ -57,6 +82,7 @@ p  {
 
 .learn-card  {
   display: inline-flex;
+    text-align: left;
 }
 
 header  {
@@ -76,28 +102,31 @@ header  {
   font-size: 16pt;
 }
 
-button  {
-  color: black;
-  background-color: var(--accent-green);
-  border-radius: 5px 5px 5px 5px;
-  border: none;
+.description button, .confirmation button  {
+  color: white;
+  background-color: transparent;
+  border-radius: 10px 10px 10px 10px;
+  border: 3px solid var(--accent-green);
   padding: 0.5rem;
   margin: 0.5rem;
-  color: white;
   font-size: 12pt;
   text-shadow: 0px 0.5px 5px #000000;
 }
 
-button:hover  {
-  background-color: var(--accent-pink);
+.cards button, .chocolate-card button {
+  color: white;
+  background-color: var(--accent-green);
+  border-radius: 10px 10px 10px 10px;
+  border: none;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  font-size: 12pt;
+  text-shadow: 0px 0.5px 5px #000000;
 }
 
-button:focus  {
-  outline: 0;
-}
-
-button:active  {
-  box-shadow: 0 0 1px 1px black inset;
+.subscription-body h1  {
+  background-color: var(--main-color);
+  margin: 0;
 }
 
 .confirmation  {
@@ -114,7 +143,10 @@ button:active  {
 
 .subscribe h3  {
   font-size: 24pt;
+  margin-top: 2rem;
 }
+
+
 
 input  {
   padding: 0.25rem;
@@ -133,15 +165,11 @@ li  {
   margin: 1rem;
 }
 
-label  {
+.subscription-body label  {
   color: white;
 }
 
 #subscribed h2  {
-  color: white;
-}
-
-h3  {
   color: white;
 }
 

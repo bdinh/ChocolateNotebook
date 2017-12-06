@@ -8,9 +8,18 @@ import Search from '../Catalog/Search';
   class Subscription extends Component  {
 
     render()  {
-      console.log(Search('71'));
       let content = null;
-      if (!this.props.subscription) {
+      if (this.props.subscription) {
+        let rows = handleRows(this.props.subscription);
+        content = (
+          <div id='subscribed'>
+            <h1>Your Subscription:</h1>
+            <h2>You are subscribed to ChocoBox {this.props.subscription}</h2>
+            {rows.grid}
+            <Link to="subscription"><button onClick={() => this.props.handleUnsubscribe()}>Unsubscribe</button></Link>
+          </div>
+        );
+      } else  {
         content = (
           <div>
             <header>
@@ -30,77 +39,65 @@ import Search from '../Catalog/Search';
             <div className="cards">
               <div className="card">
                 <h2>Option One: <br/> ChocoBox Trials</h2>
-                <img src="" alt="chocolate bars"/>
+                <img src="/6-bars.png" alt="chocolate bars"/>
                 <p>9.99$ A Month for 6 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Trials"}><button>Subscribe Now!</button></Link>
               </div>
               <div className="card">
-                <h2>Option Two: <br/> ChocoBox Premium</h2>
-                <img src="" alt="chocolate bars"/>
+                <h2>Option Two: <br/> ChocoBox Prime</h2>
+                <img src="/9-bars.png" alt="chocolate bars"/>
                 <p>14.99$ A Month for 9 different chocolate bars of your choosing!</p>
-                <Link to={"/subscribe/Premium"}><button>Subscribe Now!</button></Link>
+                <Link to={"/subscribe/Prime"}><button>Subscribe Now!</button></Link>
               </div>
               <div className="card">
                 <h2>Option Three: <br/> ChocoBox Deluxe</h2>
-                <img src="" alt="chocolate bars"/>
+                <img src="/15-bars.png" alt="chocolate bars"/>
                 <p>19.99$ A Month for 15 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Deluxe"}><button>Subscribe Now!</button></Link>
               </div>
             </div>
             <div className="learn-more">
               <div className="learn-card">
-                <img src="" alt="choose-plan"/>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
-                  iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
-                   ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta
-                  culpa minus perspiciatis. Et eius cum laboriosam! Sint, incidunt ducimus
-                 impedit, reiciendis unde deserunt fugit consequuntur quasi minus molestias,
-                  eligendi provident ullam inventore nobis! Adipisci, fuga id praesentium in
-                  , nemo non?
-                </p>
+                <img className="learn-image" src="/choices.svg" alt="choose-plan"/>
+                {/* <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
+                <div className="learn-body">
+                  <h3>Choose A Plan</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
+                    iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
+                     ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
+                  </p>
+                </div>
               </div>
               <div className="learn-card">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
                   iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
-                   ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta
-                  culpa minus perspiciatis. Et eius cum laboriosam! Sint, incidunt ducimus
-                 impedit, reiciendis unde deserunt fugit consequuntur quasi minus molestias,
-                  eligendi provident ullam inventore nobis! Adipisci, fuga id praesentium in
-                  , nemo non?
+                   ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
                 </p>
-                <img src="" alt="pick-chocolate"/>
+                <img className="learn-image" src="/chocolate-icon.svg" alt="pick-chocolate"/>
+                {/* <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
               </div>
               <div className="learn-card">
-                <img src="" alt="get-in-mail"/>
+                <img className="learn-image" src="/letter.svg" alt="get-in-mail"/>
+{/* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
                   iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
-                   ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta
-                  culpa minus perspiciatis. Et eius cum laboriosam! Sint, incidunt ducimus
-                 impedit, reiciendis unde deserunt fugit consequuntur quasi minus molestias,
-                  eligendi provident ullam inventore nobis! Adipisci, fuga id praesentium in
-                  , nemo non?
+                   ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
                 </p>
               </div>
             </div>
           </div>
         );
-      } else  {
-        let rows = handleRows(this.props.subscription);
-        content = (
-          <div id='subscribed'>
-            <h1>Your Subscription:</h1>
-            <h2>You are subscribed to ChocoBox {this.props.subscription}</h2>
-            {rows.grid}
-            <Link to="subscription"><button onClick={() => this.props.handleUnsubscribe()}>Unsubscribe</button></Link>
-          </div>
-
-        );
       }
-      return content;
+      return (
+        <div className="subscription-body">
+          {content}
+        </div>
+      );
     }
   }
+
 
   export default Subscription;

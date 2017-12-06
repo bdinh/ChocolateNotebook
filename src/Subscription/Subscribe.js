@@ -7,7 +7,7 @@ export function handleRows(subscription)  {
   let bars = 0;
   if (subscription === "Trials") {
     bars = 6;
-  } else if (subscription === "Premium") {
+  } else if (subscription === "Prime") {
     bars = 9;
   } else {
     bars = 15;
@@ -27,21 +27,23 @@ class Subscribe extends Component  {
   render()  {
     let rows = handleRows(this.props.routerprops.match.params.plan);
     return(
-      <div>
+      <div className="subscription-body">
         <h1>Subscription Confirmation</h1>
         <div className="subscribe">
-          <h2>ChocoBox {this.props.routerprops.match.params.plan}</h2>
-          <img src="" alt="subscription"/>
-          <p>
-            With ChocoBox {this.props.routerprops.match.params.plan}, you will receive {rows.bars} bars of chocolate a month
-            of your choosing.
-            <ul>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, ipsam.</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam magni sunt culpa voluptatibus!</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla nesciunt neque, dicta perferendis necessitatibus. Odit in ullam consectetur error iure natus, ab.</li>
-              <li>Lorem ipsum dolor sit amet.</li>
-            </ul>
-          </p>
+          <div id="subscribe-img">
+            <h2>ChocoBox {this.props.routerprops.match.params.plan}</h2>
+            <p>
+              With ChocoBox {this.props.routerprops.match.params.plan}, you will receive {rows.bars} bars of chocolate a month
+              of your choosing.
+              <ul>
+                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, ipsam.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam magni sunt culpa voluptatibus!</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla nesciunt neque, dicta perferendis necessitatibus. Odit in ullam consectetur error iure natus, ab.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </p>
+          </div>
+
           <h3>Your Chocolates</h3>
           {rows.grid}
           <div>
@@ -67,21 +69,21 @@ class ChooseRow extends Component  {
             <h4>{this.props.chocolateBars[0].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
             <img src="" alt="chocolate bar"/>
             <p>{(this.props.chocolateBars[0].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
-               (this.props.chocolateBars[0].fields.broad_bean_origin || 'Unkown Source')}</p>
+               (this.props.chocolateBars[0].fields.broad_bean_origin || 'Unknown Source')}</p>
             <button>Change</button>
           </div>
           <div className="chocolate-card">
             <h4>{this.props.chocolateBars[1].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
             <img src="" alt="chocolate bar"/>
             <p>{(this.props.chocolateBars[1].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
-               (this.props.chocolateBars[1].fields.broad_bean_origin || 'Unkown Source')}</p>
+               (this.props.chocolateBars[1].fields.broad_bean_origin || 'Unknown Source')}</p>
             <button>Change</button>
           </div>
           <div className="chocolate-card">
             <h4>{this.props.chocolateBars[2].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
             <img src="" alt="chocolate bar"/>
             <p>{(this.props.chocolateBars[2].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
-               (this.props.chocolateBars[2].fields.broad_bean_origin || 'Unkown Source')}</p>
+               (this.props.chocolateBars[2].fields.broad_bean_origin || 'Unknown Source')}</p>
             <button>Change</button>
           </div>
         </div>
