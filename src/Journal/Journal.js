@@ -331,10 +331,22 @@ class RenderJournalItems extends Component {
     this.setState({userData : this.state.userData, edit : true, editingEntry : entryEditing}); 
   }
   
+  // Pushes an edited journal entry to database.
+  // Recreates the string that the item can be searched for by.
   completeEdit(updatedInfo, entryKey) {
+    updatedInfo.searchString = updatedInfo.producer + updatedInfo.origin + updatedInfo.tastingNotes + updatedInfo.text + "date:" + updatedInfo.date + updatedInfo.barName;
+    updatedInfo.tastingNotes = updatedInfo.tastingNotes ? updatedInfo.tastingNotes : "(None)";
     firebase.database().ref('userData/' + this.props.user.uid + '/userJournalEntries/' + entryKey).update(updatedInfo);
   }
-
+  
+  // Deletes the entry being edited
+  deleteCurrentEditEntry(key) {
+    let newUserData = this.state.userData;
+    delete newUserData[key];
+    console.log(newUserData);
+    firebase.database().ref('userData/' + this.props.user.uid + '/userJournalEntries').set(newUserData);
+  }
+  
   render() {
     if (!this.state.edit && this.state.userData && this.state.userData !== "None") {  
       let output = Object.keys(this.state.userData).map((key) => {
@@ -347,7 +359,7 @@ class RenderJournalItems extends Component {
             includes = false; // If not included
           }
         }
-        if (includes) { // If journal entry includes all words inquery
+        if (includes) { // If journal entry includes all words in query
           return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key} dbKey={key} editEntry={(key) => this.editEntry(key)}/>
         } else {
           return "";
@@ -360,11 +372,11 @@ class RenderJournalItems extends Component {
         </div>
       );
     } else if (this.state.userData === "None") {
-      return(<div className="journal-entry-header"><p>Your chocolate journal is empty.</p></div>)
+      return(<div className="journal-entry-header info-text"><p>Your chocolate journal is empty.</p></div>)
     } else if (this.state.edit) {
-      return (<EditingJournalEntryCard itemBeingEdited={this.state.editingEntry} completeEditCallback={(newInfo) => this.completeEdit(newInfo, this.currentEditKey)}/>)
+      return (<EditingJournalEntryCard itemBeingEdited={this.state.editingEntry} completeEditCallback={(newInfo) => this.completeEdit(newInfo, this.currentEditKey)} deleteCallback={() => this.deleteCurrentEditEntry(this.currentEditKey)}/>)
     } else { // not loaded or doesn't exist
-    return(<div className="journal-entry-header"><p>Hold tight! We're retrieving your chocolate journal.</p></div>)
+    return(<div className="journal-entry-header info-text"><p>Your journal is empty.</p></div>)
   }
 }
 }
@@ -381,6 +393,9 @@ class EditingJournalEntryCard extends Component {
     this.text = this.props.itemBeingEdited.text;
     this.date = this.props.itemBeingEdited.date;
     this.barName = this.props.itemBeingEdited.barName;
+    this.state= {
+      hasConfirmedDelete : false
+    }
   }
   
   // Update in response to textarea typing
@@ -404,8 +419,17 @@ class EditingJournalEntryCard extends Component {
     this.rating = rating;
   }
   
-  updateEntry() {
+  updateEntry(e) {
+    e.preventDefault();
     this.props.completeEditCallback({producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName}, this.props.currentEditKey);
+  }
+  
+  deleteItem() {
+    this.props.deleteCallback();
+  }
+  
+  hasConfirmedDeleteClick() {
+    this.setState({hasConfirmedDelete : true});
   }
   
   render() {
@@ -421,7 +445,8 @@ class EditingJournalEntryCard extends Component {
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} defaultValue={this.text}></textarea>
       </div>
-      {(this.barName !== "") ? <Button id="submit-entry-button" onClick={(e) => this.updateEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></Button> : <Button id="submit-entry-button" disabled onClick={() => this.updateEntry()}>Update Entry</Button>}
+      {(this.barName !== "") ? <NavLink to="/journal"><Button id="submit-entry-button" onClick={(e) => this.updateEntry(e)}>Submit Entry</Button></NavLink> : (<Button id="submit-entry-button" disabled onClick={() => this.updateEntry()}>Update Entry</Button>)}
+      {this.state.hasConfirmedDelete ? <Button id="delete-button" color="danger" onClick={() => this.deleteItem()}>Delete Entry</Button> : <Button id="delete-button" onClick={() => {this.hasConfirmedDeleteClick()}} color="warning">Delete Entry ?</Button>}
       </div>
     );
   }
@@ -527,6 +552,10 @@ function toTitleCase(str) {
 // Takes in a string of tasting notes "note,note,note" format
 // Outputs "Note, Note, Note"
 function formatTastingNotes(notes) {
-  notes = notes.replace(/,/g , ", "); // Replace ',' with ', '
-  return toTitleCase(notes);
+  if (notes) {
+    notes = notes.replace(/,/g , ", "); // Replace ',' with ', '
+    return toTitleCase(notes);
+  } else {
+    return "(None)";
+  }
 }
