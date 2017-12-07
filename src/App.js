@@ -11,10 +11,15 @@ import SignUp from './Users/SignUp';
 import Login from './Users/Login';
 import firebase from 'firebase/app';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import SubscriptionInfo from './Subscription/SubscriptionInfo';
+import { handleRows, ChooseRow } from './Subscription/Subscribe';
+// import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
     constructor(props){
         super(props);
+        this.today = new Date();
+        this.start = this.today.getMonth() * 15;
         this.state = {
             loading : true,
             errorMessage : null,
@@ -22,7 +27,10 @@ class App extends Component {
                 userName : null,
                 userJournalEntries : null,
                 plan : null
-            }
+            },
+            month: this.today.getMonth(),
+            rows: handleRows('Trials', this.start),
+            index: 'month_one'
         };
     }
 
@@ -59,7 +67,7 @@ class App extends Component {
                 let newUserData = {
                     userName : email,
                     userJournalEntries : "None",
-                    plan : null
+                    subscription : null
                 }
 
                 let userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
@@ -97,13 +105,25 @@ class App extends Component {
     }
 
     handleAddSubscription(plan)  {
-        let setPlan = firebase.database().ref('userData/' + this.state.user.uid + '/plan')
-            .set(plan);
+        let setPlan = firebase.database().ref('userData/' + this.state.user.uid + '/subscription')
+            .set({plan:plan, months:{month_one:true, month_two:true, month_three:true}});
     }
 
     handleUnsubscribe()  {
-        let setNull = firebase.database().ref('userData/' + this.state.user.uid + '/plan')
+        let setNull = firebase.database().ref('userData/' + this.state.user.uid + '/subscription')
             .set(null);
+    }
+
+    handleSkip(month, bool)  {
+      let setSkip = firebase.database().ref('userData/' + this.state.user.uid + '/subscription/months/' + month)
+        .set(bool);
+    }
+
+    handleSwitchMonth(increment, month)  {
+      let newState = (this.today.getMonth() + increment) % 12;
+      this.setState({month:newState});
+      this.setState({rows:handleRows(this.state.userData.subscription.plan, this.start + (15 * increment))});
+      this.setState({index: month});
     }
 
     render() {
@@ -148,15 +168,23 @@ class App extends Component {
                       <Switch>
                         <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
                         <Route exact path="/journal" component={(props) => <Journal currentUser={this.state.user} />}></Route>
-                        <Route exact path="/subscription" component={(props) => <Subscription
-                            loading={this.state.loading} subscription={this.state.userData.plan} routerprops={props}
-                            user={this.state.user} handleUnsubscribe={() => this.handleUnsubscribe()}/>}></Route>
-                          {this.state.userData && !this.state.userData.plan ?
-                              <Route exact path="/subscribe/:plan" component={(props) =>
-                                  <Subscribe routerprops={props} handleAddSubscription={(plan) =>
-                                      this.handleAddSubscription(plan)}/>}></Route> : ''}
+                        <Route exact path="/subscription" component={(props) =>
+                          <Subscription handleSkip={(month, bool) => this.handleSkip(month, bool)}
+                          loading={this.state.loading} subscription={this.state.userData.subscription}
+                          routerprops={props} user={this.state.user} handleUnsubscribe={() => this.handleUnsubscribe()}/>}></Route>
+                        <Route exact path="/subscription/subscribed" component={(props) =>
+                          <SubscriptionInfo handleSkip={(month, bool) => this.handleSkip(month, bool)}
+                          index={this.state.index} month={this.state.month} rows={this.state.rows}
+                          subscription={this.state.userData.subscription} handleUnsubscribe={() => this.handleUnsubscribe()}
+                          handleSwitchMonth={(increment, month) => this.handleSwitchMonth(increment, month)}/>}></Route>
+
+                        {!this.state.userData.subscription ?
+                        <Route exact path="/subscribe/:plan" component={(props) =>
+                          <Subscribe routerprops={props} handleAddSubscription={(plan) =>
+                          this.handleAddSubscription(plan)}/>}></Route> : ''}
                         <Route exact path="/newjournalentry" component={() => <JournalNewEntry
-                            currentUser={this.state.user} />}></Route>
+                          currentUser={this.state.user} />}></Route>
+
                         <Redirect to="/journal"></Redirect>
                       </Switch>
                     </div>

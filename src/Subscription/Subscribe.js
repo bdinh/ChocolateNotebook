@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import './Subscription.css';
-import { Link  } from 'react-router-dom';
+import { Link, Redirect  } from 'react-router-dom';
+import Subscription from './Subscription';
 import chocolateBars from '../chocolate-bars.json';
+
+
 export function handleRows(subscription, start)  {
   let bars = 0;
   if (subscription === "Trials") {
@@ -23,39 +26,45 @@ export function handleRows(subscription, start)  {
 }
 
 class Subscribe extends Component  {
-
   render()  {
-    let rows = handleRows(this.props.routerprops.match.params.plan);
-    return(
-      <div className="subscription-body">
-        <h1>Subscription Confirmation</h1>
-        <div className="subscribe">
-          <div id="subscribe-img">
-            <h2>ChocoBox {this.props.routerprops.match.params.plan}</h2>
-            <p>
-              With ChocoBox {this.props.routerprops.match.params.plan}, you will receive {rows.bars} bars of chocolate a month
-              of your choosing.
+    let today = new Date();
+    let rows = handleRows(this.props.routerprops.match.params.plan, today.getMonth() * 15);
+    if (this.props.routerprops.match.params.plan === "Trials" ||
+        this.props.routerprops.match.params.plan === "Prime" ||
+        this.props.routerprops.match.params.plan === "Deluxe") {
+      return(
+        <div className="subscription-body">
+          <h1>Subscription Confirmation</h1>
+          <div className="subscribe">
+            <div id="subscribe-img">
+              <h2>ChocoBox {this.props.routerprops.match.params.plan}</h2>
+              <p>
+                With ChocoBox {this.props.routerprops.match.params.plan}, you will receive {rows.bars} bars of chocolate a month
+                of your choosing.
+              </p>
               <ul>
                 <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, ipsam.</li>
                 <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam magni sunt culpa voluptatibus!</li>
                 <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla nesciunt neque, dicta perferendis necessitatibus. Odit in ullam consectetur error iure natus, ab.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
               </ul>
-            </p>
-          </div>
+            </div>
 
-          <h3>Your Chocolates</h3>
-          {rows.grid}
-          <div>
-            <p>You can change your selections before the ship date under the ChocoBox tab!</p>
-          </div>
-          <div className="confirmation">
-            <Link to='/subscription'><button onClick={() => this.props.handleAddSubscription(this.props.routerprops.match.params.plan)}>Confirm Your Subscription</button></Link>
-            <Link to='/subscription'><button>Cancel</button></Link>
+            <h3>Your Chocolates</h3>
+            {rows.grid}
+            <div>
+              <p>You can change your selections before the ship date under the ChocoBox tab!</p>
+            </div>
+            <div className="confirmation">
+              <Link to='/subscription'><button onClick={() => this.props.handleAddSubscription(this.props.routerprops.match.params.plan)}>Confirm Your Subscription</button></Link>
+              <Link to='/subscription'><button>Cancel</button></Link>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (<Redirect to="/subscription"></Redirect>);
+    }
   }
 }
 

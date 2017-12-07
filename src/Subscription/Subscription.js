@@ -8,39 +8,11 @@ import Search from '../Catalog/Search';
 import SubscriptionInfo from './SubscriptionInfo';
 
   class Subscription extends Component  {
-    constructor(props){
-        super(props);
-        this.today = new Date();
-        this.start = this.today.getMonth() * 15;
-        this.monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-        ];
-        this.state = {
-            month: this.monthNames[this.today.getMonth()],
-            rows: handleRows(this.props.subscription, this.start)
-
-        }
-    };
-
-    handleSwitchMonth(increment)  {
-      let newState = (this.today.getMonth() + increment) % 12;
-      this.setState({month:this.monthNames[newState]});
-      this.setState({rows:handleRows(this.props.subscription, this.start + (15 * increment))})
-    }
 
     render()  {
       let content = null;
       if (this.props.subscription) {
-        content = (
-          <div>
-            <nav className="month-nav">
-              <button onClick={() => this.handleSwitchMonth(0)}>This Month</button>
-              <button onClick={() => this.handleSwitchMonth(1)}>Next Month</button>
-              <button onClick={() => this.handleSwitchMonth(2)}>Following Month</button>
-            </nav>
-          <SubscriptionInfo month={this.state.month} rows={this.state.rows} subscription={this.props.subscription}
-        handleUnsubscribe={() => this.props.handleUnsubscribe()}/>
-        </div>  );
+        content = (<Redirect to="/subscription/subscribed"></Redirect>);
       } else  {
         content = (
           <div>
@@ -82,7 +54,7 @@ import SubscriptionInfo from './SubscriptionInfo';
               <div className="learn-card">
                 <img className="learn-image" src="/choices.svg" alt="choose-plan"/>
                 {/* <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
-                <div className="learn-body">
+                <div>
                   <h3>Choose A Plan</h3>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
@@ -92,22 +64,28 @@ import SubscriptionInfo from './SubscriptionInfo';
                 </div>
               </div>
               <div className="learn-card">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
-                  iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
-                   ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
-                </p>
+                <div>
+                  <h3>Choose Your Chocolates</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
+                    iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
+                     ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
+                  </p>
+                </div>
                 <img className="learn-image" src="/chocolate-icon.svg" alt="pick-chocolate"/>
                 {/* <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
               </div>
               <div className="learn-card">
                 <img className="learn-image" src="/letter.svg" alt="get-in-mail"/>
 {/* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
-                  iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
-                   ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
-                </p>
+                <div>
+                  <h3>Wait For Your Box!</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum,
+                    iusto fuga harum provident, ipsa voluptates debitis quibusdam. Deleniti
+                     ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
