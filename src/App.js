@@ -141,12 +141,7 @@ class App extends Component {
                     <div className="content-wrapper">
                       <Switch>
                         <Route exact path="/" render={(routerProps) => {
-                            return (<Login
-                                {...routerProps}
-                                signInCallback={(e,p) =>
-                                    this.handleSignIn(e,p)}
-                                errorMessage={this.state.errorMessage}
-                            />)
+                            return (<LandingPage />)
                         }}/>
                         <Route exact path="/login" render={(routerProps) => {
                             return (<Login
@@ -157,7 +152,7 @@ class App extends Component {
                             />)
                         }}/>
                         <Route exact path="/signup" component={(props) => <SignUp signUpCallback={(e,p) =>
-                            this.handleSignUp(e,p)}/>}/>
+                            this.handleSignUp(e,p)} errorMessage={this.state.errorMessage}/>}/>
                         <Redirect to="/" exact/>
                       </Switch>
                     </div>);

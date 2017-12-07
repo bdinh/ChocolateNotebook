@@ -66,8 +66,9 @@ class Login extends Component {
                         <div className="brown-vertical-stroke">
                         </div>
                         <div className="user-login-container">
+                            <div className="logo"><Link to="/"><h2>Logo Here</h2></Link></div>
                             <div className="title-text">
-                                <p>Chocolate Notebook Login</p>
+                                <h1>Chocolate Notebook Login</h1>
                             </div>
                                 <div className="login-form">
                                     <div className="form-group email-form">

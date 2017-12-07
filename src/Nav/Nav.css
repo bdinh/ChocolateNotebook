@@ -1,4 +1,4 @@
-.login-button, .signup-button, #nav .signout-button {
+.login-button, .signup-button, #nav .signout-button button {
   background-color: transparent;
   border: 3px solid #CFD4AD;
   border-radius: 50px;
@@ -6,12 +6,12 @@
   color: white;
 }
 
-.login-button:focus, .signup-button:focus, #nav .signout-button:focus  {
+.login-button:focus, .signup-button:focus, #nav .signout-button button:focus  {
   outline: 0;
   box-shadow: none;
 }
 
-.login-button:active, .signup-button:active, #nav .signout-button:focus  {
+.login-button:active, .signup-button:active, #nav .signout-button button:focus  {
   background-color: var(--accent-pink);
 }
 
@@ -37,8 +37,12 @@ nav.navbar  {
   margin-right: 1em;
 }
 
-#nav .signout-button {
+#nav .signout-button button {
   width: 100%;
+}
+
+#nav .signout-button button:hover  {
+  background-color: var(--accent-pink);
 }
 
 #nav a  {

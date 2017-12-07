@@ -3,15 +3,32 @@ html, body, #root, .row-container, .auth-container,
   height: 100%;
 }
 
+#login h1, #signup h1, #login h2, #signup h2  {
+  text-align: center;
+  color: var(--font-color);
+  font-size: 2em;
+}
+
+#login h1, #signup h1  {
+  font-size: 2em;
+}
+
+#login h2, #signup h2  {
+  font-size: 1.5em;
+}
+
+#login .logo a:hover, #signup .logo a:hover  {
+  text-decoration-color: var(--font-color);
+}
+
 #signup button, #login button  {
-  color: white;
+  color: var(--font-color);
   background-color: transparent;
   border-radius: 10px 10px 10px 10px;
   border: 3px solid var(--main-color);
   padding: 0.5rem;
   margin: 0.5rem;
   font-size: 1em;
-  text-shadow: 0px 0.5px 5px #000000;
 }
 
 input  {
@@ -35,7 +52,7 @@ input  {
   margin: 0;
 }
 .user-login-container {
-  padding: 10em 3em 3em 3em;
+  padding: 7em 3em 3em 3em;
   width: 35%;
   background-color: #eeeae347;
 }
@@ -55,25 +72,34 @@ input  {
 
 .new-account-text > a {
   color: var(--accent-green);
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.new-account-text > a:hover  {
+  text-decoration-color: var(--accent-green);
 }
 
 .new-account-text-container {
   text-align: center;
 }
 
-.title-text {
-  font-size: 2em;
-}
-
 .login-button-container, .signup-button-container {
   text-align: center;
 }
 
-.login-button, .signup-button {
+#login .login-button, #signup .signup-button {
   width: 50%;
+}
+
+#login button:disabled, #signup button:disabled {
+  background-color: rgb(40, 40, 40);
+}
+
+#login button:hover, #signup button:hover {
+  background-color: var(--accent-green);
+  color: white;
+  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .password-error, .email-error {
   color: red;
 }
-

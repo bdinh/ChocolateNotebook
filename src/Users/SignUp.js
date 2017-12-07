@@ -91,61 +91,74 @@ class SignUp extends Component {
   }
 
   render() {
-    return (
-      <div id="signup">
-        <div className="row row-container">
-          <div className="login-banner-container">
-          </div>
-          <div className="brown-vertical-stroke">
-          </div>
-          <div className="user-login-container">
-            <div className="title-text">
-              <p>Chocolate Notebook Sign Up</p>
+    const {
+        errorMessage
+    } = this.props;
+    if (this.state.loading) {
+        return (
+            <div className="text-center">
+              <i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."/>
             </div>
-            <div className="login-form">
-              <div className="form-group email-form">
-                <label  className="form-labels" htmlFor="loginEmail">Email address</label>
-                <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    className="form-control"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                    onChange={this.handleChange}
-                    valid={this.emailValid}
-                />
+        )
+    } else {
+      return (
+        <div id="signup">
+          <div className="row row-container">
+            <div className="login-banner-container">
+            </div>
+            <div className="brown-vertical-stroke">
+            </div>
+            <div className="user-login-container">
+              <div className="logo"><Link to="/"><h2>Logo Here</h2></Link></div>
+              <div className="title-text">
+                <h1>Chocolate Notebook Sign Up</h1>
               </div>
-                {this.emailErrors}
-              <div className="form-group form-group-spacing">
-                <label className="form-labels" htmlFor="loginPassword">Password</label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    className="form-control"
-                    placeholder="Enter password"
-                    onChange={this.handleChange}
-                    valid={this.emailValid}
-                />
-              </div>
-                {this.passwordErrors}
-              <div className="new-account-text-container">
-                <p className="new-account-text form-labels">Already have an account? <Link to='/login'>Login</Link></p>
-              </div>
-              <div className="signup-button-container">
-                <button
-                    className="btn btn-primary signup-button"
-                    onClick={this.handleSignUp}
-                    disabled={!(this.emailValid && this.passwordValid)}>
-                  Sign Up
-                </button>
+              <div className="login-form">
+                <div className="form-group email-form">
+                  <label  className="form-labels" htmlFor="loginEmail">Email address</label>
+                  <input
+                      id="email"
+                      type="email"
+                      name="email"
+                      className="form-control"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter email"
+                      onChange={this.handleChange}
+                      valid={this.emailValid}
+                  />
+                </div>
+                  {this.emailErrors}
+                <div className="form-group form-group-spacing">
+                  <label className="form-labels" htmlFor="loginPassword">Password</label>
+                  <input
+                      id="password"
+                      type="password"
+                      name="password"
+                      className="form-control"
+                      placeholder="Enter password"
+                      onChange={this.handleChange}
+                      valid={this.emailValid}
+                  />
+                </div>
+                  {this.passwordErrors}
+                <div className="new-account-text-container">
+                  <p className="new-account-text form-labels">Already have an account? <Link to='/login'>Login</Link></p>
+                </div>
+                <div className="signup-button-container">
+                  <button
+                      className="btn btn-primary signup-button"
+                      onClick={this.handleSignUp}
+                      disabled={!(this.emailValid && this.passwordValid)}>
+                    Sign Up
+                  </button>
+                </div>
+                <p className="email-error">{errorMessage ? errorMessage : ""}</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 export default SignUp; //the default
