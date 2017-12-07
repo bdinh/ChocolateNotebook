@@ -64,13 +64,14 @@ class NewJournalEntryCard extends Component {
     this.text = e.target.value;
   }
   
-  updateDateAndTitle (details) {
+  updateDateAndTitle(details) {
     this.date = details.date;
     this.barName = details.barName;
     this.setState({});
   }
   
   updateChocolateDetails(details) {
+    this.tastingNotes = details.tastingNotes;    
     this.origin = details.origin;
     this.producer = details.producer;
   }
@@ -87,7 +88,7 @@ class NewJournalEntryCard extends Component {
   render() {
     return (
       <div className="journal-item ">
-      <NewJournalCardHeader  passUpStateCallback={(state) => this.updateDateAndTitle(state)}/>
+      <NewJournalCardHeader passUpStateCallback={(state) => this.updateDateAndTitle(state)}/>
       
       <div className="journal-entry-main">
       <div className="chocolate-detail-container">
@@ -162,7 +163,7 @@ class ChocolateDetailsEntry extends Component {
     this.setState({origin: this.state.origin, producer: producer, tastingNotes: this.state.tastingNotes});
   }
   
-  render() {    
+  render() {
     this.props.passUpStateCallback(this.state);
     
     return (

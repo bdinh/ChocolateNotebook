@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 
 // Adds a new journal entry to the data base
 export function addJournalEntry(user, entryDetails) {
+    console.log(entryDetails);
     let newEntry = {
         producer : entryDetails.producer,
         origin : entryDetails.origin,
