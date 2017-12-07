@@ -3,7 +3,6 @@
     margin-left: 0!important;
 }
 
-
 .landing-body a:hover, .landing-body button a   {
   color: white;
 }
@@ -13,8 +12,12 @@
 
 }
 
-.landing-body p, .landing-body h1, .landing-body button  {
-  color: white;
+.landing-image, .landing-body button {
+    color: #FFFFFF;
+}
+
+.landing-body h1 {
+  color: var(--font-color);
 }
 
 .landing-image {
@@ -56,10 +59,11 @@
 .section-block, .footer {
     text-align: left;
     padding: 2em;
+    color: var(--font-color);
 }
 
 .our-story {
-    background-color: #7F524E;
+    background-color: var(--background-color);
 }
 
 .history {

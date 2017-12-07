@@ -145,6 +145,13 @@ class App extends Component {
                       <Switch>
                         <Route exact path="/" render={(routerProps) => {
                             return (<LandingPage />)
+                            // return (<Login
+                            //     {...routerProps}
+                            //     signInCallback={(e,p) =>
+                            //         this.handleSignIn(e,p)}
+                            //     errorMessage={this.state.errorMessage}
+                            // />)
+                            return <LandingPage/>
                         }}/>
                         <Route exact path="/login" render={(routerProps) => {
                             return (<Login

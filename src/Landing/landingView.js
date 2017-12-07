@@ -14,19 +14,10 @@ export default class LandingView extends Component {
     render() {
         return(
         <div className="landing-body">
-            {/* <div className="navbar-container">
-                <nav className="navbar navbar-toggleable-sm navbar-inverse fixed-top">
-                    <a className="navbar-brand" href="#home">(Logo Goes Here)</a>
-                    <button className="navbar-toggler-right btn login-button" type="button">
-                    <Link to='/login'>Login</Link></button>
-                    <button className="navbar-toggler-right btn login-button" type="button">
-                    <Link to='/signup'>Sign Up</Link></button>
-                </nav>
-            </div> */}
-
             <div className="landing-image">
-                <p className="hero-text quote">"Seven days without Chocolate makes one weak"</p>
-                <p className="hero-text cited">- unknown author</p>
+                <p className="hero-text quote">
+                    “All you need is love. But a little chocolate now and then doesn't hurt.”                 </p>
+                <p className="hero-text cited">- Charles M. Schulz</p>
                 <div className="get-started-button-container">
                     <button type="button" className="btn get-started-button">Get Started</button>
                 </div>
