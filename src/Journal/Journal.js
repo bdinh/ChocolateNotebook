@@ -64,13 +64,14 @@ class NewJournalEntryCard extends Component {
     this.text = e.target.value;
   }
   
-  updateDateAndTitle (details) {
+  updateDateAndTitle(details) {
     this.date = details.date;
     this.barName = details.barName;
     this.setState({});
   }
   
   updateChocolateDetails(details) {
+    this.tastingNotes = details.tastingNotes;    
     this.origin = details.origin;
     this.producer = details.producer;
   }
@@ -87,7 +88,7 @@ class NewJournalEntryCard extends Component {
   render() {
     return (
       <div className="journal-item ">
-      <NewJournalCardHeader  passUpStateCallback={(state) => this.updateDateAndTitle(state)}/>
+      <NewJournalCardHeader passUpStateCallback={(state) => this.updateDateAndTitle(state)}/>
       
       <div className="journal-entry-main">
       <div className="chocolate-detail-container">
@@ -106,16 +107,18 @@ class NewJournalEntryCard extends Component {
 
 // Handles changing the rating of a chocolate
 class ChocolateRatingEntry extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {rating : 1};
     this.updateRating = this.updateRating.bind(this);
-    
   }
   updateRating(value, event) {
     event.preventDefault();
     this.setState({rating : value.num});
     this.props.passUpStateCallback(value.num);
+  }
+  componentWillMount() {
+    this.setState({rating : (this.props.editingRating ? this.props.editingRating : this.state.rating)});
   }
   
   render() {
@@ -141,12 +144,20 @@ class ChocolateRatingEntry extends Component {
 // Renders place for entering origin, producer and tasting notes
 // on a new journal entry
 class ChocolateDetailsEntry extends Component {
-  constructor() {
-    super();
-    this.state = {
-      origin: "(None)",
-      producer: "(None)",
-      tastingNotes: []
+  constructor(props) {
+    super(props);
+    if (!this.props.editingProducer) { // if not editing
+      this.state = {
+        origin: "(None)",
+        producer: "(None)",
+        tastingNotes: []
+      }
+    } else {
+      this.state = {
+        origin: this.props.editingOrigin,
+        producer: this.props.editingProducer,
+        tastingNotes: this.props.editingTastingNotes
+      }
     }
   }
   
@@ -162,7 +173,7 @@ class ChocolateDetailsEntry extends Component {
     this.setState({origin: this.state.origin, producer: producer, tastingNotes: this.state.tastingNotes});
   }
   
-  render() {    
+  render() {
     this.props.passUpStateCallback(this.state);
     
     return (
@@ -209,7 +220,6 @@ class ChocolateDetailsEntry extends Component {
       name="form-field-name"
       value={this.state.tastingNotes}
       simpleValue
-      value={this.state.tastingNotes}
       openOnClick={false}
       />
       </div>
@@ -219,8 +229,8 @@ class ChocolateDetailsEntry extends Component {
 
 // Renders card header that info can be entered in
 class NewJournalCardHeader extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       date: "",
       barName: "",
@@ -241,14 +251,25 @@ class NewJournalCardHeader extends Component {
   
   
   render() {
-    return(
-      <div className="journal-new-entry-header group-input">
-      <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
-      <Cleave 
-      options={{date: true, delimiter: "."}}
-      className="header-entry-field" placeholder="Date: DD.MM.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)} value={this.state.date}/>
-      </div>
-    );
+    if (this.props.editingDate && this.props.editingbarName) {
+      return  (
+        <div className="journal-new-entry-header group-input">
+        <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)} defaultValue={this.props.editingbarName}/>
+        <Cleave 
+        options={{date: true, delimiter: "."}}
+        className="header-entry-field" placeholder="Date: DD.MM.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)} value={this.props.editingDate}/>
+        </div>
+      )
+    } else {
+      return(
+        <div className="journal-new-entry-header group-input">
+        <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
+        <Cleave 
+        options={{date: true, delimiter: "."}}
+        className="header-entry-field" placeholder="Date: DD.MM.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)} value={this.state.date}/>
+        </div>
+      );
+    }
   }
 }
 
@@ -290,33 +311,56 @@ class SearchJournal extends Component {
 class RenderJournalItems extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {edit : false, editingEntry : ""};
+    this.key;
   }
   
   componentWillMount() {
     this.userDataRef = firebase.database().ref('userData/' + this.props.user.uid + "/userJournalEntries");
     this.userDataRef.on('value', (snapshot) => {
-      this.setState({userData : snapshot.val()});
+      this.setState({userData : snapshot.val(), edit: this.state.edit, editingEntry : this.state.editingEntry});
     });
   }
   componentWillUnmount() {
     this.userDataRef.off();
   }
   
+  editEntry(key) {
+    let entryEditing = this.state.userData[key];
+    this.currentEditKey = key;
+    this.setState({userData : this.state.userData, edit : true, editingEntry : entryEditing}); 
+  }
+  
+  // Pushes an edited journal entry to database.
+  // Recreates the string that the item can be searched for by.
+  completeEdit(updatedInfo, entryKey) {
+    updatedInfo.searchString = updatedInfo.producer + updatedInfo.origin + updatedInfo.tastingNotes + updatedInfo.text + "date:" + updatedInfo.date + updatedInfo.barName;
+    updatedInfo.tastingNotes = updatedInfo.tastingNotes ? updatedInfo.tastingNotes : "(None)";
+    firebase.database().ref('userData/' + this.props.user.uid + '/userJournalEntries/' + entryKey).update(updatedInfo);
+  }
+  
+  // Deletes the entry being edited
+  deleteCurrentEditEntry(key) {
+    let newUserData = this.state.userData;
+    delete newUserData[key];
+    console.log(newUserData);
+    firebase.database().ref('userData/' + this.props.user.uid + '/userJournalEntries').set(newUserData);
+  }
+  
   render() {
-    if (this.state.userData && this.state.userData !== "None") {  
+    if (!this.state.edit && this.state.userData && this.state.userData !== "None") {  
       let output = Object.keys(this.state.userData).map((key) => {
         let item = this.state.userData[key];
         let includes = true; 
-
+        
         // Check if all words in query are included
         for (let i = 0; i < this.props.query.length; i++) {
           if (!item.searchString.toLowerCase().includes(this.props.query[i].toLowerCase())) {
             includes = false; // If not included
           }
         }
-        if (includes) { // If journal entry includes all words inquery
-        return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
+        if (includes) { // If journal entry includes all words in query
+          return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key} dbKey={key} editEntry={(key) => this.editEntry(key)}/>
         } else {
           return "";
         }
@@ -328,16 +372,96 @@ class RenderJournalItems extends Component {
         </div>
       );
     } else if (this.state.userData === "None") {
-      return(<div className="journal-entry-header"><p>Your chocolate journal is empty.</p></div>)
+      return(<div className="journal-entry-header info-text"><p>Your chocolate journal is empty.</p></div>)
+    } else if (this.state.edit) {
+      return (<EditingJournalEntryCard itemBeingEdited={this.state.editingEntry} completeEditCallback={(newInfo) => this.completeEdit(newInfo, this.currentEditKey)} deleteCallback={() => this.deleteCurrentEditEntry(this.currentEditKey)}/>)
     } else { // not loaded or doesn't exist
-    return(<div className="journal-entry-header"><p>Hold tight! We're retrieving your chocolate journal.</p></div>)
+    return(<div className="journal-entry-header info-text"><p>Your journal is empty.</p></div>)
   }
 }
 }
 
+// Displays the input form for editing a journal entry
+// Takes in a prop of the former information
+class EditingJournalEntryCard extends Component {
+  constructor(props) {
+    super(props);
+    this.producer = this.props.itemBeingEdited.producer;
+    this.origin = this.props.itemBeingEdited.origin;
+    this.tastingNotes = this.props.itemBeingEdited.tastingNotes;
+    this.rating = this.props.itemBeingEdited.rating;
+    this.text = this.props.itemBeingEdited.text;
+    this.date = this.props.itemBeingEdited.date;
+    this.barName = this.props.itemBeingEdited.barName;
+    this.state= {
+      hasConfirmedDelete : false
+    }
+  }
+  
+  // Update in response to textarea typing
+  updatePost(e) {
+    this.text = e.target.value;
+  }
+  
+  updateDateAndTitle (details) {
+    this.date = details.date;
+    this.barName = details.barName;
+    this.setState({});
+  }
+  
+  updateChocolateDetails(details) {
+    this.tastingNotes = details.tastingNotes;   
+    this.origin = details.origin;
+    this.producer = details.producer;
+  }
+  
+  updateRating(rating) {
+    this.rating = rating;
+  }
+  
+  updateEntry(e) {
+    e.preventDefault();
+    this.props.completeEditCallback({producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName}, this.props.currentEditKey);
+  }
+  
+  deleteItem() {
+    this.props.deleteCallback();
+  }
+  
+  hasConfirmedDeleteClick() {
+    this.setState({hasConfirmedDelete : true});
+  }
+  
+  render() {
+    return (
+      <div className="journal-item ">
+      <NewJournalCardHeader passUpStateCallback={(state) => this.updateDateAndTitle(state)} editingbarName={this.barName} editingDate={this.date}/>
+      
+      <div className="journal-entry-main">
+      <div className="chocolate-detail-container">
+      <ChocolateDetailsEntry passUpStateCallback={(state) => this.updateChocolateDetails(state)} editingOrigin={this.origin} editingProducer={this.producer} editingTastingNotes={this.tastingNotes}/>
+      <p className="label-font">Rating: <ChocolateRatingEntry passUpStateCallback={(rating) => this.updateRating(rating)} editingRating={this.rating}/> </p>
+      </div>
+      <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
+      onChange={(e) => this.updatePost(e)} defaultValue={this.text}></textarea>
+      </div>
+      {(this.barName !== "") ? <NavLink to="/journal"><Button id="submit-entry-button" onClick={(e) => this.updateEntry(e)}>Submit Entry</Button></NavLink> : (<Button id="submit-entry-button" disabled onClick={() => this.updateEntry()}>Update Entry</Button>)}
+      {this.state.hasConfirmedDelete ? <Button id="delete-button" color="danger" onClick={() => this.deleteItem()}>Delete Entry</Button> : <Button id="delete-button" onClick={() => {this.hasConfirmedDeleteClick()}} color="warning">Delete Entry ?</Button>}
+      </div>
+    );
+  }
+}
+
+
+
 
 // Displays existing journal entry items
 class JournalEntryItem extends Component {
+  editEntry(e) {
+    e.preventDefault();
+    this.props.editEntry(this.props.dbKey);
+  }
+  
   render() {
     return (
       <div className="journal-item">
@@ -351,6 +475,7 @@ class JournalEntryItem extends Component {
       </div>
       {this.props.text ?  <JournalTextHolder text={this.props.text} /> : ""}
       </div>
+      <Button color="warning" id="edit-button" onClick={(e)=> this.editEntry(e)}>Edit</Button>
       </div>
     );
   }
@@ -427,6 +552,10 @@ function toTitleCase(str) {
 // Takes in a string of tasting notes "note,note,note" format
 // Outputs "Note, Note, Note"
 function formatTastingNotes(notes) {
-  notes = notes.replace(/,/g , ", "); // Replace ',' with ', '
-  return toTitleCase(notes);
+  if (notes) {
+    notes = notes.replace(/,/g , ", "); // Replace ',' with ', '
+    return toTitleCase(notes);
+  } else {
+    return "(None)";
+  }
 }

@@ -58,29 +58,29 @@ class App extends Component {
         this.setState({errorMessage:null});
         this.setState({loading:true});
         let promise = firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((firebaseUser) =>  {
-                firebaseUser.updateProfile({
-                    displayName: email
-                });
-
-                // Add to database a store for the user
-                let newUserData = {
-                    userName : email,
-                    userJournalEntries : "None",
-                    subscription : null
-                }
-
-                let userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
-                    .set(newUserData);
-                // userDataRef.child(firebaseUser.uid).push(newUserData);
-
-            })
-            .catch((error) =>  {
-                this.setState({
-                    errorMessage : error.message,
-                    loading:false
-                });
+        .then((firebaseUser) =>  {
+            firebaseUser.updateProfile({
+                displayName: email
             });
+
+            // Add to database a store for the user
+            let newUserData = {
+                userName : email,
+                userJournalEntries : "None",
+                subscription : null
+            }
+
+            let userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
+                .set(newUserData);
+            // userDataRef.child(firebaseUser.uid).push(newUserData);
+
+        })
+        .catch((error) =>  {
+            this.setState({
+                errorMessage : error.message,
+                loading:false
+            });
+        });
     }
 
     //logs an existing user in.
@@ -97,10 +97,10 @@ class App extends Component {
     handleSignOut() {
         this.setState({loading: true, errorMessage:null});
         firebase.auth().signOut()
-            .catch((err) =>   {
-                this.setState({
-                    loading: false,
-                    errorMessage: err.message});
+        .catch((err) =>   {
+            this.setState({
+                loading: false,
+                errorMessage: err.message});
             });
     }
 
