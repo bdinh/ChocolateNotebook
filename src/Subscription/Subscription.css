@@ -40,11 +40,22 @@
 }
 
 .month-nav  {
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   text-align: center;
   background-color: transparent;
   text-align: center;
+  margin: 1rem 0 1rem 0;
+}
+
+.chocolate-card img   {
+  width: 175px;
+  height: 175px;
+  margin: auto;
+}
+
+.chocolate-card h4  {
+  font-size: 16pt;
 }
 
 .side-button  {
@@ -61,11 +72,11 @@
   border: none;
   color: var(--font-color);
   font-size: 20pt;
+  border-bottom: 3px solid var(--font-color);
 }
 
 .month-nav button:active  {
   box-shadow: none;
-  text-decoration: underline;
 }
 
 .month-nav button:hover  {
@@ -103,6 +114,7 @@
 .card, .chocolate-card  {
   background-color: white;
   border-radius: 5px 5px 5px 5px;
+  border: none;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -150,15 +162,18 @@
   border-radius: 5px 5px 5px 5px;
 }
 
+.description p  {
+  margin: 2rem;
+}
+
 .description button, .confirmation button  {
-  color: white;
+  color: var(--font-color);
   background-color: transparent;
   border-radius: 10px 10px 10px 10px;
   border: 3px solid var(--accent-green);
   padding: 0.5rem;
   margin: 0.5rem;
   font-size: 12pt;
-  text-shadow: 0px 0.5px 5px #000000;
 }
 
 .cards button, .chocolate-card button,
@@ -170,7 +185,7 @@
   padding: 0.5rem;
   margin: 0.5rem;
   font-size: 12pt;
-  text-shadow: 0px 0.5px 5px #000000;
+  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .danger-button  {
@@ -181,10 +196,8 @@
   padding: 0.5rem;
   margin: 0.5rem;
   font-size: 12pt;
-  text-shadow: 0px 0.5px 5px #000000;
+  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
-
-
 
 .cards button:hover, .chocolate-card button:hover  {
   background-color: var(--accent-pink);

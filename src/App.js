@@ -26,10 +26,10 @@ class App extends Component {
             userData:  {
                 userName : null,
                 userJournalEntries : null,
-                plan : null
+                subscription : null
             },
             month: this.today.getMonth(),
-            rows: handleRows('Trials', this.start),
+            rows: handleRows("Trials", this.start),
             index: 'month_one'
         };
     }
@@ -41,6 +41,9 @@ class App extends Component {
                 this.userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
                 this.userDataRef.on('value', (snapshot) => {
                     this.setState({userData: snapshot.val(), loading: false});
+                    if (this.state.userData.subscription) {
+                      this.setState({rows:handleRows(this.state.userData.subscription.plan, this.start)})
+                    }
                 });
             } else { // User logged out
                 this.setState({user:null, loading: false});

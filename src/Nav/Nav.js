@@ -14,7 +14,7 @@ export class Nav extends Component  {
 
     return(
       <div id="nav">
-          <nav className="navbar">
+          <nav className="main-nav">
               <Link to='/'>(Logo Goes Here)</Link>
               {!user ?
                 <div className="nav-item">

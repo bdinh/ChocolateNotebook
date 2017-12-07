@@ -18,7 +18,6 @@ import SubscriptionInfo from './SubscriptionInfo';
           <div>
             <header>
               <h1>Get ChocoBox Today!</h1>
-              <img src="" alt="banner"/>
               <div className="description">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur
@@ -27,7 +26,7 @@ import SubscriptionInfo from './SubscriptionInfo';
                   voluptatum modi unde cum inventore aliquam quisquam tenetur?
                 </p>
                 <Link to="/catalog"><button>View Our Catalogue</button></Link>
-                <button>Learn More</button>
+                <a href="#learn"><button href="learn">Learn More</button></a>
               </div>
             </header>
             <div className="cards">
@@ -50,7 +49,7 @@ import SubscriptionInfo from './SubscriptionInfo';
                 <Link to={"/subscribe/Deluxe"}><button>Subscribe Now!</button></Link>
               </div>
             </div>
-            <div className="learn-more">
+            <div id="learn" className="learn-more">
               <div className="learn-card">
                 <img className="learn-image" src="/choices.svg" alt="choose-plan"/>
                 {/* <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}

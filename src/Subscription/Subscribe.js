@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import './Subscription.css';
+import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map';
 import { Link, Redirect  } from 'react-router-dom';
 import Subscription from './Subscription';
 import chocolateBars from '../chocolate-bars.json';
@@ -74,26 +76,26 @@ class ChooseRow extends Component  {
     return (
       <div className="choose">
         <div className="row">
-          <div className="chocolate-card">
+          <div className="chocolate-card card">
             <h4>{this.props.chocolateBars[0].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
-            <img src="" alt="chocolate bar"/>
+            <img src="https://via.placeholder.com/350" alt="chocolate bar"/>
             <p>{(this.props.chocolateBars[0].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
                (this.props.chocolateBars[0].fields.broad_bean_origin || 'Unknown Source')}</p>
-            <button>Change</button>
+            {/* <button>Change</button> */}
           </div>
-          <div className="chocolate-card">
+          <div className="chocolate-card card">
             <h4>{this.props.chocolateBars[1].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
-            <img src="" alt="chocolate bar"/>
+            <img src="https://via.placeholder.com/350" alt="chocolate bar"/>
             <p>{(this.props.chocolateBars[1].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
                (this.props.chocolateBars[1].fields.broad_bean_origin || 'Unknown Source')}</p>
-            <button>Change</button>
+            {/* <button>Change</button> */}
           </div>
-          <div className="chocolate-card">
+          <div className="chocolate-card card">
             <h4>{this.props.chocolateBars[2].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
-            <img src="" alt="chocolate bar"/>
+            <img src="https://via.placeholder.com/350" alt="chocolate bar"/>
             <p>{(this.props.chocolateBars[2].fields.cocoa_percent || 'Unknown Percentage') + '% Cocoa Percentage, Beans from ' +
                (this.props.chocolateBars[2].fields.broad_bean_origin || 'Unknown Source')}</p>
-            <button>Change</button>
+            {/* <button>Change</button> */}
           </div>
         </div>
       </div>
