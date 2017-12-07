@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Journal.css";
-import { InputGroup, InputGroupAddon, Input, FormGroup, Button } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input, Button } from 'reactstrap';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { addJournalEntry } from './CreateJournalEntry';
@@ -21,9 +21,8 @@ export class Journal extends Component {
       <div>
       <div className="entry-search-row" >
       <NewEntryButton />
-      <SearchJournal />
+      <SearchJournal currentUser={this.props.currentUser}/>
       </div>
-      <RenderJournalItems user={this.props.currentUser} />
       </div>
     );
   }
@@ -40,7 +39,6 @@ export class JournalNewEntry extends Component {
     return (
       <div>
       <div className="entry-search-row" >
-      <SearchJournal />
       </div>
       <NewJournalEntryCard currentUser={this.props.currentUser} newEntryCallback={(entryDetails) => this.addNewEntry(entryDetails)}/>
       </div>
@@ -69,12 +67,12 @@ class NewJournalEntryCard extends Component {
   updateDateAndTitle (details) {
     this.date = details.date;
     this.barName = details.barName;
+    this.setState({});
   }
   
   updateChocolateDetails(details) {
     this.origin = details.origin;
     this.producer = details.producer;
-    this.tastingNotes = details.tastingNotes;
   }
   
   updateRating(rating) {
@@ -99,7 +97,7 @@ class NewJournalEntryCard extends Component {
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} />
       </div>
-      <button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></button>
+      {(this.barName !== "") ? <Button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></Button> : <Button id="submit-entry-button" disabled onClick={(e) => this.addEntry(e)}>Submit Entry</Button>}
       </div>
     );
   }
@@ -225,14 +223,15 @@ class NewJournalCardHeader extends Component {
     super();
     this.state = {
       date: "",
-      barName: "(None)",
+      barName: "",
       date: getCurrentDate()
     }
   }
   
   handleChangeName(e) {
-    this.setState({date : this.state.date, barName : e.target.value});  
-    this.props.passUpStateCallback(this.state);
+    let newState = {date : this.state.date, barName : e.target.value};
+    this.setState(newState);  
+    this.props.passUpStateCallback(newState);
   } 
   
   handleChangeDate(e) {
@@ -264,12 +263,25 @@ class NewEntryButton extends Component {
 }
 
 class SearchJournal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {query : ""};
+  }
+  onChange(e) {
+    this.setState({ query : e.target.value});
+  }
+  
   render() {
     return (
+      <span>
       <span className="search-elements">
       <i className="fa fa-search" aria-hidden="true"></i>
       <p>Search Journal</p>
-      <input type="search" id="search-box" placeholder="Search..." />
+      <input type="search" id="search-box" placeholder="Search..." onChange={(e) => this.onChange(e)}/>
+      </span>
+      <div>
+      <RenderJournalItems user={this.props.currentUser} query={this.state.query.split(" ")}/>
+      </div>
       </span>
     );
   }
@@ -292,12 +304,24 @@ class RenderJournalItems extends Component {
   }
   
   render() {
-    if (this.state.userData && this.state.userData !== "None") {      
+    if (this.state.userData && this.state.userData !== "None") {  
       let output = Object.keys(this.state.userData).map((key) => {
         let item = this.state.userData[key];
+        let includes = true; 
+
+        // Check if all words in query are included
+        for (let i = 0; i < this.props.query.length; i++) {
+          if (!item.searchString.toLowerCase().includes(this.props.query[i].toLowerCase())) {
+            includes = false; // If not included
+          }
+        }
+        if (includes) { // If journal entry includes all words inquery
         return <JournalEntryItem date={item.date} barName={item.barName} region={item.origin} producer={item.producer} tastingNotes={item.tastingNotes} rating={item.rating} text={item.text} key={key}/>
+        } else {
+          return "";
+        }
       })
-      
+      output.reverse();
       return (
         <div>
         {output}
@@ -325,7 +349,7 @@ class JournalEntryItem extends Component {
       
       <p className="label-font">Rating: {renderRatingStars(this.props.rating)}</p>
       </div>
-      <JournalTextHolder text={this.props.text} />
+      {this.props.text ?  <JournalTextHolder text={this.props.text} /> : ""}
       </div>
       </div>
     );
@@ -361,11 +385,11 @@ class ChocolateDetailsStatic extends Component {
   render() {
     return (
       <div className="chocolate-detail">
-      <i className="fa fa-globe" aria-label="Origin"></i><p className="label-font">{this.props.region}</p>
-      <i className="fa fa-industry" aria-label="Producer"></i><p className="label-font">{this.props.producer}
+      <i className="fa fa-globe" aria-label="Origin"></i><p className="label-font">{toTitleCase(this.props.region)}</p>
+      <i className="fa fa-industry" aria-label="Producer"></i><p className="label-font">{toTitleCase(this.props.producer)}
       </p>
       <i className="fa fa-sticky-note" aria-label="Tasting notes"></i>
-      <p className="label-font">{this.props.tastingNotes}</p>
+      <p className="label-font">{formatTastingNotes(this.props.tastingNotes)}</p>
       </div>
     );
   }
@@ -376,7 +400,7 @@ class ChocolateDetailsStatic extends Component {
 function getCurrentDate() {
   let today = new Date();
   let dd = today.getDate();
-  let mm = today.getMonth()+1; //January is 0!
+  let mm = today.getMonth() + 1; //January is 0!
   let yyyy = today.getFullYear();
   
   if(dd < 10) {
@@ -386,6 +410,23 @@ function getCurrentDate() {
   if (mm < 10) {
     mm = '0' + mm
   } 
-  
   return mm + '.' + dd + '.' + yyyy;
+}
+
+
+// Formats input
+// Stack overflow 
+//https://stackoverflow.com/questions/4878756/how-to-capitalize-first-letter-of-each-word-like-a-2-word-city 
+function toTitleCase(str) {
+  if (str !== "(None)") {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  } 
+  return str;
+}
+
+// Takes in a string of tasting notes "note,note,note" format
+// Outputs "Note, Note, Note"
+function formatTastingNotes(notes) {
+  notes = notes.replace(/,/g , ", "); // Replace ',' with ', '
+  return toTitleCase(notes);
 }

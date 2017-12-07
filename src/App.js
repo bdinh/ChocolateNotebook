@@ -68,14 +68,16 @@ class App extends Component {
 
             })
             .catch((error) =>  {
-                this.setState({errorMessage : error.message});
-                this.setState({loading:false});
+                this.setState({
+                    errorMessage : error.message,
+                    loading:false
+                });
             });
     }
 
     //logs an existing user in.
     handleSignIn(email, password) {
-        this.setState({errorMessage:null}); //clear old error
+        // this.setState({errorMessage:null}); //clear old error
         this.setState({loading:true});
         firebase.auth().signInWithEmailAndPassword(email, password)
         .catch((error) => {
@@ -88,7 +90,9 @@ class App extends Component {
         this.setState({loading: true, errorMessage:null});
         firebase.auth().signOut()
             .catch((err) =>   {
-                this.setState({loading: false, errorMessage: err.message});
+                this.setState({
+                    loading: false,
+                    errorMessage: err.message});
             });
     }
 
@@ -103,6 +107,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.errorMessage);
         if (this.state.loading) { // If loading, display spinner
             return (
                 <div className="loading-screen">
@@ -115,14 +120,26 @@ class App extends Component {
                 contents = (
                     <div className="content-wrapper">
                       <Switch>
-                        <Route exact path="/" component={(props) => <LandingPage/>}/>
-                        <Route exact path="/login" component={(props) => <Login signInCallback={(e,p) =>
-                            this.handleSignIn(e,p)}/>}/>
+                        <Route exact path="/" render={(routerProps) => {
+                            return (<Login
+                                {...routerProps}
+                                signInCallback={(e,p) =>
+                                    this.handleSignIn(e,p)}
+                                errorMessage={this.state.errorMessage}
+                            />)
+                        }}/>
+                        <Route exact path="/login" render={(routerProps) => {
+                            return (<Login
+                                {...routerProps}
+                                signInCallback={(e,p) =>
+                                    this.handleSignIn(e,p)}
+                                errorMessage={this.state.errorMessage}
+                            />)
+                        }}/>
                         <Route exact path="/signup" component={(props) => <SignUp signUpCallback={(e,p) =>
                             this.handleSignUp(e,p)}/>}/>
-                        <Redirect to="/"/>
+                        <Redirect to="/" exact/>
                       </Switch>
-                      <p>{this.state.errorMessage}</p>
                     </div>);
             } else {
                 contents = (
