@@ -1,6 +1,6 @@
 :root {
   --main-color: #7F524E;
-  --background-color: #5E7A99;
+  --background-color: #eeeae347;
   --accent-green: #CFD4AD;
   --accent-pink: #CC9692;
   --dark-blue: #55697F;
@@ -13,7 +13,7 @@ input  {
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: #eeeae347;
 }
 
 button:hover, a button:hover  {

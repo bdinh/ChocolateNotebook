@@ -78,10 +78,10 @@ class App extends Component {
         this.setState({errorMessage:null}); //clear old error
         this.setState({loading:true});
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .catch((error) => {
-                this.setState({errorMessage: error.message});
-                this.setState({loading:false});
-            });
+        .catch((error) => {
+            this.setState({errorMessage: error.message});
+            this.setState({loading:false});
+        });
     }
 
     handleSignOut() {

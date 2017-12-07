@@ -30,7 +30,7 @@ export class Nav extends Component  {
                   <Link to="/subscription">ChocoBox</Link>
                 </div>,
                 <div className="nav-item">
-                  <button className="btn login-button" type="button" onClick={(e) => handleSignOutCallback(e)}>
+                  <button className="btn signout-button" type="button" onClick={(e) => handleSignOutCallback(e)}>
                   Sign Out</button>
                 </div>]}
           </nav>

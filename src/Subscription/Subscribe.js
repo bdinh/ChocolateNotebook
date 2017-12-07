@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import './Subscription.css';
 import { Link  } from 'react-router-dom';
 import chocolateBars from '../chocolate-bars.json';
-export function handleRows(subscription)  {
+export function handleRows(subscription, start)  {
   let bars = 0;
   if (subscription === "Trials") {
     bars = 6;
@@ -13,8 +13,7 @@ export function handleRows(subscription)  {
     bars = 15;
   }
   let grid = [];
-  let start= 0;
-  let end = 3;
+  let end = start + 3;
   for (var i = 0; i < bars / 3; i++) {
     grid.push(<ChooseRow chocolateBars={chocolateBars.slice(start, end)}/>);
     start += 3;
@@ -22,6 +21,7 @@ export function handleRows(subscription)  {
   }
   return ({bars, grid});
 }
+
 class Subscribe extends Component  {
 
   render()  {

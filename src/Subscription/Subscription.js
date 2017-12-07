@@ -2,23 +2,45 @@ import React, { Component } from 'react';
 import './Subscription.css';
 import Subscribe from './Subscribe';
 import { handleRows, ChooseRow } from './Subscribe';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Link  } from 'react-router-dom';
 import Search from '../Catalog/Search';
+import SubscriptionInfo from './SubscriptionInfo';
 
   class Subscription extends Component  {
+    constructor(props){
+        super(props);
+        this.today = new Date();
+        this.start = this.today.getMonth() * 15;
+        this.monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        this.state = {
+            month: this.monthNames[this.today.getMonth()],
+            rows: handleRows(this.props.subscription, this.start)
+
+        }
+    };
+
+    handleSwitchMonth(increment)  {
+      let newState = (this.today.getMonth() + increment) % 12;
+      this.setState({month:this.monthNames[newState]});
+      this.setState({rows:handleRows(this.props.subscription, this.start + (15 * increment))})
+    }
 
     render()  {
       let content = null;
       if (this.props.subscription) {
-        let rows = handleRows(this.props.subscription);
         content = (
-          <div id='subscribed'>
-            <h1>Your Subscription:</h1>
-            <h2>You are subscribed to ChocoBox {this.props.subscription}</h2>
-            {rows.grid}
-            <Link to="subscription"><button onClick={() => this.props.handleUnsubscribe()}>Unsubscribe</button></Link>
-          </div>
-        );
+          <div>
+            <nav className="month-nav">
+              <button onClick={() => this.handleSwitchMonth(0)}>This Month</button>
+              <button onClick={() => this.handleSwitchMonth(1)}>Next Month</button>
+              <button onClick={() => this.handleSwitchMonth(2)}>Following Month</button>
+            </nav>
+          <SubscriptionInfo month={this.state.month} rows={this.state.rows} subscription={this.props.subscription}
+        handleUnsubscribe={() => this.props.handleUnsubscribe()}/>
+        </div>  );
       } else  {
         content = (
           <div>

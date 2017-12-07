@@ -89,7 +89,7 @@ class Login extends Component {
                                     <div className="login-button-container">
                                         <button
                                             className="btn btn-primary login-button"
-                                            onClick={this.handleSignIn}>
+                                            onClick={this.handleSignIn} disabled={!(this.state.password && this.state.email)}>
                                             Login
                                         </button>
                                     </div>
@@ -103,6 +103,3 @@ class Login extends Component {
 }
 
 export default Login; //the default
-
-
-

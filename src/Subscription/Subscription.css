@@ -36,7 +36,28 @@
 
 .learn-more p, .description p,
 .subscribe p, .subscription-body h3  {
-  color: white;
+  color: black;
+}
+
+.month-nav  {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  background-color: transparent;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.month-nav button  {
+  background-color: transparent;
+  border: none;
+  color: var(--font-color);
+  font-size: 20pt;
+}
+
+.month-nav button:active  {
+  box-shadow: none;
+  text-decoration: underline;
 }
 
 .card h1  {
@@ -113,7 +134,7 @@
   text-shadow: 0px 0.5px 5px #000000;
 }
 
-.cards button, .chocolate-card button {
+.cards button, .chocolate-card button, .unsubscribe-button {
   color: white;
   background-color: var(--accent-green);
   border-radius: 10px 10px 10px 10px;
@@ -142,7 +163,7 @@
 }
 
 .subscribe h2  {
-  color: white;
+  color: blac;
 }
 
 .subscribe h3  {
@@ -170,11 +191,11 @@
 }
 
 .subscription-body label  {
-  color: white;
+  color: blac;
 }
 
 #subscribed h2  {
-  color: white;
+  color: blac;
 }
 
 .row  {

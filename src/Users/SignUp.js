@@ -29,8 +29,7 @@ class SignUp extends Component {
 
   handleSignUp(event) {
     event.preventDefault(); //don't submit
-    let handle = this.state.handle || this.state.email; //assign default if undefined
-    this.props.signUpCallback(this.state.email, this.state.password, handle);
+    this.props.signUpCallback(this.state.email, this.state.password);
   }
 
   validate(value, validations) {
