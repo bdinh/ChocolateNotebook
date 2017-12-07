@@ -107,16 +107,18 @@ class NewJournalEntryCard extends Component {
 
 // Handles changing the rating of a chocolate
 class ChocolateRatingEntry extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {rating : 1};
     this.updateRating = this.updateRating.bind(this);
-    
   }
   updateRating(value, event) {
     event.preventDefault();
     this.setState({rating : value.num});
     this.props.passUpStateCallback(value.num);
+  }
+  componentWillMount() {
+    this.setState({rating : (this.props.editingRating ? this.props.editingRating : this.state.rating)});
   }
   
   render() {
@@ -142,12 +144,20 @@ class ChocolateRatingEntry extends Component {
 // Renders place for entering origin, producer and tasting notes
 // on a new journal entry
 class ChocolateDetailsEntry extends Component {
-  constructor() {
-    super();
-    this.state = {
-      origin: "(None)",
-      producer: "(None)",
-      tastingNotes: []
+  constructor(props) {
+    super(props);
+    if (!this.props.editingProducer) { // if not editing
+      this.state = {
+        origin: "(None)",
+        producer: "(None)",
+        tastingNotes: []
+      }
+    } else {
+      this.state = {
+        origin: this.props.editingOrigin,
+        producer: this.props.editingProducer,
+        tastingNotes: this.props.editingTastingNotes
+      }
     }
   }
   
@@ -210,7 +220,6 @@ class ChocolateDetailsEntry extends Component {
       name="form-field-name"
       value={this.state.tastingNotes}
       simpleValue
-      value={this.state.tastingNotes}
       openOnClick={false}
       />
       </div>
@@ -220,8 +229,8 @@ class ChocolateDetailsEntry extends Component {
 
 // Renders card header that info can be entered in
 class NewJournalCardHeader extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       date: "",
       barName: "",
@@ -242,14 +251,25 @@ class NewJournalCardHeader extends Component {
   
   
   render() {
-    return(
-      <div className="journal-new-entry-header group-input">
-      <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
-      <Cleave 
-      options={{date: true, delimiter: "."}}
-      className="header-entry-field" placeholder="Date: DD.MM.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)} value={this.state.date}/>
-      </div>
-    );
+    if (this.props.editingDate && this.props.editingbarName) {
+      return  (
+        <div className="journal-new-entry-header group-input">
+        <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)} defaultValue={this.props.editingbarName}/>
+        <Cleave 
+        options={{date: true, delimiter: "."}}
+        className="header-entry-field" placeholder="Date: DD.MM.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)} value={this.props.editingDate}/>
+        </div>
+      )
+    } else {
+      return(
+        <div className="journal-new-entry-header group-input">
+        <Input className="header-entry-field" id="bar-name-input-field" placeholder="Name:" aria-label="Input a chocolate bar name" onChange={(e) => this.handleChangeName(e)}/>
+        <Cleave 
+        options={{date: true, delimiter: "."}}
+        className="header-entry-field" placeholder="Date: DD.MM.YYYY" aria-label="Input the date the bar was tasted"  onChange={(e) => this.handleChangeDate(e)} value={this.state.date}/>
+        </div>
+      );
+    }
   }
 }
 
@@ -292,12 +312,13 @@ class RenderJournalItems extends Component {
   constructor(props) {
     super(props);
     this.state = {edit : false, editingEntry : ""};
+    this.key;
   }
   
   componentWillMount() {
     this.userDataRef = firebase.database().ref('userData/' + this.props.user.uid + "/userJournalEntries");
     this.userDataRef.on('value', (snapshot) => {
-      this.setState({userData : snapshot.val(), edit: this.state.editing, editingEntry : this.state.editingEntry});
+      this.setState({userData : snapshot.val(), edit: this.state.edit, editingEntry : this.state.editingEntry});
     });
   }
   componentWillUnmount() {
@@ -306,15 +327,16 @@ class RenderJournalItems extends Component {
   
   editEntry(key) {
     let entryEditing = this.state.userData[key];
-    console.log(entryEditing);
+    this.currentEditKey = key;
     this.setState({userData : this.state.userData, edit : true, editingEntry : entryEditing}); 
   }
   
-  completeEdit(updatedInfo) {
-    console.log(updatedInfo);
+  completeEdit(updatedInfo, entryKey) {
+    firebase.database().ref('userData/' + this.props.user.uid + '/userJournalEntries/' + entryKey).update(updatedInfo);
   }
+
   render() {
-    if (this.state.userData && this.state.userData !== "None") {  
+    if (!this.state.edit && this.state.userData && this.state.userData !== "None") {  
       let output = Object.keys(this.state.userData).map((key) => {
         let item = this.state.userData[key];
         let includes = true; 
@@ -339,26 +361,19 @@ class RenderJournalItems extends Component {
       );
     } else if (this.state.userData === "None") {
       return(<div className="journal-entry-header"><p>Your chocolate journal is empty.</p></div>)
-    } else if(this.state.edit) {
-      return (<EditingJournalEntryCard itemBeingEdited={this.state.editingEntry} completeEditCallback={(newInfo) => this.forceUpdatecompleteEdit(newInfo)}/>)
+    } else if (this.state.edit) {
+      return (<EditingJournalEntryCard itemBeingEdited={this.state.editingEntry} completeEditCallback={(newInfo) => this.completeEdit(newInfo, this.currentEditKey)}/>)
     } else { // not loaded or doesn't exist
     return(<div className="journal-entry-header"><p>Hold tight! We're retrieving your chocolate journal.</p></div>)
   }
 }
 }
 
-class EditableJournalEntry extends Component {
-  render() {
-    return (<NewJournalEntryCard updateInfoCallback={(updatedInfo) => this.props.completeEditCallback(updatedInfo)} previousInfo={this.props.itemBeingEdited} />
-  )}
-}
-
-
 // Displays the input form for editing a journal entry
 // Takes in a prop of the former information
 class EditingJournalEntryCard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.producer = this.props.itemBeingEdited.producer;
     this.origin = this.props.itemBeingEdited.origin;
     this.tastingNotes = this.props.itemBeingEdited.tastingNotes;
@@ -380,6 +395,7 @@ class EditingJournalEntryCard extends Component {
   }
   
   updateChocolateDetails(details) {
+    this.tastingNotes = details.tastingNotes;   
     this.origin = details.origin;
     this.producer = details.producer;
   }
@@ -389,23 +405,23 @@ class EditingJournalEntryCard extends Component {
   }
   
   updateEntry() {
-    this.props.completeEditCallback({producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
+    this.props.completeEditCallback({producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName}, this.props.currentEditKey);
   }
   
   render() {
     return (
       <div className="journal-item ">
-      <NewJournalCardHeader  passUpStateCallback={(state) => this.updateDateAndTitle(state)}/>
+      <NewJournalCardHeader passUpStateCallback={(state) => this.updateDateAndTitle(state)} editingbarName={this.barName} editingDate={this.date}/>
       
       <div className="journal-entry-main">
       <div className="chocolate-detail-container">
-      <ChocolateDetailsEntry passUpStateCallback={(state) => this.updateChocolateDetails(state)}/>
-      <p className="label-font">Rating: <ChocolateRatingEntry passUpStateCallback={(rating) => this.updateRating(rating)}/> </p>
+      <ChocolateDetailsEntry passUpStateCallback={(state) => this.updateChocolateDetails(state)} editingOrigin={this.origin} editingProducer={this.producer} editingTastingNotes={this.tastingNotes}/>
+      <p className="label-font">Rating: <ChocolateRatingEntry passUpStateCallback={(rating) => this.updateRating(rating)} editingRating={this.rating}/> </p>
       </div>
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
-      onChange={(e) => this.updatePost(e)} />
+      onChange={(e) => this.updatePost(e)} defaultValue={this.text}></textarea>
       </div>
-      {(this.barName !== "") ? <Button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></Button> : <Button id="submit-entry-button" disabled onClick={() => this.addEntry()}>Update Entry</Button>}
+      {(this.barName !== "") ? <Button id="submit-entry-button" onClick={(e) => this.updateEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></Button> : <Button id="submit-entry-button" disabled onClick={() => this.updateEntry()}>Update Entry</Button>}
       </div>
     );
   }
