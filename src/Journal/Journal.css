@@ -3,7 +3,7 @@
     border-radius: 5px 5px 5px 5px;
     margin: 3% 10% 0 10%;
     padding-bottom: 1%;
-    color: var(--font-color);
+    color: var(--font-color); 
 }
 
 .journal-entry-header {
@@ -11,6 +11,14 @@
     border-radius: 5px 5px 0 0;
     padding: 2%;
 }
+
+.journal-item, #entry-button {
+    -webkit-box-shadow: 3px 3px 5px 2px #ccc;
+    -moz-box-shadow:    3px 3px 5px 2px #ccc;
+    box-shadow:         3px 3px 5px 2px #ccc;  
+}
+
+
 
 .journal-new-entry-header {
     background-color: var(--main-color);
@@ -88,9 +96,9 @@
 }
 
 #entry-button {
-    background-color: white;
+    background-color: var(--accent-green);    
     border: none;
-    color: var(--font-color);
+    color: var(--accent-green);
     padding: 1% 4.2% 1% 4.2%;
     text-align: center;
     text-decoration: none;
@@ -102,17 +110,19 @@
   color: var(--font-color);
 }
 
+#entry-button:hover  {
+    background-color: var(--accent-pink);
+  }
+
 .fa-search {
     text-shadow: 0 0 0;
-    color: white;
     font-size: 2em;
     margin-left: 20%;
 }
 
 .search-elements > p {
     display: inline;
-    color: white;
-    font-weight: 500;
+    font-weight: 600;
     vertical-align: middle;
     padding-left: 1%;
 }
@@ -137,9 +147,7 @@
 }
 
 #submit-entry-button {
-    background-color: var(--main-color);
     border: none;
-    color: var(--accent-green);
     text-align: center;
     padding: .5%;
     text-decoration: none;
@@ -159,3 +167,18 @@
     align-items: center;
     width: 100%;
 }
+
+#edit-button {
+    color: white;
+    background-color: var(--accent-green);
+    border-radius: 10px 10px 10px 10px;
+    border: none;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 12pt;
+    text-shadow: 0px 0.5px 5px #000000;
+}
+  
+ #edit-button:hover {
+    background-color: var(--accent-pink);
+  }
