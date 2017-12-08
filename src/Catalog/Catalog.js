@@ -5,6 +5,14 @@ import chocolateBars from '../Data/chocolate-bars.json';
 
 
 export class Catalog extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {query : ""};
+    }
+    onChange(e) {
+        this.setState({ query : e.target.value});
+    }
+
     render() {
         console.log(chocolateBars);
         let catalogChocolates = chocolateBars.filter(bar => {
@@ -13,8 +21,8 @@ export class Catalog extends Component {
         console.log(catalogChocolates);
         return (
             <div className="catalog-container">
-                <SearchCatalog />
-                <div id="catalog-body">
+                <SearchCatalog onChange={(e) => this.onChange(e)} />
+                <div className="catalog-body">
                     <div className="catalog-sidebar">
                         <CatalogSidebar />
                     </div>
@@ -68,13 +76,15 @@ export class CatalogItem extends Component {
 
         return (
             <div className="catalog-item">
-                <div className="catalog-item-header">{itemName}</div>
-                <div className="catalog-item-content">
-                    <div className="catalog-img">
-                        <span className="catalog-img-valign"></span><img src={src} />
+                <div className="catalog-item-card">
+                    <div className="catalog-item-header">{itemName}</div>
+                    <div className="catalog-item-content">
+                        <div className="catalog-img">
+                            <span className="catalog-img-valign"></span><img src={src} />
+                        </div>
+                        <StaticRating rating={rating} />
                     </div>
-                    <StaticRating rating={rating} />
-                    </div>
+                </div>
             </div>
         );
     }
@@ -97,7 +107,7 @@ class SearchCatalog extends Component {
         <span className="search-elements">
             <i className="fa fa-search" aria-hidden="true"></i>
             <p>Search our Catalog</p>
-            <input type="search" id="search-box" placeholder="Search..." />
+            <input type="search" id="search-box" placeholder="Search..." onChange={(e) => this.props.onChange(e)} />
         </span>
         </div>
       );

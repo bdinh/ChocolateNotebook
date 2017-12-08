@@ -15,6 +15,7 @@ export class Journal extends Component {
     super(props);
     this.state = {query : ""};
   }
+  
   onChange(e) {
     this.setState({ query : e.target.value});
   }
