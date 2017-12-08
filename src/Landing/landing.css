@@ -29,56 +29,45 @@
 }
 
 .quote {
-    font-size: 1em;
+    font-size: 1.5em;
 }
 
 .cited {
     font-size: 1em;
-    margin-bottom: 2em;
+    width: 70%;
+    margin: auto;
 }
 
 .get-started-button {
     background-color: transparent;
     border: 3px solid #CFD4AD;
     border-radius: 50px;
-    font-size: 0.5em;
-}
-
-.landing-body button.get-started-button {
-    background-color: #d0d4ad36;
-    border: 3px solid #CFD4AD;
-    border-radius: 50px;
-    font-size: 0.5em;
+    font-size: 20%;
 }
 
 .get-started-button-container {
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+    padding-bottom: 2em;
     display: flex;
     justify-content: center;
-    padding-top: 5em;
 }
 
 .section-block{
     text-align: left;
     padding: 2em;
+    padding-bottom: 0;
+    display: inline-block;
     color: var(--font-color);
-    height: 80vh;
-}
-
-.extra-padding-block {
-
 }
 
 .footer-container {
     text-align: center;
-    padding-top: 3em;
+    padding: 2em;
+    background-color: #CC9692;
 }
 
-.footer {
-    text-align: left;
-    padding: 2em;
-    height: 20vh;
-    padding-top: 4em;
-}
 
 .our-story {
     background-color: var(--background-color);
@@ -90,28 +79,16 @@
     margin: 0!important;
 }
 
-.get-started-button-container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    padding-bottom: 2em;
-}
 
 .section-title {
-    font-size: 1em;
+    font-size: 1.5em;
 }
 
 .section-text {
     font-size: 0.75em;
+    font-height: 0.75em
 }
 
-.footer {
-    background-color: #CC9692;
-}
-
-.section-block {
-    display: inline-block;
-}
 
 .section-block img {
     height: 60%;
@@ -122,18 +99,21 @@
     display: flex;
 }
 
-.chocolate-bar-icon {
-    height: 70%;
+.chocolate-bar-icon img {
+    height: 60%;
+}
+
+.landing-text-container {
+    padding: 2em;
+    padding-top: 30%;
+}
+
+.note-book-icon, .chocolate-bar-icon {
+    padding-top: 0em;
 }
 
 
-
 @media (min-width: 598px) {
-
-    .landing-image {
-        padding: 8em 2em 8em;
-    }
-
     .quote {
         font-size: 1.5em;
         width: 70%;
@@ -176,9 +156,6 @@
 
 @media (min-width: 768px) {
 
-    /*.landing-image {*/
-    /*padding: 8em 2em 8em;*/
-    /*}*/
 
     .quote {
         font-size: 2em;
@@ -214,8 +191,8 @@
 }
 
 @media (min-width: 1200px) {
-    .landing-image {
-        padding: 12em 0 12em;
+    .landing-text-container {
+        padding-top: 10%;
     }
 
     .quote {
@@ -239,7 +216,6 @@
 
     .landing-body button.get-started-button {
         font-size: 1.5em;
-        /*margin-bottom: 2em;*/
     }
 
     .section-title {
@@ -248,7 +224,7 @@
 
     .section-text {
         font-size: 1.5em;
-        line-height: 2em;
+        line-height: 1.5em;
     }
 
     .section-block {
