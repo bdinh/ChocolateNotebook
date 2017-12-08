@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import "./Catalog.css";
-//import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import chocolateBars from '../Data/chocolate-bars.json';
+
 
 
 export class Catalog extends Component {
     render() {
+        console.log(chocolateBars);
+        let catalogChocolates = chocolateBars.filter(bar => {
+            return bar.fields.src != undefined;
+        });
+        console.log(catalogChocolates);
         return (
-            <div className="catalog-container catalog-body">
+            <div className="catalog-container">
                 <SearchCatalog />
-                <div className="row">
-                    <div className="col-m-4">
+                <div id="catalog-body">
+                    <div className="catalog-sidebar">
                         <CatalogSidebar />
                     </div>
-                    <div className="col-m-8">
+                    <div className="catalog-grid">
+                    {catalogChocolates.map(bar => <CatalogItem name={bar.fields.name} rating={bar.fields.rating} src={bar.fields.src} />)}
                     <CatalogItem rating={3}/>
                     <CatalogItem />
 
@@ -55,14 +62,19 @@ class CatalogFilter extends Component {
 export class CatalogItem extends Component {
 
     render() {
-        let itemName = this.props.item || "Item Name";
+        let itemName = this.props.name || "Item Name";
+        let src = this.props.src || "http://via.placeholder.com/350";
+        let rating = Math.round(this.props.rating);
+
         return (
             <div className="catalog-item">
-            <div className="catalog-item-header">{itemName}</div>
-            <div className="catalog-item-content">
-                <img src="http://via.placeholder.com/350" />
-                <StaticRating rating={this.props.rating} />
-                </div>
+                <div className="catalog-item-header">{itemName}</div>
+                <div className="catalog-item-content">
+                    <div className="catalog-img">
+                        <span className="catalog-img-valign"></span><img src={src} />
+                    </div>
+                    <StaticRating rating={rating} />
+                    </div>
             </div>
         );
     }
@@ -81,11 +93,13 @@ export class ProductPage extends Component {
 class SearchCatalog extends Component {
     render() {
       return (
+          <div className="entry-search-row">
         <span className="search-elements">
             <i className="fa fa-search" aria-hidden="true"></i>
             <p>Search our Catalog</p>
             <input type="search" id="search-box" placeholder="Search..." />
         </span>
+        </div>
       );
     }
   }

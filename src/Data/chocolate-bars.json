@@ -10,7 +10,8 @@
       "company": "A. Morin",
       "company_location": "France",
       "broad_bean_origin": "Panama",
-      "ref": "1011"
+      "ref": "1011",
+      "src": "http://chocolaterie-morin.com/wp-content/uploads/2016/07/Origine-Dabaiba.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -26,7 +27,8 @@
       "bean_type": "Trinitario",
       "company_location": "Italy",
       "broad_bean_origin": "Ecuador",
-      "ref": "123"
+      "ref": "123",
+      "src": "http://aziende.freecomm.it/390798/prodotti/S_PPLLUHYV.jpg"      
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -101,7 +103,8 @@
       "company": "Burnt Fork Bend",
       "company_location": "U.S.A.",
       "broad_bean_origin": "Ecuador",
-      "ref": "1299"
+      "ref": "1299",
+      "src": "http://www.burntforkbend.com/uploads/3/4/4/2/34421667/7870841.jpg?523"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -132,7 +135,8 @@
       "company": "Cacaosuyo (Theobroma Inversiones)",
       "company_location": "Peru",
       "broad_bean_origin": "Peru",
-      "ref": "1173"
+      "ref": "1173",
+      "src": "https://cocoarunners.com/wp-content/uploads/2017/01/Cacaosuyo-Piura-nibs.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -148,7 +152,8 @@
       "bean_type": "Forastero (Arriba)",
       "company_location": "Ecuador",
       "broad_bean_origin": "Ecuador",
-      "ref": "259"
+      "ref": "259",
+      "src": "https://www.c-spot.com/images/cacaoyere-pichincha-large.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -179,7 +184,8 @@
       "company": "Duffy's",
       "company_location": "U.K.",
       "broad_bean_origin": "Peru",
-      "ref": "523"
+      "ref": "523",
+      "src": "https://i.pinimg.com/474x/71/ca/e6/71cae66355153781ab8022f206625c49--white-chocolate-pretzels-chocolate-stars.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -239,7 +245,8 @@
       "company": "Fruition",
       "company_location": "U.S.A.",
       "broad_bean_origin": "Dominican Republic",
-      "ref": "1046"
+      "ref": "1046",
+      "src": "https://cdn.shopify.com/s/files/1/0093/8802/products/Hispanola_large.jpg?v=1462192762"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -285,7 +292,8 @@
       "bean_type": "Criollo, Trinitario",
       "company_location": "Canada",
       "broad_bean_origin": "Bolivia",
-      "ref": "1307"
+      "ref": "1307",
+      "src": "https://i2.wp.com/www.beantobar.be/wp-content/uploads/2015/01/KKBTB20150102-3.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -14390,7 +14398,8 @@
       "company": "Mana",
       "company_location": "U.S.A.",
       "broad_bean_origin": "Peru",
-      "ref": "1219"
+      "ref": "1219",
+      "src": "https://cdn.shopify.com/s/files/1/0750/7561/products/mana_-_peru_1024x1024.jpg?v=1429034410"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -14422,7 +14431,8 @@
       "bean_type": "Trinitario",
       "company_location": "Vietnam",
       "broad_bean_origin": "Vietnam",
-      "ref": "849"
+      "ref": "849",
+      "src": "https://cocoarunners.com/wp-content/uploads/2013/09/maroubentre1-800.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
