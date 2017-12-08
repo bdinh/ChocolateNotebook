@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import firebase from 'firebase/app';
 import './Subscription.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map';
 import { Link, Redirect  } from 'react-router-dom';
-import Subscription from './Subscription';
 import chocolateBars from '../chocolate-bars.json';
 
 

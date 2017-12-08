@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import './Subscription.css';
-import Subscribe from './Subscribe';
-import { handleRows, ChooseRow } from './Subscribe';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { Link  } from 'react-router-dom';
-import Search from '../Catalog/Search';
-import SubscriptionInfo from './SubscriptionInfo';
+import { Link, Redirect  } from 'react-router-dom';
 
   class Subscription extends Component  {
 

@@ -41,7 +41,7 @@ class SubscriptionInfo extends Component  {
               <button onClick={() => this.props.handleSwitchMonth(2, 'month_three')}>Following Month</button>
             </div>
           </nav>
-          <h3>{monthNames[this.props.month] + "\'s Chocolate Bars:"}</h3>
+          <h3>{monthNames[this.props.month] + "'s Chocolate Bars:"}</h3>
           <div>
             {this.props.subscription.months[this.props.index] ? this.props.rows.grid
             : <div className="skipped"><p>You have skipped this month's chocolate bars</p></div>}

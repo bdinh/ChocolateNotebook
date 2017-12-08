@@ -13,7 +13,7 @@ import Login from './Users/Login';
 import firebase from 'firebase/app';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
-import { handleRows, ChooseRow } from './Subscription/Subscribe';
+import { handleRows } from './Subscription/Subscribe';
 import MapView from "./Map/mapView";
 // import PrivateRoute from './PrivateRoute';
 
@@ -62,7 +62,7 @@ class App extends Component {
     handleSignUp(email, password)  {
         this.setState({errorMessage:null});
         this.setState({loading:true});
-        let promise = firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((firebaseUser) =>  {
             firebaseUser.updateProfile({
                 displayName: email
@@ -75,7 +75,7 @@ class App extends Component {
                 subscription : null
             }
 
-            let userDataRef = firebase.database().ref('userData/' + firebaseUser.uid)
+            firebase.database().ref('userData/' + firebaseUser.uid)
                 .set(newUserData);
             // userDataRef.child(firebaseUser.uid).push(newUserData);
 
@@ -110,17 +110,21 @@ class App extends Component {
     }
 
     handleAddSubscription(plan)  {
-        let setPlan = firebase.database().ref('userData/' + this.state.user.uid + '/subscription')
-            .set({plan:plan, months:{month_one:true, month_two:true, month_three:true}});
+      firebase.database().ref('userData/' + this.state.user.uid + '/subscription')
+      .set({plan:plan, months:{month_one:true, month_two:true, month_three:true}})
+      .then(() => {
+        this.handleSwitchMonth(0, "month_one");
+      });
+
     }
 
     handleUnsubscribe()  {
-        let setNull = firebase.database().ref('userData/' + this.state.user.uid + '/subscription')
+      firebase.database().ref('userData/' + this.state.user.uid + '/subscription')
             .set(null);
     }
 
     handleSkip(month, bool)  {
-      let setSkip = firebase.database().ref('userData/' + this.state.user.uid + '/subscription/months/' + month)
+      firebase.database().ref('userData/' + this.state.user.uid + '/subscription/months/' + month)
         .set(bool);
     }
 
