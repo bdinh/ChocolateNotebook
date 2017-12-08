@@ -252,8 +252,12 @@ export const PRODUCERS = [
     { label: 'Honest', value: 'honest' }, 
     { label: 'Jacque Torres', value: 'jacque torres' }, 
     { label: 'Kah Kow', value: 'kah kow' }, 
-    { label: 'Marigolds Finest', value: 'marigolds finest' },{ label: 'Blend', value: 'blend' },    
-    
+    { label: 'Marigolds Finest', value: 'marigolds finest' },
+    { label: 'Blend', value: 'blend' },    
+    { label: 'Dove', value: 'dove' },   
+    { label: 'Green and Blacks', value: 'green and blacks' },   
+    { label: 'Theo', value: 'theo' },
+    { label: '? ', value: '? ' },   
 ];
 
 
