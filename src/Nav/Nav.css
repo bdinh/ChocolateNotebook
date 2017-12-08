@@ -1,52 +1,86 @@
-.login-button, .signup-button, #nav .signout-button button {
+* {
+  box-sizing: border-box;
+}
+.navbar {
+  padding: 1rem 1rem!important;
+  margin-bottom: 0;
+}
+
+.nav-link, .navbar-brand, #nav a {
+  color: #ffffff!important;
+}
+
+button.navbar-toggler {
+  border-color: transparent!important;
+}
+
+button.navbar-toggler:focus {
+  outline: none;
+}
+button.navbar-toggler:active {
+  box-shadow: none!important;
+}
+
+button.navbar-toggler:hover {
   background-color: transparent;
-  border: 3px solid #CFD4AD;
+}
+
+button.login-button, button.signup-button, button.signout-button {
+  background-color: transparent;
+  border: 3px solid var(--accent-green);
   border-radius: 50px;
   width: 100%;
   color: white;
 }
 
-.login-button:focus, .signup-button:focus, #nav .signout-button button:focus  {
+.login-button:focus, .signup-button:focus, .signout-button:focus  {
   outline: 0;
   box-shadow: none;
 }
 
-.login-button:active, .signup-button:active, #nav .signout-button button:focus  {
+.login-button:active, .signup-button:active, .signout-button:active {
   background-color: var(--accent-pink);
 }
 
-.main-nav  {
-  justify-content: space-between;
-  display: flex;
+button.link-button:active, button.link-button:focus,
+button.signout-button:focus, button.signout-button:active,
+button.signup-button:active, button.login-button:active,
+button.signup-button:focus, button.login-button:focus {
+  background-color: transparent;
+  box-shadow: none;
 }
 
-#nav {
+button.link-button:hover, button.signout-button:hover,
+button.signup-button:hover, button.login-button:hover
+{
+  background-color: transparent;
+}
+
+div.show div.link-centered {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+nav.navbar {
   background-color: rgba(127, 82, 78, 0.5);
-  position: absolute;
   width: 100%;
   padding: 1rem;
-  font-size: 16pt;
+  font-size: 1em;
 }
 
 #nav {
   padding: 1em;
 }
 
+nav.navbar  {
+  display: flex;
+}
+
+
 .nav-item  {
   display: inline-flex;
   margin-right: 1em;
-}
-
-#nav .signout-button button {
-  width: 100%;
-}
-
-.signout-button button {
-  padding: 0.375rem 0.75rem;
-}
-
-#nav .signout-button button:hover  {
-  background-color: var(--accent-pink);
 }
 
 #nav a  {
@@ -55,34 +89,39 @@
   padding-left: 1rem;
 }
 
-@media (max-width: 598px) {
-  #nav, .signout-button button  {
-    font-size: 12pt;
-  }
-  .signout-button button  {
-    padding: 0.2rem 0.325rem;
-  }
-  .main-nav  {
-    display: block;
-    text-align: center;
-  }
-  .nav-item  {
-    margin: 0.5rem 0 0.5rem 0;
-  }
+button.btn {
+  margin: 0.5em 0;
 }
 
-@media (min-width: 598px) and (max-width: 768px) {
-  #nav, .signout-button button  {
-    font-size: 12pt;
-  }
-  .signout-button button  {
-    padding: 0.300rem 0.5rem;
-  }
+.link-button {
+  background-color: transparent;
+  color: #FFFFFF;
 }
 
-@media (min-width: 768px) and (max-width: 1200px) {
+button.link-button:hover {
+  background-color: #CC9692;
 }
 
-@media (min-width: 1200px) {
+.
 
+div.show button.login-button:hover, div.show button.signup-button:hover {
+  background-color: transparent;
+}
+
+button.login-button:hover, button.signup-button:hover,
+button.signout-button:hover {
+  background-color: #E2E5CD;
+}
+
+div.show button.login-button, div.show button.signup-button, div.show button.signout-button {
+  border: none;
+}
+
+div.show li.nav-item:hover {
+  border-radius: 10px;
+  background-color: #CC9692;
+}
+
+nav.logged-navbar {
+  background-color: rgba(127, 82, 78, 9);
 }

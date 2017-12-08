@@ -14,6 +14,7 @@ import firebase from 'firebase/app';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import { handleRows, ChooseRow } from './Subscription/Subscribe';
+import MapView from "./Map/mapView";
 // import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
@@ -146,6 +147,13 @@ class App extends Component {
                       <Switch>
                         <Route exact path="/" render={(routerProps) => {
                             return (<LandingPage />)
+                            // return (<Login
+                            //     {...routerProps}
+                            //     signInCallback={(e,p) =>
+                            //         this.handleSignIn(e,p)}
+                            //     errorMessage={this.state.errorMessage}
+                            // />)
+                            return <MapView/>
                         }}/>
                         <Route exact path="/login" render={(routerProps) => {
                             return (<Login

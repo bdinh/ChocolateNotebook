@@ -9,3 +9,32 @@
 .nav-link {
     margin-right: 1em;
 }
+
+.visual-padding {
+    width: 100%;
+    height: 90px;
+}
+
+.visual-container {
+    height: 60%;
+    margin: 0 4em;
+}
+
+.visual-buttons-container {
+    width: 100%;
+    height: 10%;
+    text-align: center;
+}
+
+button.visual-button {
+    margin: 1em;
+}
+.map-wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.svgContainer {
+    height: 100%;
+    width: 100%;
+}
