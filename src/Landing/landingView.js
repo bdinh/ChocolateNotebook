@@ -23,16 +23,42 @@ export default class LandingView extends Component {
                 </div>
             </div>
 
-
-            <div className="our-story section-block">
-                <p className="section-title">Our Story</p>
-                <p className="section-text">We created Chocolate Notebook to help people keep track of all of the chocolate they taste over time. We hope it will be a useful and fun tool for chocolate enthusiasts, especially people who taste a lot of single origin chocolate. Since there are thousands of different chocolate bars and numerous things to remember about each chocolate, it can be hard to remember what you have had. Even fantastic chocolates can blur together if you haven’t had them in awhile. One member of our team has tasted numerous chocolate bars and admittedly cannot remember what they thought of most of the bars they’ve tasted. This project is also inspired by Chocolopolis, which has an incredible selection of single origin chocolate bars from around the world.</p>
+            <div className="our-story row">
+                <div className="col-6 section-block text-block">
+                        <p className="section-title">Our Story</p>
+                        <p className="section-text">We created Chocolate Notebook to help people keep track of all of the chocolate they taste over time. We hope it will be a useful and fun tool for chocolate enthusiasts, especially people who taste a lot of single origin chocolate. Since there are thousands of different chocolate bars and numerous things to remember about each chocolate, it can be hard to remember what you have had. Even fantastic chocolates can blur together if you haven’t had them in awhile. One member of our team has tasted numerous chocolate bars and admittedly cannot remember what they thought of most of the bars they’ve tasted. This project is also inspired by Chocolopolis, which has an incredible selection of single origin chocolate bars from around the world.</p>
+                </div>
+                <div className="col-6 note-book-icon section-block icon-block">
+                    <img src="./notebook-icon.svg"/>
+                </div>
             </div>
+            <div className="history row">
+                <div className="col-6 section-block text-block">
+                        <p className="section-title">History of Chocolate</p>
+                        <p className="section-text">
+                            Cacao seeds, which chocolate is made out of, were first used in 1900 BC to
+                            create fermented beverages that were frothy, spiced and bitter. It’s possible that
+                            it was fermented and served as an alcoholic beverage as early as 1400 BC! The seeds
+                            were believed to be a gift from a god that would imbue the drinker with strength.
+                            It spread in Europe in the 16th century and was sweetened for consumption. It was
+                            initially available to wealthy members of society, being an import, and later
+                            became available to the general public. Cacao plantations spread, bringing with
+                            them a thriving slave market, as it is laborious to grow and process cacao.The
+                            chocolate we recognize today started to take form in the 1800s as people learned
+                            how to separate cacao butter (the fats) from cacao liquor (cacao solids).
+                            Milk chocolate came on the scene in the late 1800s when powdered milk was mixed in
+                            with the cacao liquor. </p>
 
-
-            <div className="history section-block">
-                <p className="section-title">History of Chocolate</p>
-                <p className="section-text">Cacao seeds, which chocolate is made out of, where first used in 1900 BC to create fermented beverages that were frothy, spiced and bitter. It’s possible that it was fermented and served as an alcoholic beverage as early as 1400 BC! The seeds were believed to be a gift from a god that would imbue the drinker with strength. It spread in Europe in the 16th century and was sweetened for consumption. It was initially available to wealthy members of society, being an import, and later became available to the general public. Cacao plantations spread, bringing with them a thriving slave market, as it is laborious to grow and process cacao. Wind and horse power were used to speed up production and to grind up cacao seeds. The chocolate we recognize today started to take form in the 1800s as people learned how to separate cacao butter (the fats) from cacao liquor (cacao solids). Milk chocolate came on the scene in the late 1800s when powdered milk was mixed in with the cacao liquor. In 1879, Robert Lindt of today’s Lindt chocolate brand invented conching, the process by which chocolate is cooked and refined to reduce the particle size and bring out flavors. Almost all modern chocolate on the market today has been conched.</p>
+                </div>
+                <div className="col-6 section-block extra-padding-block">
+                    <p className="section-text">In 1879, Robert Lindt of today’s Lindt chocolate brand invented
+                        conching, the process by which chocolate is cooked and refined to reduce the particle size
+                        and bring out flavors. Almost all modern chocolate on the market today has been conched.
+                    </p>
+                    <div className="chocolate-bar-icon">
+                        <img src="./chocolate-icon.svg"/>
+                    </div>
+                </div>
             </div>
             <div className="footer">
                 <p className="section-title">Footer</p>

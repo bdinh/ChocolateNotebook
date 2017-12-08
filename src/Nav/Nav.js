@@ -17,7 +17,12 @@ export class Nav extends Component  {
         <div className="navbar-container">
         {!user ?
           (<nav className="navbar navbar-expand-md fixed-top navbar-dark">
-              <a className="navbar-brand" href="#">(Logo Goes Here)</a>
+              <Link to="/" exact>
+                  <a className="navbar-brand" href="#">
+                      {/*<img width="30" height="30" src="./notebook-logo.svg"/>*/}
+                      Chocolate Notebook
+                  </a>
+              </Link>
               <button className="navbar-toggle navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon icon-bar"/>
               </button>

@@ -3,9 +3,8 @@
     margin-left: 0!important;
 }
 
-
 .landing-body a:hover, .landing-body button a   {
-  color: white;
+    color: white;
 }
 
 .navbar-brand {
@@ -13,15 +12,20 @@
 
 }
 
-.landing-body p, .landing-body h1, .landing-body button  {
-  color: white;
+.landing-image, .landing-body button {
+    color: #FFFFFF;
+}
+
+.landing-body h1 {
+    color: var(--font-color);
 }
 
 .landing-image {
     background-image: url("../img/hand-holding-coffee.jpg");
     background-position: center;
     background-size: cover;
-    padding: 8em 2em 0em;
+    height: 100vh;
+    width: 100%;
 }
 
 .quote {
@@ -40,7 +44,7 @@
     font-size: 0.5em;
 }
 
-.landing-body button.get-started-button:hover {
+.landing-body button.get-started-button {
     background-color: #d0d4ad36;
     border: 3px solid #CFD4AD;
     border-radius: 50px;
@@ -53,17 +57,40 @@
     padding-top: 5em;
 }
 
-.section-block, .footer {
+.section-block{
     text-align: left;
     padding: 2em;
+    color: var(--font-color);
+    height: 80vh;
+}
+
+.extra-padding-block {
+
+}
+
+/*.history-block {*/
+    /*height: 90vh;*/
+/*}*/
+
+.footer {
+    text-align: left;
+    padding: 2em;
+    height: 20vh;
 }
 
 .our-story {
-    background-color: #7F524E;
+    background-color: var(--background-color);
 }
 
 .history {
     background-color: #CFD4AD;
+}
+
+.get-started-button-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    padding-bottom: 2em;
 }
 
 .section-title {
@@ -76,6 +103,23 @@
 
 .footer {
     background-color: #CC9692;
+}
+
+.section-block {
+    display: inline-block;
+}
+
+.section-block img {
+    height: 60%;
+    margin: auto;
+}
+
+.icon-block, .chocolate-bar-icon {
+    display: flex;
+}
+
+.chocolate-bar-icon {
+    height: 70%;
 }
 
 
@@ -99,7 +143,7 @@
         font-size: 0.75em;
     }
 
-    button.get-started-button:hover {
+    button.get-started-button {
         font-size: 0.75em;
     }
 
@@ -129,7 +173,7 @@
 @media (min-width: 768px) {
 
     /*.landing-image {*/
-        /*padding: 8em 2em 8em;*/
+    /*padding: 8em 2em 8em;*/
     /*}*/
 
     .quote {
@@ -141,7 +185,7 @@
         font-size: 2em;
     }
 
-    .get-started-button, button.get-started-button:hover {
+    .get-started-button, button.get-started-button {
         font-size: 1em;
     }
 
@@ -172,8 +216,42 @@
 
     .quote {
         width: 70%;
-        font-size: 2.5em;
+        font-size: 4em;
         margin-left: 10%;
         margin-bottom: 0;
+    }
+
+    .cited {
+        font-size: 3em;
+        width: 40%;
+        margin: auto;
+        margin-left: 40%;
+    }
+
+    .get-started-button-container {
+        font-size: 1em;
+        padding-bottom: 2em;
+    }
+
+    .landing-body button.get-started-button {
+        font-size: 1.5em;
+        /*margin-bottom: 2em;*/
+    }
+
+    .section-title {
+        font-size: 3em;
+    }
+
+    .section-text {
+        font-size: 1.5em;
+        line-height: 2em;
+    }
+
+    .section-block {
+        padding: 3em;
+    }
+
+    .text-block {
+        padding-left: 5em;
     }
 }

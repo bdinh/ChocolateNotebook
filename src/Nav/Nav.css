@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 .navbar {
   padding: 1rem 1rem!important;
   margin-bottom: 0;
@@ -25,6 +26,10 @@ button.navbar-toggler:hover {
   background-color: transparent;
 }
 
+.logo-icon {
+  height: 50px;
+  width: 50px;
+}
 button.login-button, button.signup-button, button.signout-button {
   background-color: transparent;
   border: 3px solid var(--accent-green);
@@ -69,9 +74,6 @@ nav.navbar {
   font-size: 1em;
 }
 
-#nav {
-  padding: 1em;
-}
 
 nav.navbar  {
   display: flex;
