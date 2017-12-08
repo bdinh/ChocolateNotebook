@@ -201,7 +201,8 @@
       "bean_type": "Trinitario",
       "company_location": "Venezuela",
       "broad_bean_origin": "Venezuela",
-      "ref": "439"
+      "ref": "439",
+      "src": "https://www.c-spot.com/images/el-rey-macuro-large.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -20198,7 +20199,8 @@
       "bean_type": "Trinitario",
       "company_location": "U.S.A.",
       "broad_bean_origin": "Grenada",
-      "ref": "576"
+      "ref": "576",
+      "src": "https://www.burdickchocolate.com/ckfinder/userfiles/images/0%20Repeat%20Gallery/SSGrenadaBar.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -20258,7 +20260,8 @@
       "company": "Manoa",
       "company_location": "U.S.A.",
       "broad_bean_origin": "Liberia",
-      "ref": "1003"
+      "ref": "1003",
+      "src": "https://cdn.shopify.com/s/files/1/0750/7561/products/manoa_-_liberia.jpg?v=1429034807"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -20443,7 +20446,8 @@
       "bean_type": "Criollo (Porcelana)",
       "company_location": "France",
       "broad_bean_origin": "Venezuela",
-      "ref": "717"
+      "ref": "717",
+      "src": "http://www.seventypercent.com/wp-content/uploads/2012/07/D7K_0768-466x611.jpg"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -20555,7 +20559,8 @@
       "bean_type": "Criollo, Trinitario",
       "company_location": "Sweden",
       "broad_bean_origin": "Sri Lanka",
-      "ref": "1618"
+      "ref": "1618",
+      "src": "https://cdn.shopify.com/s/files/1/1120/9400/products/svenska-kakaobolaget-sri-lanka-72.jpg?v=1510288183"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
@@ -20571,7 +20576,8 @@
       "bean_type": "Forastero",
       "company_location": "U.S.A.",
       "broad_bean_origin": "Ghana",
-      "ref": "199"
+      "ref": "199",
+      "src": "http://i2.wp.com/erincooks.com/images/tcho/chocolate.jpg?resize=525%2C349"
     },
     "record_timestamp": "2016-12-20T08:57:04-08:00"
   },
