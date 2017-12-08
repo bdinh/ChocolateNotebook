@@ -75,7 +75,6 @@ class ChooseRow extends Component  {
   render()  {
     return (
       <div className="choose">
-        <div className="row">
           <div className="chocolate-card card">
             <h4>{this.props.chocolateBars[0].fields.name + ', by ' +  this.props.chocolateBars[0].fields.company}</h4>
             <img src="https://via.placeholder.com/350" alt="chocolate bar"/>
@@ -97,7 +96,6 @@ class ChooseRow extends Component  {
                (this.props.chocolateBars[2].fields.broad_bean_origin || 'Unknown Source')}</p>
             {/* <button>Change</button> */}
           </div>
-        </div>
       </div>
     );
   }

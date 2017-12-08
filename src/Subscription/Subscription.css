@@ -244,6 +244,10 @@
   margin: 1rem;
 }
 
+#subscribe-img ul {
+  text-align: left;
+}
+
 #subscribed  {
   margin-bottom: 3rem;
 }
@@ -253,12 +257,10 @@
   color: var(--font-color);
 }
 
-.row  {
-  display: inline-flex;
-}
-
 .choose  {
-  margin: 2rem;
+  display: inline-flex;
+  margin: auto;
+  text-align: center;
 }
 
 .sub-links  {
@@ -266,8 +268,12 @@
   text-align: center;
 }
 
+#subscribe-img h2, #subscribe-img p, #subscribe-img ul, #subscribe-img li  {
+  color: white;
+}
+
 @media (max-width: 375px)  {
-  .learn-more  {
+  .learn-more, .choose, .description  {
     margin: 0;
   }
   .cards  {
@@ -283,12 +289,32 @@
   .sub-links  {
     display: block;
   }
-  .description  {
-    margin: 0;
-  }
   .subscription-body h1  {
     font-size: 22pt;
     margin-top: 5rem;
+  }
+  .choose  {
+    display: block;
+  }
+  .chocolate-card  {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  #subscribe-img  {
+    background-image: none;
+    background-color: var(--main-color);
+  }
+  .middle-button  {
+    margin-right: auto;
+  }
+  #subscribed h1  {
+    font-size: 24pt;
+    margin-top: 3rem;
+  }
+  .month-nav button  {
+    font-size: 16pt;
   }
 }
 
@@ -300,7 +326,7 @@
   .cards  {
     display: block;
   }
-  .learn-more  {
+  .learn-more, .choose  {
     margin: 0;
   }
   .subscription-body h2  {
@@ -312,6 +338,24 @@
   .subscription-body h1  {
     font-size: 22pt;
     margin-top: 2.5rem;
+  }
+  .choose  {
+    display: block;
+  }
+  .chocolate-card  {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .middle-button  {
+    margin-right: auto;
+  }
+  #subscribed h1  {
+    font-size: 24pt;
+  }
+  .month-nav button {
+    font-size: 16pt;
   }
 }
 
@@ -329,11 +373,26 @@
   .logged  {
     padding-top: 4rem;
   }
+  .choose  {
+    display: block;
+  }
+  .chocolate-card  {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .middle-button  {
+    margin-right: auto;
+  }
 }
 
 
 
-@media (min-width: 768px) and (max-width: 1200px) {
+@media (max-width: 900px)  {
+  .middle-button  {
+    margin-right: auto;
+  }
 }
 
 @media (min-width: 1200px) {
