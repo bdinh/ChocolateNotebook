@@ -14,7 +14,7 @@
 }
 
 .select-box  {
-  text-align: left;
+    text-align: left;
 }
 
 .journal-item, #entry-button {
@@ -24,11 +24,11 @@
 }
 
 #submit-entry-button  a  {
-  color: white;
+    color: white;
 }
 
 #submit-entry-button a:hover  {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 
@@ -47,8 +47,8 @@
 }
 
 .journal-entry-header  {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header-entry-field {
@@ -164,25 +164,25 @@
 }
 
 #submit-entry-button {
-  border: none;
-  text-align: center;
-  padding: 0.375rem 0.75rem;
-  text-decoration: none;
-  font-size: 1.1em;
-  margin: 0.5rem;
-
+    border: none;
+    text-align: center;
+    padding: 0.375rem 0.75rem;
+    text-decoration: none;
+    font-size: 1.1em;
+    margin: 0.5rem;
+    background-color: var(--accent-green);
 }
 
 .chocolate-detail  {
-  margin: 1rem;
+    margin: 1rem;
 }
 
 #delete-button {
-  margin: 0.5rem;
+    margin: 0.5rem;
 }
 
 #delete-button:active, #submit-entry-button:active  {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .label-font {
@@ -208,7 +208,7 @@
     margin-top: 1rem;
     font-size: 12pt;
     text-shadow: 0px 0.5px 5px #000000;
-
+    
 }
 
 #edit-button:hover {
@@ -227,69 +227,69 @@
 }
 
 .entry-search-row  {
-  display: inline-flex;
-  justify-content: space-around;
-  align-content: center;
-  width: 100%;
-  margin-top: 3rem;
+    display: inline-flex;
+    justify-content: space-around;
+    align-content: center;
+    width: 100%;
+    margin-top: 3rem;
 }
 
 .entry-button-container  {
-  margin-top: auto;
-  margin-bottom: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .search-elements  {
-  display: inline-flex;
-  margin-top: auto;
-  margin-bottom: auto;
+    display: inline-flex;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .search-elements p  {
-  margin: 0;
-  width: 100%;
+    margin: 0;
+    width: 100%;
 }
 
 @media (max-width: 540px) {
-  .entry-search-row  {
-    margin-top: 7rem;
-  }
+    .entry-search-row  {
+        margin-top: 7rem;
+    }
 }
 
 @media (min-width: 540px) and (max-width: 598px)  {
-  .entry-search-row  {
-    margin-top: 2.5rem;
-  }
+    .entry-search-row  {
+        margin-top: 2.5rem;
+    }
 }
 
 @media (max-width: 598px) {
-  .fa-search {
-      display: none;
-  }
-  .entry-search-row  {
-    display: block;
-    text-align: center;
-  }
-  .search-elements  {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  #journal-body p  {
-    font-size: 10pt;
-  }
-  .journal-item  {
-    margin: 0 0 1rem 0;
-    width: 100%;
-  }
+    .fa-search {
+        display: none;
+    }
+    .entry-search-row  {
+        display: block;
+        text-align: center;
+    }
+    .search-elements  {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    #journal-body p  {
+        font-size: 10pt;
+    }
+    .journal-item  {
+        margin: 0 0 1rem 0;
+        width: 100%;
+    }
 }
 
 @media (min-width: 598px) and (max-width: 768px) {
-
+    
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {
 }
 
 @media (min-width: 1200px) {
-
+    
 }
