@@ -36,34 +36,28 @@ export default class LandingView extends Component {
             </div>
             <div className="history row">
                 <div className="col-md-6 section-block text-block">
-                        <p className="section-title">History of Chocolate</p>
-                        <p className="section-text">
-                            Cacao seeds, which chocolate is made out of, were first used in 1900 BC to
-                            create fermented beverages that were frothy, spiced and bitter. It’s possible that
-                            it was fermented and served as an alcoholic beverage as early as 1400 BC! The seeds
-                            were believed to be a gift from a god that would imbue the drinker with strength.</p>
-                        <p className="section-text">
-                            It spread in Europe in the 16th century and was sweetened for consumption. It was
-                            initially available to wealthy members of society, being an import, and later
-                            became available to the general public. Cacao plantations spread, bringing with
-                            them a thriving slave market, as it is laborious to grow and process cacao.
-                        </p>
-                        <p className="section-text">The
-                            chocolate we recognize today started to take form in the 1800s as people learned
-                            how to separate cacao butter (the fats) from cacao liquor (cacao solids).
-                            Milk chocolate came on the scene in the late 1800s when powdered milk was mixed in
-                            with the cacao liquor.In 1879, Robert Lindt of today’s Lindt chocolate brand invented
-                            conching, the process by which chocolate is cooked and refined to reduce the particle size
-                            and bring out flavors. Almost all modern chocolate on the market today has been conched.</p>
+                    <p className="section-title">History of Chocolate</p>
+                    <p className="section-text">
+                        Cacao seeds, which chocolate is made out of, were first used in 1900 BC to
+                        create fermented beverages that were frothy, spiced and bitter. It’s possible that
+                        it was fermented and served as an alcoholic beverage as early as 1400 BC! The seeds
+                        were believed to be a gift from a god that would imbue the drinker with strength.</p>
+                    <p className="section-text">
+                        It spread in Europe in the 16th century and was sweetened for consumption. It was
+                        initially available to wealthy members of society, being an import, and later
+                        became available to the general public. Cacao plantations spread, bringing with
+                        them a thriving slave market, as it is laborious to grow and process cacao.
+                    </p>
+                    <p className="section-text">The
+                        chocolate we recognize today started to take form in the 1800s as people learned
+                        how to separate cacao butter (the fats) from cacao liquor (cacao solids).
+                        Milk chocolate came on the scene in the late 1800s when powdered milk was mixed in
+                        with the cacao liquor.In 1879, Robert Lindt of today’s Lindt chocolate brand invented
+                        conching, the process by which chocolate is cooked and refined to reduce the particle size
+                        and bring out flavors. Almost all modern chocolate on the market today has been conched.</p>
                 </div>
                 <div className="col-md-6 section-block chocolate-bar-icon">
-                    {/*<p className="section-text">In 1879, Robert Lindt of today’s Lindt chocolate brand invented*/}
-                        {/*conching, the process by which chocolate is cooked and refined to reduce the particle size*/}
-                        {/*and bring out flavors. Almost all modern chocolate on the market today has been conched.*/}
-                    {/*</p>*/}
-                    {/*<div className="chocolate-bar-icon">*/}
                         <img src="./chocolate-icon.svg"/>
-                    {/*</div>*/}
                 </div>
             </div>
             <div className="footer">

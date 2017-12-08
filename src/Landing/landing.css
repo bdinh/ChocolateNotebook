@@ -85,8 +85,8 @@
 }
 
 .section-text {
-    font-size: 0.75em;
-    font-height: 0.75em
+    font-size: 1em;
+    font-height: 1em
 }
 
 
@@ -112,15 +112,25 @@
     padding-top: 0em;
 }
 
+.footer {
+    padding: 0;
+    width: 100%;
+}
+
+.text-block {
+    padding: 3em;
+    /*padding-bottom: 0;*/
+}
+
 
 @media (min-width: 598px) {
     .quote {
-        font-size: 1.5em;
-        width: 70%;
+        font-size: 2em;
     }
 
     .cited {
         font-size: 1.5em;
+        width: 60%;
     }
 
     .get-started-button {
@@ -139,7 +149,6 @@
 
     .section-block, .footer {
         text-align: left;
-        padding: 2em;
     }
 
     .section-title {
@@ -148,6 +157,11 @@
 
     .section-text {
         font-size: 1em;
+    }
+
+    .landing-text-container {
+        /*padding-top: 25%;*/
+        padding-left: 10%;
     }
 
 
@@ -155,24 +169,21 @@
 
 
 @media (min-width: 768px) {
-
-
     .quote {
-        font-size: 2em;
-        width: 70%;
+        font-size: 2.5em;
     }
 
     .cited {
         font-size: 2em;
+        width: 50%;
     }
 
     .get-started-button, button.get-started-button {
         font-size: 1em;
     }
 
-    .section-block, .footer {
+    .section-block {
         text-align: left;
-        padding: 2em;
     }
 
     .section-title {
@@ -183,16 +194,35 @@
         font-size: 1em;
     }
 
+    .landing-text-container {
+        padding-top: 25%;
+    }
+
 }
 
 
 @media (min-width: 992px) {
+    .quote {
+        font-size: 3em;
+    }
+
+    .cited {
+        font-size: 2.5em;
+        width: 50%;
+    }
+
+    .get-started-button, button.get-started-button {
+        font-size: 1em;
+    }
+
+
 
 }
 
 @media (min-width: 1200px) {
     .landing-text-container {
         padding-top: 10%;
+        padding-left: 0em;
     }
 
     .quote {
@@ -212,6 +242,7 @@
     .get-started-button-container {
         font-size: 1em;
         padding-bottom: 2em;
+        left: 50%;
     }
 
     .landing-body button.get-started-button {
@@ -234,4 +265,15 @@
     .text-block {
         padding-left: 5em;
     }
+
+    .note-book-icon img {
+        width: 100%;
+        margin: auto;
+    }
+
+    .chocolate-bar-icon img {
+        width: 100%;
+        margin: auto;
+    }
+
 }
