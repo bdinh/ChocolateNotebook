@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import LandingPage from './Landing/landingView';
 import Catalog from './Catalog/Catalog';
+import ProductPage from './Catalog/ProductPage';
 // import MapView from './Map/mapView';
 import {Journal, JournalNewEntry} from './Journal/Journal';
 import Subscription from './Subscription/Subscription';
@@ -165,6 +166,7 @@ class App extends Component {
                         {/* <Nav user={this.state.user} handleSignOutCallback={() => this.handleSignOut()}/> */}
                       <Switch>
                         <Route exact path="/catalog" component={(props) => <Catalog />}></Route>
+                        <Route exact path="/catalog/:productRef" component={(props) => <ProductPage routerprops={props} />}></Route>
                         <Route exact path="/journal" component={(props) => <Journal currentUser={this.state.user} />}></Route>
                         <Route exact path="/subscription" component={(props) =>
                           <Subscription handleSkip={(month, bool) => this.handleSkip(month, bool)}

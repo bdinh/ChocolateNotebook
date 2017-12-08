@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import "./Catalog.css";
 import chocolateBars from '../Data/chocolate-bars.json';
 import search from "./Search";
-
+import StaticRating from "./StaticRating";
+import { Link } from 'react-router-dom';
 
 
 export class Catalog extends Component {
@@ -73,14 +74,12 @@ export class Catalog extends Component {
             catalogChocolates = search(this.state.query, catalogChocolates);
         }
 
-        console.log(this.state);
-
         catalogChocolates = catalogChocolates.filter(bar => {
             if (this.state.origin.length !== 0 && 
                 !this.state.origin.includes(bar.fields.broad_bean_origin)) {
                     return false;
                 } else if (this.state.percentage.length !== 0 && 
-                !this.state.origin.includes(bar.fields.cocoa_percent)) {
+                !this.state.percentage.includes(bar.fields.cocoa_percent.toString())) {
                     return false;
                 } else if (this.state.producer.length !== 0 && 
                     !this.state.producer.includes(bar.fields.company)) {
@@ -92,15 +91,16 @@ export class Catalog extends Component {
         return (
             <div className="catalog-container">
                 <SearchCatalog onChange={(e) => this.onChange(e)} />
-                    <p className="catalog-message"><em>{catalogChocolates.length} results</em></p>
                 <div className="catalog-body">
                     <div className="catalog-sidebar">
                         <CatalogSidebar filters={filters} updateFiltersCallback={this.updateFilters} />
                     </div>
-                    <div className="catalog-grid">
-                    {catalogChocolates.map(bar => <CatalogItem key={bar.fields.ref} name={bar.fields.name} rating={bar.fields.rating} src={bar.fields.src} />)}
-                    {catalogChocolates.length == 0 ? <p className="catalog-message"><em>There are no results for your search.</em></p> : null}
+                    <div className="catalog-items">
+                    {catalogChocolates.length == 0 ? <p className="catalog-message"><em>There are no results for your search.</em></p> : <p className="catalog-message"><em>{catalogChocolates.length} result{catalogChocolates.length == 1 ? null : "s"}</em></p>}
+                        <div className="catalog-grid">
+                        {catalogChocolates.map(bar => <CatalogItem key={bar.fields.ref} recordId={bar.recordid} name={bar.fields.name} rating={bar.fields.rating} src={bar.fields.src} />)}
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,6 +171,7 @@ export class CatalogItem extends Component {
 
         return (
             <div className="catalog-item">
+            <Link to={"/catalog/" + this.props.recordId}>
                 <div className="catalog-item-card">
                     <div className="catalog-item-header">{itemName}</div>
                     <div className="catalog-item-content">
@@ -180,6 +181,7 @@ export class CatalogItem extends Component {
                         <StaticRating rating={rating} />
                     </div>
                 </div>
+                </Link>
             </div>
         );
     }
@@ -207,30 +209,6 @@ class SearchCatalog extends Component {
         </div>
       );
     }
-  }
+}
 
-  class StaticRating extends Component {
-
-    render() {
-        let rating = this.props.rating || 1;
-
-      let ratingStars = [{star : rating >= 1, num : 1}, {star : rating >= 2,
-        num : 2}, {star : rating >= 3, num : 3}, {star : rating >= 4, num : 4},
-         {star : rating >= 5, num : 5}];
-      let i = 0;
-      ratingStars = ratingStars.map((item) => {
-        if (item.star) {
-          return(<i key={++i} className="fa fa-star" aria-hidden="true"></i>)
-        } else {
-          return(<i key={++i} className="fa fa-star-o" aria-hidden="true"></i>)
-        }
-      })
-
-      return (
-        <span>
-        {rating} {ratingStars}
-        </span>
-      );
-    }
-  }
 export default Catalog;
