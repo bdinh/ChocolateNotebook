@@ -8,14 +8,34 @@ import search from "./Search";
 export class Catalog extends Component {
     constructor(props) {
         super(props);
-        this.state = {query : ""};
+        this.state = {
+            query : "",
+            origin: [],
+            percentage: [],
+            producer: []
+        };
+
+        this.updateFilters = this.updateFilters.bind(this);
     }
+    
     onChange(e) {
         this.setState({ query : e.target.value});
     }
 
+    updateFilters(event, filter = "origin") {
+        let value = event.target.value;
+        let newFilters = this.state[filter];
+        
+        if (newFilters.includes(value)) {
+            newFilters.splice(newFilters.indexOf(value), 1);
+        } else {
+            newFilters.push(value);
+        }
+
+        this.setState({ [filter]: newFilters})
+    }
+
     render() {
-        console.log(chocolateBars);
         let catalogChocolates = chocolateBars.filter(bar => {
             return bar.fields.src != undefined;
         });
@@ -24,6 +44,7 @@ export class Catalog extends Component {
         let catalogPercentages = [];
         let catalogProducers = [];
 
+        // Generate list of filter values
         catalogChocolates.forEach(bar => {
             if (!catalogOrigins.includes(bar.fields.broad_bean_origin)) {
                 catalogOrigins.push(bar.fields.broad_bean_origin)
@@ -52,15 +73,32 @@ export class Catalog extends Component {
             catalogChocolates = search(this.state.query, catalogChocolates);
         }
 
+        console.log(this.state);
+
+        catalogChocolates = catalogChocolates.filter(bar => {
+            if (this.state.origin.length !== 0 && 
+                !this.state.origin.includes(bar.fields.broad_bean_origin)) {
+                    return false;
+                } else if (this.state.percentage.length !== 0 && 
+                !this.state.origin.includes(bar.fields.cocoa_percent)) {
+                    return false;
+                } else if (this.state.producer.length !== 0 && 
+                    !this.state.producer.includes(bar.fields.company)) {
+                    return false;
+                }
+            return true;
+        })
+
         return (
             <div className="catalog-container">
                 <SearchCatalog onChange={(e) => this.onChange(e)} />
+                    <p className="catalog-message"><em>{catalogChocolates.length} results</em></p>
                 <div className="catalog-body">
                     <div className="catalog-sidebar">
-                        <CatalogSidebar filters={filters} />
+                        <CatalogSidebar filters={filters} updateFiltersCallback={this.updateFilters} />
                     </div>
                     <div className="catalog-grid">
-                    {catalogChocolates.map(bar => <CatalogItem name={bar.fields.name} rating={bar.fields.rating} src={bar.fields.src} />)}
+                    {catalogChocolates.map(bar => <CatalogItem key={bar.fields.ref} name={bar.fields.name} rating={bar.fields.rating} src={bar.fields.src} />)}
                     {catalogChocolates.length == 0 ? <p className="catalog-message"><em>There are no results for your search.</em></p> : null}
 
                     </div>
@@ -71,14 +109,24 @@ export class Catalog extends Component {
 }
 
 class CatalogSidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {appliedFiters : {
+            origin: [],
+            percentage: [],
+            producer: []
+        }};
+    }
+
     render() {
         let filters = this.props.filters;
 
         return (
             <div>
-                <CatalogFilter name="Origin" icon="globe" values={filters.origin} />
-                <CatalogFilter name="Cocoa Percentage" icon="chocolate" values={filters.percentage} />
-                <CatalogFilter name="Producer" icon="industry" values={filters.producer} />
+                <p>Filter Chocolates</p>
+                <CatalogFilter name="Origin" filterName="origin" icon="globe" values={filters.origin} updateFiltersCallback={this.props.updateFiltersCallback} />
+                <CatalogFilter name="Cocoa Percentage" filterName="percentage" icon="chocolate" values={filters.percentage} updateFiltersCallback={this.props.updateFiltersCallback} />
+                <CatalogFilter name="Producer" filterName="producer" icon="industry" values={filters.producer} updateFiltersCallback={this.props.updateFiltersCallback} />
             </div>
         );
     }
@@ -95,7 +143,7 @@ class CatalogFilter extends Component {
                 </div>
                 <hr/>
                 <div className="catalogfilter-items">
-                {values.map(value => <CheckBox value={value} />)}
+                {values.map(value => <CheckBox key={value} filterName={this.props.filterName} value={value} onChange={this.props.updateFiltersCallback} />)}
                 </div>
             </div>
         );
@@ -108,7 +156,7 @@ class CheckBox extends Component {
 
         return (
         <div>
-            <label><input type="checkbox" id={value} value={value} /> {value}</label>
+            <label><input type="checkbox" id={value} value={value} onChange={(e, name) => this.props.onChange(e, this.props.filterName)} /> {value}</label>
         </div>
         );
     }
