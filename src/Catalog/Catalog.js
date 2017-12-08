@@ -24,6 +24,30 @@ export class Catalog extends Component {
         let catalogPercentages = [];
         let catalogProducers = [];
 
+        catalogChocolates.forEach(bar => {
+            if (!catalogOrigins.includes(bar.fields.broad_bean_origin)) {
+                catalogOrigins.push(bar.fields.broad_bean_origin)
+            }
+
+            if (!catalogPercentages.includes(bar.fields.cocoa_percent)) {
+                catalogPercentages.push(bar.fields.cocoa_percent)
+            }
+
+            if (!catalogProducers.includes(bar.fields.company)) {
+                catalogProducers.push(bar.fields.company)
+            }
+        });
+
+        catalogOrigins.sort();
+        catalogPercentages.sort();
+        catalogProducers.sort();
+
+        let filters = {
+            origin : catalogOrigins,
+            percentage : catalogPercentages,
+            producer : catalogProducers
+        }
+
         if (this.state.query !== "") {
             catalogChocolates = search(this.state.query, catalogChocolates);
         }
@@ -33,7 +57,7 @@ export class Catalog extends Component {
                 <SearchCatalog onChange={(e) => this.onChange(e)} />
                 <div className="catalog-body">
                     <div className="catalog-sidebar">
-                        <CatalogSidebar />
+                        <CatalogSidebar filters={filters} />
                     </div>
                     <div className="catalog-grid">
                     {catalogChocolates.map(bar => <CatalogItem name={bar.fields.name} rating={bar.fields.rating} src={bar.fields.src} />)}
@@ -48,11 +72,13 @@ export class Catalog extends Component {
 
 class CatalogSidebar extends Component {
     render() {
+        let filters = this.props.filters;
+
         return (
             <div>
-                <CatalogFilter name="Origin" icon="globe" />
-                <CatalogFilter name="Cocoa Percentage" icon="chocolate" />
-                <CatalogFilter name="Producer" icon="industry" />
+                <CatalogFilter name="Origin" icon="globe" values={filters.origin} />
+                <CatalogFilter name="Cocoa Percentage" icon="chocolate" values={filters.percentage} />
+                <CatalogFilter name="Producer" icon="industry" values={filters.producer} />
             </div>
         );
     }
@@ -60,6 +86,8 @@ class CatalogSidebar extends Component {
 
 class CatalogFilter extends Component {
     render() {
+        let values = this.props.values;
+
         return (
             <div className="card">
                 <div className="catalogfilter-header">
@@ -67,10 +95,21 @@ class CatalogFilter extends Component {
                 </div>
                 <hr/>
                 <div className="catalogfilter-items">
-                <input type="checkbox" value="option-1" /> Option 1<br/>
-                <input type="checkbox" value="option-2" /> Option 2<br/>
+                {values.map(value => <CheckBox value={value} />)}
                 </div>
             </div>
+        );
+    }
+}
+
+class CheckBox extends Component {
+    render() {
+        let value = this.props.value;
+
+        return (
+        <div>
+            <label><input type="checkbox" id={value} value={value} /> {value}</label>
+        </div>
         );
     }
 }
