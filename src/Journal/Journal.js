@@ -26,14 +26,14 @@ export class Journal extends Component {
 
   render() {
     return (
-      <div>
+      <div id="journal-body">
       <div className="entry-search-row" >
       <NewEntryButton />
       <SearchJournal onChange={(e) => this.onChange(e)} currentUser={this.props.currentUser}/>
+      </div>
       <div>
       <RenderJournalItems user={this.props.currentUser}
         query={this.state.query.split(" ")}/>
-      </div>
       </div>
       </div>
     );
@@ -296,7 +296,9 @@ class NewJournalCardHeader extends Component {
 class NewEntryButton extends Component {
   render() {
     return(
-      <button id="entry-button"><NavLink to="/newjournalentry" >New Entry</NavLink></button>
+      <div className="entry-button-container">
+        <button id="entry-button"><NavLink to="/newjournalentry" >New Entry</NavLink></button>
+      </div>
     );
   }
 }
@@ -305,13 +307,11 @@ class SearchJournal extends Component {
 
   render() {
     return (
-      <span>
-      <span className="search-elements">
-      <i className="fa fa-search" aria-hidden="true"></i>
-      <p>Search Journal</p>
+      <div className="search-elements">
+          <i className="fa fa-search" aria-hidden="true"></i>
+          <p>Search Journal</p>
       <input type="search" id="search-box" placeholder="Search..." onChange={(e) => this.props.onChange(e)}/>
-      </span>
-      </span>
+      </div>
     );
   }
 }

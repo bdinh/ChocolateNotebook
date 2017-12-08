@@ -41,6 +41,10 @@
   width: 100%;
 }
 
+.signout-button button {
+  padding: 0.375rem 0.75rem;
+}
+
 #nav .signout-button button:hover  {
   background-color: var(--accent-pink);
 }
@@ -49,4 +53,36 @@
   color: white;
   padding-right: 1rem;
   padding-left: 1rem;
+}
+
+@media (max-width: 598px) {
+  #nav, .signout-button button  {
+    font-size: 12pt;
+  }
+  .signout-button button  {
+    padding: 0.2rem 0.325rem;
+  }
+  .main-nav  {
+    display: block;
+    text-align: center;
+  }
+  .nav-item  {
+    margin: 0.5rem 0 0.5rem 0;
+  }
+}
+
+@media (min-width: 598px) and (max-width: 768px) {
+  #nav, .signout-button button  {
+    font-size: 12pt;
+  }
+  .signout-button button  {
+    padding: 0.300rem 0.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+}
+
+@media (min-width: 1200px) {
+
 }

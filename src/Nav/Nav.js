@@ -15,7 +15,9 @@ export class Nav extends Component  {
     return(
       <div id="nav">
           <nav className="main-nav">
-              <Link to='/'>(Logo Goes Here)</Link>
+              <div className="nav-item">
+                <Link to='/'>(Logo Goes Here)</Link>
+              </div>
               {!user ?
                 <div className="nav-item">
                   <Link to='/login'><button className="btn login-button" type="button">
@@ -30,7 +32,7 @@ export class Nav extends Component  {
                   <Link to="/subscription">ChocoBox</Link>
                 </div>,
                 <div className="nav-item signout-button">
-                  <button className="btn" type="button" onClick={(e) => handleSignOutCallback(e)}>
+                  <button type="button" onClick={(e) => handleSignOutCallback(e)}>
                   Sign Out</button>
                 </div>]}
           </nav>

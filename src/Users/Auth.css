@@ -6,15 +6,6 @@ html, body, #root, .row-container, .auth-container,
 #login h1, #signup h1, #login h2, #signup h2  {
   text-align: center;
   color: var(--font-color);
-  font-size: 2em;
-}
-
-#login h1, #signup h1  {
-  font-size: 2em;
-}
-
-#login h2, #signup h2  {
-  font-size: 1.5em;
 }
 
 #login .logo a:hover, #signup .logo a:hover  {
@@ -42,9 +33,6 @@ input  {
   background-size: cover;
   display: flex;
   flex: 1 1 0%;
-}
-
-.login-banner-container {
   width: 60%;
 }
 
@@ -102,4 +90,73 @@ input  {
 
 .password-error, .email-error {
   color: red;
+}
+
+@media (max-width: 375px)  {
+  #login h1, #signup h1  {
+    font-size: 1.5em;
+  }
+
+  #login h2, #signup h2  {
+    font-size: 1em;
+  }
+  .login-banner-container {
+    width: 0%;
+  }
+  .user-login-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 598px) {
+  #login h1, #signup h1  {
+    font-size: 1.5em;
+  }
+
+  #login h2, #signup h2  {
+    font-size: 1em;
+  }
+  .login-banner-container {
+    width: 25%;
+  }
+  .user-login-container {
+    width: 75%;
+  }
+}
+
+@media (min-width: 598px) and (max-width: 768px) {
+  #login h1, #signup h1  {
+    font-size: 1.5em;
+  }
+
+  #login h2, #signup h2  {
+    font-size: 1em;
+  }
+
+  .login-banner-container {
+    width: 50%;
+  }
+  .user-login-container {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  #login h1, #signup h1  {
+    font-size: 1.5em;
+  }
+
+  #login h2, #signup h2  {
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 1200px) {
+  #login h1, #signup h1  {
+    font-size: 2em;
+  }
+
+  #login h2, #signup h2  {
+    font-size: 1.5em;
+  }
 }
