@@ -31,8 +31,8 @@ export default class ProductPage extends Component {
                 <div className="catalog-item-header catalog-product-header">{itemName}</div>
                 <div className="catalog-item-content">
                     <div className="product-content">
+                        <ProductInformation product={product} />
                         <div className="catalog-img">
-                            <ProductInformation product={product} />
                             <span className="catalog-img-valign"></span><img src={src} />
                         </div>
                     </div>
@@ -55,10 +55,16 @@ export default class ProductPage extends Component {
 class ProductInformation extends Component {
     render() {
         return (
-            <div>
-                <i className={"fa fa-globe"} aria-hidden="true"></i> Origin
-                <i className={"fa fa-chocolate"} aria-hidden="true"></i> Cocoa Percentage
-                <i className={"fa fa-industry"} aria-hidden="true"></i> Producer
+            <div className="product-information">
+                <div>
+                <i className={"fa fa-globe"} aria-hidden="true"></i> Origin: {this.props.product.fields.broad_bean_origin}
+                </div>
+                <div>
+                <i className={"fa fa-chocolate"} aria-hidden="true"></i> Cocoa Percentage {this.props.product.fields.cocoa_percent}
+                </div>
+                <div>
+                <i className={"fa fa-industry"} aria-hidden="true"></i> Producer {this.props.product.fields.company}
+                </div>
             </div>
         );
     }

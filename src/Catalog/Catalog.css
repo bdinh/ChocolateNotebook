@@ -42,14 +42,22 @@
 }
 
 .product-content {
-    display: -ms-inline-flexbox;
-    display: inline-flex;
+    display: flex;
+    flex-flow: wrap;
 }
 
 .product-content > div {
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
     max-width: 50%;
+}
+
+.product-information{
+    text-align: left;
+}
+
+.product-information > div{
+    margin-bottom: 1rem;
 }
 
 .catalog-img {
