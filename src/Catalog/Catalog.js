@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./Catalog.css";
 import chocolateBars from '../Data/chocolate-bars.json';
+import search from "./Search";
 
 
 
@@ -18,7 +19,15 @@ export class Catalog extends Component {
         let catalogChocolates = chocolateBars.filter(bar => {
             return bar.fields.src != undefined;
         });
-        console.log(catalogChocolates);
+        
+        let catalogOrigins = [];
+        let catalogPercentages = [];
+        let catalogProducers = [];
+
+        if (this.state.query !== "") {
+            catalogChocolates = search(this.state.query, catalogChocolates);
+        }
+
         return (
             <div className="catalog-container">
                 <SearchCatalog onChange={(e) => this.onChange(e)} />
@@ -28,8 +37,7 @@ export class Catalog extends Component {
                     </div>
                     <div className="catalog-grid">
                     {catalogChocolates.map(bar => <CatalogItem name={bar.fields.name} rating={bar.fields.rating} src={bar.fields.src} />)}
-                    <CatalogItem rating={3}/>
-                    <CatalogItem />
+                    {catalogChocolates.length == 0 ? <p className="catalog-message"><em>There are no results for your search.</em></p> : null}
 
                     </div>
                 </div>
