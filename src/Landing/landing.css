@@ -68,22 +68,26 @@
 
 }
 
-/*.history-block {*/
-    /*height: 90vh;*/
-/*}*/
+.footer-container {
+    text-align: center;
+    padding-top: 3em;
+}
 
 .footer {
     text-align: left;
     padding: 2em;
     height: 20vh;
+    padding-top: 4em;
 }
 
 .our-story {
     background-color: var(--background-color);
+    margin: 0!important;
 }
 
 .history {
     background-color: #CFD4AD;
+    margin: 0!important;
 }
 
 .get-started-button-container {

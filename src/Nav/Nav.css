@@ -30,6 +30,11 @@ button.navbar-toggler:hover {
   height: 50px;
   width: 50px;
 }
+
+button.signup-button {
+  margin-right: 2em;
+}
+
 button.login-button, button.signup-button, button.signout-button {
   background-color: transparent;
   border: 3px solid var(--accent-green);

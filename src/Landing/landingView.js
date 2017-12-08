@@ -61,7 +61,10 @@ export default class LandingView extends Component {
                 </div>
             </div>
             <div className="footer">
-                <p className="section-title">Footer</p>
+                <div className="footer-container">
+                    <p>Data from <a href="http://flavorsofcacao.com/index.html">Favors of Cacao</a></p>
+                    <p className="footer-text">Made with &hearts; by Adele Miller, Bao Dinh, Jonathan Chuang, McKaulay Kolakowski</p>
+                </div>
             </div>
         </div>
 
