@@ -153,7 +153,7 @@ class App extends Component {
                             //         this.handleSignIn(e,p)}
                             //     errorMessage={this.state.errorMessage}
                             // />)
-                            return <MapView/>
+                            // return <MapView/>
                         }}/>
                         <Route exact path="/login" render={(routerProps) => {
                             return (<Login
@@ -180,12 +180,12 @@ class App extends Component {
                           <Subscription handleSkip={(month, bool) => this.handleSkip(month, bool)}
                           loading={this.state.loading} subscription={this.state.userData.subscription}
                           routerprops={props} user={this.state.user} handleUnsubscribe={() => this.handleUnsubscribe()}/>}></Route>
-                        <Route exact path="/subscription/subscribed" component={(props) =>
+                          <Route exact path="/subscription/subscribed" component={(props) =>
                           <SubscriptionInfo handleSkip={(month, bool) => this.handleSkip(month, bool)}
                           index={this.state.index} month={this.state.month} rows={this.state.rows}
                           subscription={this.state.userData.subscription} handleUnsubscribe={() => this.handleUnsubscribe()}
                           handleSwitchMonth={(increment, month) => this.handleSwitchMonth(increment, month)}/>}></Route>
-
+                          <Route exact path="/map" component={(props) => <MapView/>}/>
                         {!this.state.userData.subscription ?
                         <Route exact path="/subscribe/:plan" component={(props) =>
                           <Subscribe routerprops={props} handleAddSubscription={(plan) =>

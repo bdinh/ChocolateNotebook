@@ -23,7 +23,6 @@ export default class MapView extends Component {
             "handleButtons"
         ]);
         this.map = "";
-
     }
 
     componentWillMount() {
@@ -57,8 +56,8 @@ export default class MapView extends Component {
     }
 
     componentDidMount() {
-        // this.map = L.map('map');
-        this.updateMap();
+        this.map = L.map('map');
+        // this.updateMap();
         // csv("./destination-data.csv", (error, data) => {
         //     let dataArray = [];
         //     console.log(data)
@@ -342,12 +341,6 @@ export default class MapView extends Component {
     }
 
     render() {
-
-        console.log(this.state.plotData);
-
-        function renderMarkers() {
-            console.log("hey");
-        }
 
         return (
             <div className="map-wrapper">
