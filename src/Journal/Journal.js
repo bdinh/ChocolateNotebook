@@ -8,7 +8,7 @@ import { PRODUCERS } from '../RDataWrangling/AllProducerNames';
 import { ORIGINS } from '../RDataWrangling/AllRegionNames';
 import { TASTINGNOTES } from '../RDataWrangling/AllTastingNotes';
 import Cleave from 'cleave.js/react'; // For date formatting
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import { renderRatingStars } from './RenderRating';
 
@@ -92,8 +92,7 @@ class NewJournalEntryCard extends Component {
     this.rating = rating;
   }
   
-  addEntry(e) {
-    e.preventDefault();
+  addEntry() {
     addJournalEntry(this.props.currentUser, {producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName});
   }
   
@@ -112,14 +111,15 @@ class NewJournalEntryCard extends Component {
       </div>
       {(this.barName !== "") ?
       <div>
-      <Button id="submit-entry-button" onClick={(e) => this.addEntry(e)}><NavLink to="/journal">Submit Entry</NavLink></Button>
-      </div> :
-      <div>
-      <Button id="submit-entry-button" disabled onClick={(e) => this.addEntry(e)}>Submit Entry</Button>
-      </div>}
-      </div>
-    );
-  }
+      <NavLink to="/journal"><Button id="submit-entry-button" onClick={() => {this.addEntry();}}>Submit Entry</Button></NavLink>
+    </div> :
+    <div>
+    <Button id="submit-entry-button" disabled onClick={(e) => {this.addEntry(e);
+  }}>Submit Entry</Button>
+  </div>}
+  </div>
+);
+}
 }
 
 
@@ -294,10 +294,17 @@ class NewJournalCardHeader extends Component {
 
 // Renders card header
 class NewEntryButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {navigate : false};
+  }
   render() {
+    if (this.state.navigate) {
+      return <Redirect to="/newjournalEntry" push={true} />
+    }
     return(
       <div className="entry-button-container">
-      <button id="entry-button"><NavLink to="/newjournalentry" >New Entry</NavLink></button>
+      <button id="entry-button" onClick={() => this.setState({ navigate: true })}>New Entry</button>
       </div>
     );
   }
@@ -429,7 +436,6 @@ class EditingJournalEntryCard extends Component {
   
   updateEntry(e) {
     e.preventDefault();
-    
     this.props.completeEditCallback({producer : this.producer, origin : this.origin, tastingNotes : this.tastingNotes, rating : this.rating, text : this.text, date: this.date, barName : this.barName}, this.props.currentEditKey);
   }
   
@@ -454,8 +460,8 @@ class EditingJournalEntryCard extends Component {
       <textarea name="text" className="new-chocolate-rating-text-container" placeholder="How was this chocolate?"
       onChange={(e) => this.updatePost(e)} defaultValue={this.text}></textarea>
       </div>
-      <div><NavLink to="/journal"><Button id="submit-entry-button"
-      onClick={(e) => this.updateEntry(e)}> Confirm Changes</Button></NavLink></div>
+      <div><Link to="/journal"><Button id="submit-entry-button"
+      onClick={(e) => this.updateEntry(e)}> Confirm Changes</Button></Link></div>
       
       {this.state.hasConfirmedDelete ? <div><Button id="delete-button" color="danger" onClick={() =>
         this.deleteItem()}>Confirm Delete Entry</Button></div> : <div><Button id="delete-button" onClick={() =>
