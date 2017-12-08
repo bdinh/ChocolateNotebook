@@ -141,7 +141,7 @@
 
 .learn-card  {
   display: inline-flex;
-    text-align: left;
+  text-align: left;
 }
 
 .subscription-bar header  {
@@ -261,14 +261,77 @@
   margin: 2rem;
 }
 
+.sub-links  {
+  display: inline-flex;
+  text-align: center;
+}
+
 @media (max-width: 375px)  {
+  .learn-more  {
+    margin: 0;
+  }
+  .cards  {
+    display: block;
+  }
+  .learn-card  {
+    display: block;
+    text-align: center;
+  }
+  .subscription-body h2  {
+    font-size: 18pt;
+  }
+  .sub-links  {
+    display: block;
+  }
+  .description  {
+    margin: 0;
+  }
+  .subscription-body h1  {
+    font-size: 22pt;
+    margin-top: 5rem;
+  }
 }
 
-@media (min-width: 375px) and (max-width: 598px) {
+@media (min-width: 375px) and (max-width: 598px)  {
+  .learn-card  {
+    display: block;
+    text-align: center;
+  }
+  .cards  {
+    display: block;
+  }
+  .learn-more  {
+    margin: 0;
+  }
+  .subscription-body h2  {
+    font-size: 18pt;
+  }
+  .description  {
+    margin: 0;
+  }
+  .subscription-body h1  {
+    font-size: 22pt;
+    margin-top: 2.5rem;
+  }
 }
 
-@media (min-width: 598px) and (max-width: 768px) {
+@media (min-width: 598px) and (max-width: 865px) {
+  .cards  {
+    display: block;
+  }
+  .description  {
+    margin: 0;
+  }
+  .subscription-body h1  {
+    font-size: 28pt;
+    margin-top: 0;
+  }
+  .logged  {
+    padding-top: 4rem;
+  }
 }
+
+
 
 @media (min-width: 768px) and (max-width: 1200px) {
 }
