@@ -55,7 +55,6 @@ import { Link, Redirect  } from 'react-router-dom';
                 <div>
                   <img className="learn-image" src="/choices.svg" alt="choose-plan"/>
                 </div>
-                {/* <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
                 <div>
                   <h3>Choose A Plan</h3>
                   <p>
@@ -77,13 +76,11 @@ import { Link, Redirect  } from 'react-router-dom';
                      ipsum dolores aperiam et error! Dignissimos aspernatur harum totam soluta.
                   </p>
                 </div>
-                {/* <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
               </div>
               <div className="learn-card">
                 <div>
                   <img className="learn-image" src="/letter.svg" alt="get-in-mail"/>
                 </div>
-{/* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> */}
                 <div>
                   <h3>Wait For Your Box!</h3>
                   <p>
@@ -93,6 +90,15 @@ import { Link, Redirect  } from 'react-router-dom';
                   </p>
                 </div>
               </div>
+            </div>
+            <div className="subscription-footer">
+                <div className="subscription-footer-container">
+                  <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                  <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                  <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                  <p>Data from <a href="http://flavorsofcacao.com/index.html">Favors of Cacao</a></p>
+                  <p className="footer-text">Made with &hearts; by Adele Miller, Bao Dinh, Jonathan Chuang, McKaulay Kolakowski</p>
+                </div>
             </div>
           </div>
         );

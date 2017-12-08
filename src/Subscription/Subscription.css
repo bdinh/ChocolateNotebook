@@ -1,7 +1,6 @@
 .subscription-body {
   text-align: center;
   font-size: 14pt;
-  margin-bottom: 5rem;
 }
 
 .subscription-body .card img  {
@@ -270,6 +269,23 @@
 
 #subscribe-img h2, #subscribe-img p, #subscribe-img ul, #subscribe-img li  {
   color: white;
+}
+
+.subscription-footer-container {
+    text-align: center;
+    padding-top: 3em;
+}
+
+.subscription-footer {
+    text-align: left;
+    padding: 2em;
+    padding-top: 4em;
+    background-color: var(--main-color);
+    color: white;
+}
+.subscription-footer a {
+  color: white;
+  text-decoration: underline;
 }
 
 @media (max-width: 375px)  {
