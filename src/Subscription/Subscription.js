@@ -33,19 +33,19 @@ import { Link, Redirect  } from 'react-router-dom';
             <div className="cards">
               <div className="card">
                 <h2>Option One: <br/> ChocoBox Trials</h2>
-                <img src="/6-bars.png" alt="chocolate bars"/>
+                <img src="6-bars.png" alt="chocolate bars"/>
                 <p>9.99$ A Month for 6 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Trials"}><button>Subscribe Now!</button></Link>
               </div>
               <div className="card">
                 <h2>Option Two: <br/> ChocoBox Prime</h2>
-                <img src="/9-bars.png" alt="chocolate bars"/>
+                <img src="9-bars.png" alt="chocolate bars"/>
                 <p>14.99$ A Month for 9 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Prime"}><button>Subscribe Now!</button></Link>
               </div>
               <div className="card">
                 <h2>Option Three: <br/> ChocoBox Deluxe</h2>
-                <img src="/15-bars.png" alt="chocolate bars"/>
+                <img src="15-bars.png" alt="chocolate bars"/>
                 <p>19.99$ A Month for 15 different chocolate bars of your choosing!</p>
                 <Link to={"/subscribe/Deluxe"}><button>Subscribe Now!</button></Link>
               </div>
@@ -53,7 +53,7 @@ import { Link, Redirect  } from 'react-router-dom';
             <div id="learn" className="learn-more">
               <div className="learn-card">
                 <div>
-                  <img className="learn-image" src="/choices.svg" alt="choose-plan"/>
+                  <img className="learn-image" src="choices.svg" alt="choose-plan"/>
                 </div>
                 <div>
                   <h3>Choose A Plan</h3>
@@ -66,7 +66,7 @@ import { Link, Redirect  } from 'react-router-dom';
               </div>
               <div className="learn-card">
                 <div>
-                  <img className="learn-image" src="/chocolate-icon.svg" alt="pick-chocolate"/>
+                  <img className="learn-image" src="chocolate-icon.svg" alt="pick-chocolate"/>
                 </div>
                 <div>
                   <h3>Choose Your Chocolates</h3>
@@ -79,7 +79,7 @@ import { Link, Redirect  } from 'react-router-dom';
               </div>
               <div className="learn-card">
                 <div>
-                  <img className="learn-image" src="/letter.svg" alt="get-in-mail"/>
+                  <img className="learn-image" src="letter.svg" alt="get-in-mail"/>
                 </div>
                 <div>
                   <h3>Wait For Your Box!</h3>
