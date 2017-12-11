@@ -31,7 +31,7 @@ export default class LandingView extends Component {
                         <p className="section-text">We created Chocolate Notebook to help people keep track of all of the chocolate they taste over time. We hope it will be a useful and fun tool for chocolate enthusiasts, especially people who taste a lot of single origin chocolate. Since there are thousands of different chocolate bars and numerous things to remember about each chocolate, it can be hard to remember what you have had. Even fantastic chocolates can blur together if you haven’t had them in awhile. One member of our team has tasted numerous chocolate bars and admittedly cannot remember what they thought of most of the bars they’ve tasted. This project is also inspired by Chocolopolis, which has an incredible selection of single origin chocolate bars from around the world.</p>
                 </div>
                 <div className="col-md-6 note-book-icon section-block icon-block">
-                    <img src="./notebook-icon.svg"/>
+                    <img src="notebook-icon.svg" alt="notebook icon"/>
                 </div>
             </div>
             <div className="history row">
@@ -57,7 +57,7 @@ export default class LandingView extends Component {
                         and bring out flavors. Almost all modern chocolate on the market today has been conched.</p>
                 </div>
                 <div className="col-md-6 section-block chocolate-bar-icon">
-                        <img src="./chocolate-icon.svg"/>
+                        <img src="chocolate-icon.svg" alt="chocolate bar icon"/>
                 </div>
             </div>
             <div className="footer">

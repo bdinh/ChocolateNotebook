@@ -18,4 +18,4 @@ var config = {
   messagingSenderId: "491534616181"
 };
 firebase.initializeApp(config);
-ReactDOM.render(<BrowserRouter><ScrollToTop><App /></ScrollToTop></BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter basename={process.env.PUBLIC_URL+'/'}><ScrollToTop><App /></ScrollToTop></BrowserRouter>, document.getElementById('root'));

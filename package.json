@@ -2,11 +2,13 @@
   "name": "chocolatenotebook",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://aamiller.github.io/ChocolateNotebook/",
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
     "cleave.js": "^1.0.7",
     "d3": "^4.12.0",
     "firebase": "^4.7.0",
+    "gh-pages": "^1.1.0",
     "jquery": "^3.2.1",
     "json-loader": "^0.5.7",
     "leaflet": "^1.0.0",
@@ -31,6 +33,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
