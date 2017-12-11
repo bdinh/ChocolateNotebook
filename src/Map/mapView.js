@@ -162,7 +162,6 @@ export default class MapView extends Component {
 
     updateMap() {
         if (this.state.type === "origin-view") {
-            console.log("orig")
             csv("./origin-data.csv", (error, data) => {
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
@@ -170,7 +169,7 @@ export default class MapView extends Component {
 
                 this.map =  L.map('map')
                     .addLayer(mapboxTiles)
-                    .setView([-1.2858, 20], 2);
+                    .setView([-1.2858, 13], 2);
 
                 data.forEach((datum) => {
                     let opacity;
@@ -219,16 +218,15 @@ export default class MapView extends Component {
             })
 
         } else if (this.state.type === "destination-view"){
-            console.log("dest")
             csv("./destination-data.csv", (error, data) => {
 
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                 });
 
-                this.map = L.map('map')
+                this.map =  L.map('map')
                     .addLayer(mapboxTiles)
-                    .setView([-1.2858, 20], 2);
+                    .setView([-1.2858, 13], 2);
 
                 data.forEach((datum) => {
                     let opacity;
@@ -274,56 +272,69 @@ export default class MapView extends Component {
                 })
             });
         } else {
-            csv("./origin-data.csv", (error, data) => {
-
-                let originData = data;
-
-                csv("./destination-data.csv", (error, data) => {
-                    let destinationData = data;
-
+            csv("./final-bezier-data.csv", (error, data) => {
                     let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                         attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                     });
 
-                    this.map = L.map('map')
+                    this.map =  L.map('map')
                         .addLayer(mapboxTiles)
-                        .setView([-1.2858, 20], 2);
+                        .setView([-1.2858, 13], 2);
 
-                    originData.forEach((datum) => {
-                        let position = [parseFloat(datum.latitude), parseFloat(datum.longitude)];
-                        let circle = new L.circleMarker(position, {
+                    console.log(data);
+
+                    data.forEach((datum) => {
+                        let origPosition = [parseFloat(datum.originLat), parseFloat(datum.originLong)];
+                        let destPosition = [parseFloat(datum.destLat), parseFloat(datum.destLong)];
+
+                        let origCircle = new L.circleMarker(origPosition, {
                             color: "transparent",
                             fill: true,
-                            fillColor: '#CC9692',
-                            fillOpacity: 0.5,
-                            radius: 10
+                            fillColor: '#7F524E',
+                            fillOpacity: 1,
+                            radius: 3
                         }).addTo(this.map);
-                        let popupText = "<b>Country of Origin:</b> " + datum["Bean.Origin"] + "<br>" +
-                            "<b>Total # Bars:</b> " + datum.count + "<br>" +
-                            "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum["avg.rating"])) / 100;
-                        circle.bindPopup(popupText)
-                    });
 
-                    destinationData.forEach((datum) => {
-                        let position = [parseFloat(datum.latitude), parseFloat(datum.longitude)];
-                        let circle = new L.circleMarker(position, {
+                        let destCircle = new L.circleMarker(destPosition, {
                             color: "transparent",
                             fill: true,
-                            fillColor: '#CFD4AD',
-                            fillOpacity: 0.8,
-                            radius: 10
+                            fillColor: '#909479',
+                            fillOpacity: 1,
+                            radius: 5
                         }).addTo(this.map);
-                        let popupText = "<b>Country of Destination:</b> " + datum["Company.Location"] + "<br>" +
-                            "<b>Total # Bars:</b> " + datum.count + "<br>" +
-                            "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum["avg.rating"])) / 100;
-                        circle.bindPopup(popupText)
+
+                        let pathOptions = {
+                            color: 'rgba(127, 82, 78, 0.2)',
+                            weight: 2,
+                            snakingSpeed: 200,
+                            vertices:200
+                        };
+
+                        let bezierCurve = L.curve(['M', [datum.originLat, datum.originLong],
+                            'Q', [datum.midpointY + 20, datum.midpointX],
+                            [datum.destLat, datum.destLong]], pathOptions).addTo(this.map);
+
+                        let popupText = "<b>Country of Origin:</b> " + datum.Origin + "<br>" +
+                            "<b>Country of Destination:</b> " + datum.Destination + "<br>" +
+                            "<b>Total # Bars:</b> " + datum.TotalN + "<br>" +
+                            "<b>Average Cocoa Percentage:</b> " + datum.MeanPercent + "%" + "<br>" +
+                            "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.MeanRating)) / 100;
+                        bezierCurve.bindPopup(popupText);
+                        bezierCurve.on('mouseover', function(event) {
+                            this.setStyle({
+                                color: 'rgba(127, 82, 78, 1)',
+                                weight: 4
+                            });
+                            this.openPopup();
+                        });
+                        bezierCurve.on('mouseout', function(event) {
+                            this.setStyle(pathOptions);
+                            this.closePopup();
+                        });
+
                     })
 
-
-
-                })
-
-            });
+            })
 
         }
 
