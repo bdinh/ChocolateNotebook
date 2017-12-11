@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import "./Journal.css";
-import { InputGroup, InputGroupAddon, Input, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import 'react-select/dist/react-select.css';
-import { NavLink, Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import firebase from 'firebase/app';
 import { renderRatingStars } from './RenderRating';
-import { NewJournalEntryCard, ChocolateRatingEntry, ChocolateDetailsEntry, NewJournalCardHeader } from './NewJournalEntry';
+import { NewJournalEntryCard } from './NewJournalEntry';
 import { EditingJournalEntryCard } from './EditJournalEntry';
 
 
@@ -88,7 +88,6 @@ class RenderJournalItems extends Component {
   constructor(props) {
     super(props);
     this.state = {edit : false, editingEntry : ""};
-    this.key;
   }
   
   componentWillMount() {

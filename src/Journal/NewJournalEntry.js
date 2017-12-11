@@ -15,7 +15,7 @@ export class NewJournalEntryCard extends Component {
         super();
         this.producer = "none";
         this.origin = "none";
-        this.tastingNotes;
+        this.tastingNotes = undefined;
         this.rating = 1;
         this.text = "";
         this.date = "";
@@ -199,7 +199,6 @@ export class NewJournalCardHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: "",
             barName: "",
             date: getCurrentDate()
         }
