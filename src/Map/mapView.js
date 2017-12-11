@@ -106,7 +106,6 @@ export default class MapView extends Component {
     updateMap() {
         if (this.state.type === "origin-view") {
             csv("./origin-data.csv", (error, data) => {
-                console.log(data);
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                 });
@@ -163,8 +162,6 @@ export default class MapView extends Component {
 
         } else if (this.state.type === "destination-view"){
             csv("./destination-data.csv", (error, data) => {
-                console.log(data);
-
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                 });
@@ -227,7 +224,6 @@ export default class MapView extends Component {
                         .setView([-1.2858, 13], 2);
 
                     let plotData = data;
-                    console.log(plotData);
 
                     if (this.state.transitionViewSelected !== "AllFilter") {
                         plotData = [];
@@ -308,12 +304,12 @@ export default class MapView extends Component {
     }
 
     handleViewMode(event) {
+        console.log(event.target.id);
         this.map.off();
         this.map.remove();
         this.setState({
-            type: event.target.value
+            type: event.target.id
         }, this.updateMap);
-        console.log(this.map);
     }
 
 
@@ -321,28 +317,30 @@ export default class MapView extends Component {
         this.map.off();
         this.map.remove();
         this.setState({
-            originFilterType: event.target.value
+            originFilterType: event.target.id
         }, this.updateMap);
     }
 
     handleTransitionView(event) {
+        $('#AllFilter').addClass('active');
+        $('#'+this.state.transitionViewSelected).removeClass('active');
         this.map.off();
         this.map.remove();
         this.setState({
-            transitionView: event.target.value
+            transitionView: event.target.id,
+            transitionViewSelected: 'AllFilter'
         }, this.updateMap);
-        // console.log(event.target.value)
     }
 
     handleCountryFilter(event) {
-        console.log(event.target.value);
+        // console.log(this.state);
+        // console.log(event.target.value);
         this.map.off();
         this.map.remove();
         this.setState({
-            transitionViewSelected: event.target.value
+            transitionViewSelected: event.target.id
         }, this.updateMap);
     }
-
 
 
     updateControlCenter() {
@@ -381,33 +379,38 @@ export default class MapView extends Component {
                         Filter By:
                     </p>
                     <div className="filter-by-button-container">
-                        <button
-                            className="btn visual-button"
-                            type="radio"
-                            name="totalFilter"
-                            value="totalFilter"
+                        <div className="btn-group" data-toggle="buttons">
+                        <label
+                            className="btn visual-button active"
+                            value="origin-view"
+                            id="totalFilter"
                             onClick={this.handleOriginFilter}
                         >
+                            <input
+                                type="radio"
+                                name="totalFilter"/>
                             Total
-                        </button>
-                        <button
+                        </label>
+                        <label
                             className="btn visual-button"
-                            type="radio"
-                            name="ratingFilter"
                             value="ratingFilter"
+                            id="ratingFilter"
                             onClick={this.handleOriginFilter}
                         >
+                            <input type="radio"
+                                   name="ratingFilter"/>
                             Rating
-                        </button>
-                        <button
-                            className="btn visual-button"
-                            type="radio"
-                            name="percentFilter"
-                            value="percentFilter"
-                            onClick={this.handleOriginFilter}
-                        >
+                        </label>
+                        <label className="btn visual-button"
+                               value="percentFilter"
+                               id="percentFilter"
+                               onClick={this.handleOriginFilter}
+                           >
+                            <input type="radio"
+                                   name="percentFilter"/>
                             Cocao Percent
-                        </button>
+                        </label>
+                        </div>
                     </div>
                 </div>
             );
@@ -423,57 +426,70 @@ export default class MapView extends Component {
                         Filter By:
                     </p>
                     <div className="filter-by-button-container">
-                        <button
-                            className="btn visual-button"
-                            name="exportFilter"
-                            value="exportFilter"
-                            onClick={this.handleTransitionView}
-                        >
-                            Export
-                        </button>
-                        <button
-                            className="btn visual-button"
-                            name="importFilter"
-                            value="importFilter"
-                            onClick={this.handleTransitionView}
-                        >
-                            Import
-                        </button>
+                        <div className="btn-group" data-toggle="buttons">
+                            <label
+                                className="btn visual-button active"
+                                value="exportFilter"
+                                id="exportFilter"
+                                onClick={this.handleTransitionView}
+                            >
+                                <input
+                                    type="radio"
+                                    name="exportFilter"/>
+                                Export
+                            </label>
+                            <label className="btn visual-button"
+                                   value="importFilter"
+                                   id="importFilter"
+                                   onClick={this.handleTransitionView}
+                            >
+                                <input type="radio" name="importFilter"/>
+                                Import
+                            </label>
+                        </div>
                     </div>
                     <p className="card-section">
                         {this.state.transitionView === "exportFilter" ? "Export " : "Import "}
                         Country:
                     </p>
                     <div className="country-button-container">
+                        <div className="btn-group btn-group-country" data-toggle="buttons">
+
                         {
                             this.state.transitionView === "exportFilter" ?
                                 (this.exportCountry.map((country, i) => {
+                                    let classActive= "btn visual-button active";
                             return (
-                             <button
-                                 className="btn visual-button"
-                                 key={i}
-                                 name={country + "Filter"}
-                                 value={country + "Filter"}
-                                 onClick={this.handleCountryFilter}
-                             >
-                                 {country}
-                             </button>
+                                <label
+                                    className={i === 0 ? classActive : "btn visual-button"}
+                                    key={i}
+                                    value={country + "Filter"}
+                                    id={country + "Filter"}
+                                    onClick={this.handleCountryFilter}>
+                                    <input
+                                        type="radio"
+                                        name={country + "Filter"}/>
+                                    {country}
+                                </label>
                             )})) :
                                 (this.importCountry.map((country, i) => {
+                                    let classActive= "btn visual-button active";
                                     return (
-                                        <button
-                                            className="btn visual-button"
+                                        <label
+                                            className={i === 0 ? classActive : "btn visual-button"}
                                             key={i}
-                                            name={country + "Filter"}
                                             value={country + "Filter"}
-                                            onClick={this.handleCountryFilter}
-                                        >
+                                            id={country + "Filter"}
+                                            onClick={this.handleCountryFilter}>
+                                            <input
+                                                type="radio"
+                                                name={country + "Filter"}/>
                                             {country}
-                                        </button>
+                                        </label>
                                     )}
                                 ))
                         }
-
+                        </div>
                     </div>
                 </div>
             )
@@ -495,30 +511,34 @@ export default class MapView extends Component {
                                 </p>
                                 <p className="card-section">View Mode:</p>
                                 <div className="btn-group btn-container view-mode-button-container" data-toggle="buttons">
-                                        <button
-                                            className="btn visual-button"
-                                            type="radio"
-                                            name="origin-view"
+                                    <div className="btn-group" data-toggle="buttons">
+                                        <label
+                                            className="btn visual-button active"
                                             value="origin-view"
-                                            onClick={this.handleViewMode}
-                                        >Origin
-                                        </button>
-                                        <button
+                                            id="origin-view"
+                                            onClick={this.handleViewMode}>
+                                            <input
+                                                type="radio"
+                                                name="origin-view"/>
+                                                Origin
+                                        </label>
+                                        <label
                                             className="btn visual-button"
-                                            type="radio"
-                                            name="destination-view"
                                             value="destination-view"
-                                            onClick={this.handleViewMode}
-                                        >Destination
-                                        </button>
-                                        <button
-                                            className="btn visual-button"
-                                            type="radio"
-                                            name="transition-view"
-                                            value="transition-view"
-                                            onClick={this.handleViewMode}
-                                        >Transition
-                                        </button>
+                                            id="destination-view"
+                                            onClick={this.handleViewMode}>
+                                            <input type="radio"
+                                                   name="destination-view"/>
+                                                Destination
+                                        </label>
+                                        <label className="btn visual-button"
+                                               value="transition-view"
+                                               id="transition-view"
+                                               onClick={this.handleViewMode}>
+                                            <input type="radio" name="transition-view"/>
+                                                Transition
+                                        </label>
+                                    </div>
                                 </div>
                                 {this.updateControlCenter()}
                             </div>

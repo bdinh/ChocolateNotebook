@@ -73,20 +73,20 @@ button.visual-button {
     margin-left: 0em;
 }
 
-button.visual-button {
+label.visual-button, button.visual-button {
     background: #CFD4AD!important;
     border-color: #babe9b;
     color: #FFFFFF;
 
 }
 
-.btn-primary:not([disabled]):not(.disabled):active,
-.btn-primary:not([disabled]):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
-    background-color: #CFD4AD!important;
-    border-color: #babe9b;
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(165, 169, 138, 0.5);
-}
+/*label.btn-primary:not([disabled]):not(.disabled):active,*/
+/*label.btn-primary:not([disabled]):not(.disabled).active,*/
+/*.show > .btn-primary.dropdown-toggle {*/
+    /*background-color: #CFD4AD!important;*/
+    /*border-color: #babe9b;*/
+    /*-webkit-box-shadow: 0 0 0 0.2rem rgba(165, 169, 138, 0.5);*/
+/*}*/
 
 .legend-scale {
     width: 50%;
@@ -112,6 +112,14 @@ button.visual-button {
 
 .country-button-container {
     text-align: left;
+}
+
+.btn-group-country {
+    display: block;
+}
+
+.btn:not([disabled]):not(.disabled):active, .btn:not([disabled]):not(.disabled).active {
+    background-color: #646754!important;
 }
 
 @keyframes dash {
