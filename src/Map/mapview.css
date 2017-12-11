@@ -77,7 +77,13 @@ label.visual-button, button.visual-button {
     background: #CFD4AD!important;
     border-color: #babe9b;
     color: #FFFFFF;
+    font-size: 0.75em!important;
 
+}
+
+label.visual-button:disabled {
+    color: darkgrey;
+    background-color: grey;
 }
 
 .legend-scale {
@@ -118,4 +124,12 @@ label.visual-button, button.visual-button {
     to {
         stroke-dashoffset: 0;
     }
+}
+
+
+@media (max-width: 768px) {
+    label.visual-button {
+        font-size: 1em!important;
+    }
+
 }

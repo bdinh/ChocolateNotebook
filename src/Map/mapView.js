@@ -70,37 +70,13 @@ export default class MapView extends Component {
 
     }
 
-    componentWillMount() {
-
-
-
-    }
-
     componentDidMount() {
         this.updateMap();
-        // var line = L.polyline(latlngs, {snakingSpeed: 200});
-            // line.addTo(map).snakeIn();
-
-            // let test = L.Polyline.Arc([-16.290154, -63.588653], [-27.35313, -53.60125], pathOptions).addTo(this.map).snakeIn();
-            // let test2 = L.Polyline.Arc([-0.006949, 6.522309], [46.227638, 2.213749], pathOptions).addTo(this.map).snakeIn();
-
-            // var path = L.curve(['M',[50.54136296522163,28.520507812500004],
-            //         'C',[52.214338608258224,28.564453125000004],
-            //         [48.45835188280866,33.57421875000001],
-            //         [50.680797145321655,33.83789062500001],
-            //         'V',[48.40003249610685],
-            //         'L',[47.45839225859763,31.201171875],
-            //         [48.40003249610685,28.564453125000004],'Z'],
-            //     {color:'red'}).addTo(this.map);
-
-            // var pathFour = L.curve(['M',[46.86019101567027,-29.047851562500004],
-            //     'Q',[50.48547354578499,-23.818359375000004],
-            //     [46.70973594407157,-19.907226562500004],
-            //     'T',[46.6795944656402,-11.0302734375]], {dashArray: 5, animate: {duration: 3000}}).addTo(this.map);
     }
 
     updateMap() {
-        if (this.state.type === "origin-view") {
+
+            if (this.state.type === "origin-view") {
             csv("./origin-data.csv", (error, data) => {
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
@@ -133,7 +109,7 @@ export default class MapView extends Component {
                         radius: 5
                     }).addTo(this.map);
                     let popupText = "<b>Country of Origin:</b> " + datum["Bean.Origin"] + "<br>" +
-                        "<b>Total # Bars:</b> " + datum.total + "<br>" +
+                        "<b>Total # Bars Exported:</b> " + datum.total + "<br>" +
                         "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.avgRating)) / 100 + "<br>" +
                         "<b>Average Cocoa Percent:</b> " + Math.round(10 * parseFloat(datum.avgPercent)) / 10  + "%";
                         circle.bindPopup(popupText);
@@ -189,7 +165,7 @@ export default class MapView extends Component {
                         radius: 5
                     }).addTo(this.map);
                     let popupText = "<b>Country of Destination:</b> " + datum["Company.Location"] + "<br>" +
-                        "<b>Total # Bars:</b> " + datum.total + "<br>" +
+                        "<b>Total # Bars Imported:</b> " + datum.total + "<br>" +
                         "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.avgRating)) / 100 + "<br>" +
                         "<b>Average Cocoa Percent:</b> " + Math.round(10 * parseFloat(datum.avgPercent)) / 10  + "%";
                     circle.bindPopup(popupText);
@@ -210,12 +186,12 @@ export default class MapView extends Component {
                 })
             });
         } else {
-            csv("./final-bezier-data.csv", (error, data) => {
+                csv("./final-bezier-data.csv", (error, data) => {
                     let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                         attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                     });
 
-                    this.map =  L.map('map')
+                    this.map = L.map('map')
                         .addLayer(mapboxTiles)
                         .setView([-1.2858, 13], 2);
 
@@ -225,7 +201,6 @@ export default class MapView extends Component {
                         plotData = [];
 
                         let country = this.state.transitionViewSelected.replace("Filter", "");
-                        console.log(country);
                         if (this.state.transitionView === "exportFilter") {
                             data.forEach((datum) => {
                                 if (datum.Origin === country) {
@@ -265,7 +240,7 @@ export default class MapView extends Component {
                             color: 'rgba(127, 82, 78, 0.2)',
                             weight: 2,
                             snakingSpeed: 200,
-                            vertices:200
+                            vertices: 200
                         };
 
                         let bezierCurve = L.curve(['M', [datum.originLat, datum.originLong],
@@ -279,60 +254,65 @@ export default class MapView extends Component {
                             "<b>Average Cocoa Percent:</b> " + Math.round(10 * parseFloat(datum.MeanPercent)) / 10 + "%";
 
                         bezierCurve.bindPopup(popupText);
-                        bezierCurve.on('mouseover', function(event) {
+                        bezierCurve.on('mouseover', function (event) {
                             this.setStyle({
                                 color: 'rgba(127, 82, 78, 1)',
                                 weight: 4
                             });
                             this.openPopup();
                         });
-                        bezierCurve.on('mouseout', function(event) {
+                        bezierCurve.on('mouseout', function (event) {
                             this.setStyle(pathOptions);
                             this.closePopup();
                         });
 
                     })
 
-            })
-
-        }
+                })
+            }
 
     }
 
     handleViewMode(event) {
-        this.map.off();
-        this.map.remove();
-        this.setState({
-            type: event.target.id
-        }, this.updateMap);
+            let eventTriggered = event.target.id;
+            setTimeout(function() {
+                this.map.off();
+                this.map.remove();
+                this.setState({
+                    type: eventTriggered
+                }, this.updateMap);
+            }.bind(this), 0);
     }
 
 
     handleOriginFilter(event) {
-        this.map.off();
-        this.map.remove();
-        this.setState({
-            originFilterType: event.target.id
-        }, this.updateMap);
+            let eventTriggered = event.target.id;
+            setTimeout(function () {
+                this.map.off();
+                this.map.remove();
+                this.setState({
+                    originFilterType: eventTriggered
+                }, this.updateMap);
+            }.bind(this), 0)
     }
 
     handleTransitionView(event) {
-        $('#AllFilter').addClass('active');
-        $('#'+this.state.transitionViewSelected).removeClass('active');
-        this.map.off();
-        this.map.remove();
-        this.setState({
-            transitionView: event.target.id,
-            transitionViewSelected: 'AllFilter'
-        }, this.updateMap);
+            $('#AllFilter').addClass('active');
+            $('#' + this.state.transitionViewSelected).removeClass('active');
+            this.map.off();
+            this.map.remove();
+            this.setState({
+                transitionView: event.target.id,
+                transitionViewSelected: 'AllFilter'
+            }, this.updateMap);
     }
 
     handleCountryFilter(event) {
-        this.map.off();
-        this.map.remove();
-        this.setState({
-            transitionViewSelected: event.target.id
-        }, this.updateMap);
+            this.map.off();
+            this.map.remove();
+            this.setState({
+                transitionViewSelected: event.target.id
+            }, this.updateMap);
     }
 
 
