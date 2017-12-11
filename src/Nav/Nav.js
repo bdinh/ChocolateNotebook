@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import '../include/bootstrap';
 import { Link  } from 'react-router-dom';
 import './Nav.css';
@@ -18,10 +17,7 @@ export class Nav extends Component  {
         {!user ?
           (<nav className="navbar navbar-expand-md fixed-top navbar-dark">
               <Link to="/" exact>
-                  {/*<a className="navbar-brand" href="#">*/}
-                      {/*<img width="30" height="30" src="./notebook-logo.svg"/>*/}
                       Chocolate Notebook
-                  {/*</a>*/}
               </Link>
               <button className="navbar-toggle navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon icon-bar"/>
@@ -51,11 +47,9 @@ export class Nav extends Component  {
           </nav>)
             :
           (<nav className="navbar navbar-expand-md fixed-top navbar-dark logged-navbar">
-              {/*<a className="navbar-brand" href="#">*/}
               <Link to="/">
                   Chocolate Notebook
               </Link>
-              {/*</a>*/}
               <button className="navbar-toggle navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon icon-bar"/>
               </button>

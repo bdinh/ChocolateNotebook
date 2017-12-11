@@ -135,7 +135,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.errorMessage);
         if (this.state.loading) { // If loading, display spinner
             return (
                 <div className="loading-screen">

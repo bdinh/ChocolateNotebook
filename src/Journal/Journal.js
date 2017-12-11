@@ -118,7 +118,6 @@ class RenderJournalItems extends Component {
   deleteCurrentEditEntry(key) {
     let newUserData = this.state.userData;
     delete newUserData[key];
-    console.log(newUserData);
     firebase.database().ref('userData/' + this.props.user.uid + '/userJournalEntries').set(newUserData);
   }
   

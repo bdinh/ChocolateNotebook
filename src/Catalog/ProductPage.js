@@ -13,8 +13,6 @@ export default class ProductPage extends Component {
             return bar.recordid === productRef;
         });
 
-        console.log(product);
-
         let content;
         if (product.length === 0) {
             content = (<p><strong>Product not found.</strong> Please return to our <Link to="/catalog" >Catalog</Link></p>);
