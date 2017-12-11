@@ -110,6 +110,10 @@ button.visual-button {
     display: inline-block;
 }
 
+.country-button-container {
+    text-align: left;
+}
+
 @keyframes dash {
     to {
         stroke-dashoffset: 0;
