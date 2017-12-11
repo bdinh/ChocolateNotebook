@@ -66,7 +66,10 @@ export const TASTINGNOTES = [
     { label: 'Alder', value: 'alder' }, 
     { label: 'Pudding', value: 'pudding' },
     { label: 'Fudge', value: 'fudge' }, 
-    { label: 'Maple', value: 'maple' }
+    { label: 'Maple', value: 'maple' },
+    { label: 'Powdery', value: 'powdery' },
+    { label: 'Chalky', value: 'chalky' }
+    
 ];
 
 
