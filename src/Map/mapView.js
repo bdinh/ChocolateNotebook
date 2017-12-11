@@ -10,6 +10,9 @@ import L, { map, getPanes, overlayPane, geo, svg, LatLng,
 import $ from 'jquery';
 // import L from 'leaflet';
 import { bindAll } from 'lodash'
+import  '../../node_modules/leaflet-curve/leaflet.curve';
+import '../../node_modules/leaflet-arc/bin/leaflet-arc.min';
+import '../../node_modules/leaflet.polyline.snakeanim/L.Polyline.SnakeAnim'
 
 export default class MapView extends Component {
     constructor(props) {
@@ -60,9 +63,83 @@ export default class MapView extends Component {
         // this.updateMap();
 
 
-        // csv("./destination-data.csv", (error, data) => {
-        //     let dataArray = [];
-        //     console.log(data)
+        csv("./final-bezier-data.csv", (error, data) => {
+            let dataArray = [];
+            console.log(data)
+
+            let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
+            });
+
+            this.map =  L.map('map')
+                .addLayer(mapboxTiles)
+                .setView([-1.2858, 20], 2);
+
+            let origin = [];
+            let destination = [];
+            let midpoint = [];
+
+            let count = 0;
+            data.forEach((datum) => {
+                console.log(datum);
+                let pathOptions = {
+                    color: 'brown',
+                    weight: 1,
+                    snakingSpeed: 200,
+                    vertices:200
+                };
+
+                let bezierCurve = L.curve(['M', [datum.originLat, datum.originLong],
+                    'Q', [datum.midpointY + 20, datum.midpointX],
+                    [datum.destLat, datum.destLong]], pathOptions).addTo(this.map);
+                // let bezierCurve = L.Polyline.Arc([datum.originLat, datum.originLong], [datum.destLat, datum.destLong], pathOptions).addTo(this.map).snakeIn();
+                // let bezierCurve = L.Polyline.Arc([-25.274398, -133.775136], [-25.274398, 133.775136], pathOptions).addTo(this.map).snakeIn();
+
+                let popupText = "<b>Country of Origin:</b> " + datum.Origin + "<br>" +
+                    "<b>Country of Destination:</b> " + datum.Destination + "<br>" +
+                    "<b>Total # Bars:</b> " + datum.TotalN + "<br>" +
+                    "<b>Average Cocoa Percentage:</b> " + datum.MeanPercent + "%" + "<br>" +
+                    "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.MeanRating)) / 100;
+                bezierCurve.bindPopup(popupText);
+                bezierCurve.on('mouseover', function (e) {
+                    this.openPopup();
+                });
+                bezierCurve.on('mouseout', function (e) {
+                    this.closePopup();
+                });
+
+            })
+
+
+
+
+
+
+            // var line = L.polyline(latlngs, {snakingSpeed: 200});
+            // line.addTo(map).snakeIn();
+
+            // let test = L.Polyline.Arc([-16.290154, -63.588653], [-27.35313, -53.60125], pathOptions).addTo(this.map).snakeIn();
+            // let test2 = L.Polyline.Arc([-0.006949, 6.522309], [46.227638, 2.213749], pathOptions).addTo(this.map).snakeIn();
+
+            // var path = L.curve(['M',[50.54136296522163,28.520507812500004],
+            //         'C',[52.214338608258224,28.564453125000004],
+            //         [48.45835188280866,33.57421875000001],
+            //         [50.680797145321655,33.83789062500001],
+            //         'V',[48.40003249610685],
+            //         'L',[47.45839225859763,31.201171875],
+            //         [48.40003249610685,28.564453125000004],'Z'],
+            //     {color:'red'}).addTo(this.map);
+
+            // var pathFour = L.curve(['M',[46.86019101567027,-29.047851562500004],
+            //     'Q',[50.48547354578499,-23.818359375000004],
+            //     [46.70973594407157,-19.907226562500004],
+            //     'T',[46.6795944656402,-11.0302734375]], {dashArray: 5, animate: {duration: 3000}}).addTo(this.map);
+
+
+
+
+
+        })
     }
 
     handleButtons(event) {
@@ -235,33 +312,6 @@ export default class MapView extends Component {
                     >Transition</button>
                 </div>
                 <div className="visual-container" id="map">
-                    {/*<Map*/}
-                        {/*id="mapContainer"*/}
-                        {/*center={[51.505, -0.09,]}*/}
-                        {/*zoom={3}*/}
-                        {/*style={{*/}
-                            {/*height: "100%",*/}
-                        {/*}}*/}
-                    {/*>*/}
-                        {/*<TileLayer*/}
-                            {/*url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
-                            {/*attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/}
-                        {/*/>*/}
-                        {/*<Circle center={[51.505,51.505]}>*/}
-                            {/*<Popup>*/}
-                                {/*<span>*/}
-                                  {/*A pretty CSS3 popup.<br />Easily customizable.*/}
-                                {/*</span>*/}
-                            {/*</Popup>*/}
-                        {/*</Circle>*/}
-                        {/*{this.renderCircles()}*/}
-                        {/*<Circle radius={100} center={[55.5, 50]}>*/}
-                            {/*<Popup>*/}
-                                {/*<span>A pretty CSS3 popup. <br/> Easily customizable.</span>*/}
-                            {/*</Popup>*/}
-                        {/*</Circle>*/}
-                        {/*{this.state.data !== null ? renderMarkers() : ""}*/}
-                    {/*</Map>*/}
                 </div>
             </div>
         );
