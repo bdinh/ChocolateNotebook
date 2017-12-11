@@ -111,6 +111,7 @@
     display: -ms-inline-flexbox;
     display: inline-flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .catalog-sidebar {
