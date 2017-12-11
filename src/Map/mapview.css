@@ -41,7 +41,7 @@ button.visual-button {
     width: 100%;
 }
 
-.card {
+.control-card {
     margin: 0!important;
     overflow-x: scroll;
 }
@@ -57,7 +57,7 @@ button.visual-button {
     text-align: center;
 }
 
-.card-section {
+.control-card-section {
     margin: 0;
 }
 
@@ -79,14 +79,6 @@ label.visual-button, button.visual-button {
     color: #FFFFFF;
 
 }
-
-/*label.btn-primary:not([disabled]):not(.disabled):active,*/
-/*label.btn-primary:not([disabled]):not(.disabled).active,*/
-/*.show > .btn-primary.dropdown-toggle {*/
-    /*background-color: #CFD4AD!important;*/
-    /*border-color: #babe9b;*/
-    /*-webkit-box-shadow: 0 0 0 0.2rem rgba(165, 169, 138, 0.5);*/
-/*}*/
 
 .legend-scale {
     width: 50%;

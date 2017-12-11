@@ -368,7 +368,7 @@ export default class MapView extends Component {
                                 : this.destinationValueMapping[this.state.originFilterType].max}
                         </p>
                     </div>
-                    <p className="card-section">
+                    <p className="control-card-section">
                         Filter By:
                     </p>
                     <div className="filter-by-button-container">
@@ -415,7 +415,7 @@ export default class MapView extends Component {
                         <a href="http://flavorsofcacao.com/index.html"> dataset</a>, along with
                         a path trajectory that shows where the chocolate begins and ends up.
                     </p>
-                    <p className="card-section">
+                    <p className="control-card-section">
                         Filter By:
                     </p>
                     <div className="filter-by-button-container">
@@ -441,7 +441,7 @@ export default class MapView extends Component {
                             </label>
                         </div>
                     </div>
-                    <p className="card-section">
+                    <p className="control-card-section">
                         {this.state.transitionView === "exportFilter" ? "Export " : "Import "}
                         Country:
                     </p>
@@ -497,12 +497,12 @@ export default class MapView extends Component {
                 <div className="visual-container col-md-8" id="map">
                 </div>
                 <div className="visual-buttons-container col-md-4">
-                    <div className="card">
+                    <div className="card control-card">
                             <div className="card-block">
                                 <p className="card-title">
                                     Control Center
                                 </p>
-                                <p className="card-section">View Mode:</p>
+                                <p className="control-card-section">View Mode:</p>
                                 <div className="btn-group btn-container view-mode-button-container" data-toggle="buttons">
                                     <div className="btn-group" data-toggle="buttons">
                                         <label
