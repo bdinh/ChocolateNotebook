@@ -18,9 +18,6 @@ export default class LandingView extends Component {
         return(
         <div className="landing-body">
             <div className="landing-image">
-                <div className="get-started-button-container">
-                    <button type="button" className="btn get-started-button">Get Started</button>
-                </div>
                 <div className="landing-text-container">
                     <p className="hero-text quote">
                         “All you need is love. But a little chocolate now and then doesn't hurt.”                 </p>
