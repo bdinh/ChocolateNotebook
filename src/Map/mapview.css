@@ -2,6 +2,12 @@
     background-color: rgba(127, 82, 78, 0.6);
 }
 
+#map:hover {
+    -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+
+}
+
 .nav-link {
     color: #ffffff!important;
 }
@@ -13,17 +19,13 @@
 .visual-padding {
     width: 100%;
     height: 90px;
+    margin: 0;
+    padding: 2em;
 }
 
-.visual-container {
-    height: 60vh;
-    margin: 0 4em;
-}
-
-.visual-buttons-container {
-    width: 100%;
-    height: 10%;
-    text-align: center;
+.visual-container, .visual-buttons-container {
+    height: 80vh;
+    margin-top: 1em;
 }
 
 button.visual-button {
@@ -39,10 +41,65 @@ button.visual-button {
     width: 100%;
 }
 
+.card {
+    margin: 0!important;
+    overflow-x: scroll;
+}
+
 .leaflet-interactive {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
     animation: dash 10s linear forwards;
+}
+
+.card-title {
+    font-size: 2em;
+    text-align: center;
+}
+
+.card-section {
+    margin: 0;
+}
+
+.view-mode-button-container, .filter-by-button-container {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+button.visual-button {
+    margin-left: 0em;
+}
+
+button.visual-button {
+    background: #CFD4AD!important;
+    border-color: #babe9b;
+    color: #FFFFFF;
+
+}
+
+.btn-primary:not([disabled]):not(.disabled):active,
+.btn-primary:not([disabled]):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+    background-color: #CFD4AD!important;
+    border-color: #babe9b;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(165, 169, 138, 0.5);
+}
+
+.legend-scale {
+    width: 50%;
+    height: 2em;
+    background: linear-gradient(to right, rgba(127, 82, 78,0.1), rgba(127, 82, 78,1));
+}
+
+.legend-wrapper {
+    text-align: center;
+}
+.legend-wrapper p, .legend-wrapper div {
+    padding: 1em;
+    display: inline-block;
 }
 
 @keyframes dash {

@@ -19,11 +19,13 @@ export default class MapView extends Component {
         super(props);
         this.state = {
             plotData: null,
-            type: "origin",
+            type: "Origin",
         };
         bindAll(this, [
             "renderCircles",
-            "handleButtons"
+            "handleButtons",
+            "updateControlCenter",
+            "handleOriginFilter"
         ]);
         this.map = "";
     }
@@ -60,55 +62,62 @@ export default class MapView extends Component {
 
     componentDidMount() {
         // this.map = L.map('map');
-        // this.updateMap();
+        this.updateMap();
 
 
-        csv("./final-bezier-data.csv", (error, data) => {
-            let dataArray = [];
-            console.log(data)
+        // csv("./final-bezier-data.csv", (error, data) => {
+        //     let dataArray = [];
+        //     console.log(data)
+        //
+        //     let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        //         attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
+        //     });
+        //
+        //     this.map =  L.map('map')
+        //         .addLayer(mapboxTiles)
+        //         .setView([-1.2858, 13], 2);
+        //
+        //     let origin = [];
+        //     let destination = [];
+        //     let midpoint = [];
 
-            let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
-            });
-
-            this.map =  L.map('map')
-                .addLayer(mapboxTiles)
-                .setView([-1.2858, 20], 2);
-
-            let origin = [];
-            let destination = [];
-            let midpoint = [];
-
-            let count = 0;
-            data.forEach((datum) => {
-                console.log(datum);
-                let pathOptions = {
-                    color: 'brown',
-                    weight: 1,
-                    snakingSpeed: 200,
-                    vertices:200
-                };
-
-                let bezierCurve = L.curve(['M', [datum.originLat, datum.originLong],
-                    'Q', [datum.midpointY + 20, datum.midpointX],
-                    [datum.destLat, datum.destLong]], pathOptions).addTo(this.map);
-                // let bezierCurve = L.Polyline.Arc([datum.originLat, datum.originLong], [datum.destLat, datum.destLong], pathOptions).addTo(this.map).snakeIn();
-                // let bezierCurve = L.Polyline.Arc([-25.274398, -133.775136], [-25.274398, 133.775136], pathOptions).addTo(this.map).snakeIn();
-
-                let popupText = "<b>Country of Origin:</b> " + datum.Origin + "<br>" +
-                    "<b>Country of Destination:</b> " + datum.Destination + "<br>" +
-                    "<b>Total # Bars:</b> " + datum.TotalN + "<br>" +
-                    "<b>Average Cocoa Percentage:</b> " + datum.MeanPercent + "%" + "<br>" +
-                    "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.MeanRating)) / 100;
-                bezierCurve.bindPopup(popupText);
-                bezierCurve.on('mouseover', function (e) {
-                    this.openPopup();
-                });
-                bezierCurve.on('mouseout', function (e) {
-                    this.closePopup();
-                });
-
-            })
+            // data.forEach((datum) => {
+            //     let pathOptions = {
+            //         color: 'rgba(127, 82, 78, 0.2)',
+            //         weight: 2,
+            //         snakingSpeed: 200,
+            //         vertices:200
+            //     };
+            //
+            //     let bezierCurve = L.curve(['M', [datum.originLat, datum.originLong],
+            //         'Q', [datum.midpointY + 20, datum.midpointX],
+            //         [datum.destLat, datum.destLong]], pathOptions).addTo(this.map);
+            //     // let bezierCurve = L.Polyline.Arc([datum.originLat, datum.originLong], [datum.destLat, datum.destLong], pathOptions).addTo(this.map).snakeIn();
+            //     // let bezierCurve = L.Polyline.Arc([-25.274398, -133.775136], [-25.274398, 133.775136], pathOptions).addTo(this.map).snakeIn();
+            //
+            //     let popupText = "<b>Country of Origin:</b> " + datum.Origin + "<br>" +
+            //         "<b>Country of Destination:</b> " + datum.Destination + "<br>" +
+            //         "<b>Total # Bars:</b> " + datum.TotalN + "<br>" +
+            //         "<b>Average Cocoa Percentage:</b> " + datum.MeanPercent + "%" + "<br>" +
+            //         "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.MeanRating)) / 100;
+            //     bezierCurve.bindPopup(popupText);
+            //     bezierCurve.on('mouseover', function (e) {
+            //         // this.options.color = 'rgba(127, 82, 78, 1)';
+            //         this.setStyle({
+            //             color: 'rgba(127, 82, 78, 1)',
+            //             weight:
+            //         });
+            //         this.openPopup();
+            //     });
+            //     bezierCurve.on('mouseout', function (e) {
+            //         // this.options.color = 'rgba(127, 82, 78, 0.2)';
+            //         this.setStyle(pathOptions);
+            //         this.closePopup();
+            //     });
+            //
+            //
+            //
+            // })
 
 
 
@@ -139,17 +148,17 @@ export default class MapView extends Component {
 
 
 
-        })
+        // })
     }
 
     handleButtons(event) {
         console.log(event.target.value);
-        this.setState({
-            type: event.target.value
-        });
-        this.updateMap();
-        this.map.off();
-        this.map.remove();
+        // this.setState({
+        //     type: event.target.value
+        // });
+        // this.updateMap();
+        // this.map.off();
+        // this.map.remove();
     }
 
     updateMap() {
@@ -157,11 +166,9 @@ export default class MapView extends Component {
         // this.map.off();
         // this.map.remove();
 
-        if (this.state.type === "origin") {
+        if (this.state.type === "Origin") {
             csv("./origin-data.csv", (error, data) => {
-                let dataArray = [];
                 console.log(data)
-
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                 });
@@ -175,18 +182,34 @@ export default class MapView extends Component {
                     let circle = new L.circleMarker(position, {
                         color: "transparent",
                         fill: true,
-                        fillColor: 'brown',
-                        fillOpacity: 0.5,
-                        radius: datum.count * .1
+                        fillColor: '#7F524E',
+                        fillOpacity: datum.count * 0.01,
+                        radius: 5
                     }).addTo(this.map);
                     let popupText = "<b>Country of Origin:</b> " + datum["Bean.Origin"] + "<br>" +
                         "<b>Total # Bars:</b> " + datum.count + "<br>" +
                         "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum["avg.rating"])) / 100;
                     circle.bindPopup(popupText)
+
+                    circle.on('mouseover', (event) => {
+                        event.target.openPopup();
+                        event.target.setStyle({
+                            fillOpacity: 1
+                        });
+                    });
+
+                    circle.on('mouseout', (event) => {
+                        event.target.closePopup();
+                        event.target.setStyle({
+                            fillOpacity: datum.count * 0.01
+                        });
+                    });
+
                 })
+
             })
 
-        } else if (this.state.type === "destination"){
+        } else if (this.state.type === "Destination"){
             csv("./destination-data.csv", (error, data) => {
                 let dataArray = [];
                 console.log(data)
@@ -286,32 +309,117 @@ export default class MapView extends Component {
         }
     }
 
+    handleOriginFilter(event) {
+        console.log(event.target.value)
+    }
+
+    updateControlCenter() {
+        if (this.state.type === "Origin") {
+            return (
+                <div>
+                    <p>This map shows the country of origin that produced the chocolate bars
+                        from the 1700 individual bars that were expertly rated in this
+                        <a href="http://flavorsofcacao.com/index.html"> dataset</a>.
+                    </p>
+                    <p>Total Number of Bars Exported Legend:</p>
+                    <div className="legend-wrapper">
+                        <p>0</p>
+                        <div className="legend-scale">
+                        </div>
+                        <p>220</p>
+                    </div>
+                    <p className="card-section">
+                        Filter By:
+                    </p>
+                    <div className="filter-by-button-container">
+                        <button
+                            className="btn visual-button"
+                            type="radio"
+                            name="total-filter"
+                            value="total-filter"
+                            onClick={this.handleOriginFilter}
+                        >
+                            Total
+                        </button>
+                        <button
+                            className="btn visual-button"
+                            type="radio"
+                            name="rating-filter"
+                            value="rating-filter"
+                            onClick={this.handleOriginFilter}
+                        >
+                            Rating
+                        </button>
+                        <button
+                            className="btn visual-button"
+                            type="radio"
+                            name="percent-filter"
+                            value="percent-filter"
+                            onClick={this.handleOriginFilter}
+                        >
+                            Cocao Percent
+                        </button>
+                    </div>
+                </div>
+            );
+        } else if (this.state.type === "Destination") {
+            return (
+                <p>This map shows the country where the chocolate bars
+                    from the 1700 individual bars that were expertly rated in this
+                    <a href="http://flavorsofcacao.com/index.html"> dataset</a> were
+                    imported to.
+                </p>
+            )
+        } else {
+            return ""
+        }
+    }
+
+
     render() {
 
         return (
             <div className="map-wrapper">
-                <div className="visual-padding"/>
-                <div className="visual-buttons-container">
-                    <button
-                        className="btn visual-button"
-                        id="origin-button"
-                        value="origin"
-                        onClick={this.handleButtons}
-                    >Origin</button>
-                    <button
-                        className="btn visual-button"
-                        id="destination-button"
-                        value="destination"
-                        onClick={this.handleButtons}
-                    >Destination</button>
-                    <button
-                        className="btn visual-button"
-                        value="transition"
-                        id="transition-button"
-                        onClick={this.handleButtons}
-                    >Transition</button>
+                <div className="visual-padding row">
+                <div className="visual-container col-md-8" id="map">
                 </div>
-                <div className="visual-container" id="map">
+                <div className="visual-buttons-container col-md-4">
+                    <div className="card">
+                            <div className="card-block">
+                                <p className="card-title">
+                                    Control Center
+                                </p>
+                                <p className="card-section">View Mode:</p>
+                                <div className="btn-group btn-container view-mode-button-container" data-toggle="buttons">
+                                        <button
+                                            className="btn visual-button"
+                                            type="radio"
+                                            name="Origin"
+                                            value="Origin"
+                                            onClick={this.handleButtons}
+                                        >Origin
+                                        </button>
+                                        <button
+                                            className="btn visual-button"
+                                            type="radio"
+                                            name="Destination"
+                                            value="Destination"
+                                            onClick={this.handleButtons}
+                                        >Destination
+                                        </button>
+                                        <button
+                                            className="btn visual-button"
+                                            type="radio"
+                                            name="Transition"
+                                            value="Transition"
+                                            onClick={this.handleButtons}
+                                        >Transition
+                                        </button>
+                                </div>
+                                {this.updateControlCenter()}
+                            </div>
+                    </div>
+                </div>
                 </div>
             </div>
         );
