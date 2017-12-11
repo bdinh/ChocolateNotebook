@@ -24,7 +24,6 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        $('#nav').hide();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -51,6 +50,8 @@ class Login extends Component {
             errorMessage
         } = this.props;
 
+        $('#nav').hide();
+
         if (this.state.loading) {
             return (
                 <div className="text-center">
@@ -61,6 +62,9 @@ class Login extends Component {
             return (
                 <div id="login">
                     <div className="row row-container">
+                        <div>
+                            <i id="back-button" class="fa fa-times" aria-hidden="true"></i>
+                        </div>
                         <div className="login-banner-container">
                         </div>
                         <div className="brown-vertical-stroke">

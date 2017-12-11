@@ -11,7 +11,10 @@ export default class LandingView extends Component {
         super(props);
     }
 
+
     render() {
+        $('#nav').hide();
+
         return(
         <div className="landing-body">
             <div className="landing-image">

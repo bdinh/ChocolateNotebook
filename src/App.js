@@ -4,7 +4,6 @@ import './App.css';
 import LandingPage from './Landing/landingView';
 import Catalog from './Catalog/Catalog';
 import ProductPage from './Catalog/ProductPage';
-// import MapView from './Map/mapView';
 import {Journal, JournalNewEntry} from './Journal/Journal';
 import Subscription from './Subscription/Subscription';
 import Subscribe from './Subscription/Subscribe';
@@ -151,13 +150,6 @@ class App extends Component {
                       <Switch>
                         <Route exact path="/" render={(routerProps) => {
                             return (<LandingPage />)
-                            // return (<Login
-                            //     {...routerProps}
-                            //     signInCallback={(e,p) =>
-                            //         this.handleSignIn(e,p)}
-                            //     errorMessage={this.state.errorMessage}
-                            // />)
-                            // return <MapView/>
                         }}/>
                         <Route exact path="/login" render={(routerProps) => {
                             return (<Login
