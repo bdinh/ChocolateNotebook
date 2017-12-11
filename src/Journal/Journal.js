@@ -9,7 +9,7 @@ import { NewJournalEntryCard } from './NewJournalEntry';
 import { EditingJournalEntryCard } from './EditJournalEntry';
 
 
-// Needs make new entry callback
+// Displays all journal items the user has input so far
 export class Journal extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +36,8 @@ export class Journal extends Component {
   }
 }
 
+// Lets user create a new entry in the journal, displays 
+// input options for specifying details about the chocolate
 export class JournalNewEntry extends Component {
   // Call back to add new entry to database
   addNewEntry(entryDetails) {
@@ -60,6 +62,7 @@ class NewEntryButton extends Component {
     this.state = {navigate : false};
   }
   render() {
+    // Redirect to new journal entry making page if necessary
     if (this.state.navigate) {
       return <Redirect to="/newjournalEntry" push={true} />
     }
@@ -71,8 +74,8 @@ class NewEntryButton extends Component {
   }
 }
 
+// Search bar for journal
 class SearchJournal extends Component {
-  
   render() {
     return (
       <div className="search-elements">
@@ -83,7 +86,7 @@ class SearchJournal extends Component {
     );
   }
 }
-
+// Renders all journal items, taking into account words that are currently searched for
 class RenderJournalItems extends Component {
   constructor(props) {
     super(props);

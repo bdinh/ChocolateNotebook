@@ -1,3 +1,4 @@
+// All tasting notes to be used in select boxes when creating an entry
 export const TASTINGNOTES = [
 	{ label: 'Blackberry', value: 'blackberry' }, 
     { label: 'Currant', value: 'currant' }, 

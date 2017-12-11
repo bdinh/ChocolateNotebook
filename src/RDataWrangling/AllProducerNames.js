@@ -1,3 +1,4 @@
+// All producers to be used in select boxes when creating an entry
 export const PRODUCERS = [
 	{ label: 'A. Morin', value: 'a. morin' }, 
     { label: 'Amedei', value: 'amedei' }, 

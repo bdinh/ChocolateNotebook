@@ -1,5 +1,4 @@
 // Takes an input rating between 1 and 5 and returns the font awesome star icons to display the rating
-
 import React from 'react';
 
 export function renderRatingStars(inputNum) {

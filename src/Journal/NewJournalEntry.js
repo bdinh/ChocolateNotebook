@@ -33,12 +33,14 @@ export class NewJournalEntryCard extends Component {
         this.setState({});
     }
     
+    // Updates details from select boxes-- tasting notes, origin, producer
     updateChocolateDetails(details) {
         this.tastingNotes = details.tastingNotes;
         this.origin = details.origin;
         this.producer = details.producer;
     }
     
+    // Updates rating
     updateRating(rating) {
         this.rating = rating;
     }
@@ -215,7 +217,6 @@ export class NewJournalCardHeader extends Component {
         this.props.passUpStateCallback(this.state)
     }
     
-    
     render() {
         if (this.props.editingDate && this.props.editingbarName) {
             return  (
@@ -241,6 +242,7 @@ export class NewJournalCardHeader extends Component {
 
 // From stack overflow
 // https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
+// Gets and formats the current date
 function getCurrentDate() {
     let today = new Date();
     let dd = today.getDate();

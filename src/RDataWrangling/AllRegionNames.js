@@ -1,3 +1,4 @@
+// All regions/origins to be used in select boxes when creating an entry
 export const ORIGINS = [
 { label: 'Panama', value: 'panama' },
 { label: 'Ecuador', value: 'ecuador' },
