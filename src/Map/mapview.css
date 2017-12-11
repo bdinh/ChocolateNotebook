@@ -91,8 +91,16 @@ button.visual-button {
 .legend-scale {
     width: 50%;
     height: 2em;
+}
+
+.legend-scale-origin {
     background: linear-gradient(to right, rgba(127, 82, 78,0.1), rgba(127, 82, 78,1));
 }
+
+.legend-scale-destination {
+    background: linear-gradient(to right, rgba(144, 148, 121,0.1), rgba(144, 148, 121,1));
+}
+
 
 .legend-wrapper {
     text-align: center;

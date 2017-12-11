@@ -18,44 +18,54 @@ export default class MapView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            plotData: null,
-            type: "Origin",
+            type: "origin-view",
+            originFilterType: "totalFilter"
         };
         bindAll(this, [
-            "renderCircles",
-            "handleButtons",
+            "handleViewMode",
             "updateControlCenter",
             "handleOriginFilter"
         ]);
         this.map = "";
+        this.originValueMapping = {
+            totalFilter: {
+                min: 0,
+                max: 220,
+                text: "Total Number"
+            },
+            ratingFilter: {
+                min: 0,
+                max: 3.5,
+                text: "Average Rating"
+            },
+            percentFilter: {
+                min: 0,
+                max: 85,
+                text: "Average Cocao Percent"
+            },
+        };
+        this.destinationValueMapping = {
+            totalFilter: {
+                min: 0,
+                max: 775,
+                text: "Total Number"
+            },
+            ratingFilter: {
+                min: 0,
+                max: 4,
+                text: "Average Rating"
+            },
+            percentFilter: {
+                min: 0,
+                max: 85,
+                text: "Average Cocao Percent"
+            },
+        };
+
     }
 
     componentWillMount() {
-        // json("./test2.json", (error, data) => {
-        //     let dataArray = [];
-        //
-        //     Object.keys(data).forEach((key, i) => {
-        //         if (i == 0) {
-        //             let insertObject = {};
-        //             data[key].forEach((value) => {
-        //                 insertObject[key] = value;
-        //                 dataArray.push(insertObject);
-        //             });
-        //         } else {
-        //             data[key].forEach((value) => {
-        //                 let insert = dataArray[i];
-        //                 insert[key] = value;
-        //             });
-        //         }
-        //     });
-        //
-        //     // dataArray.forEach((collection) => {
-        //     //     collection.LatLng = new L.LatLng(collection["Origin.Lat"], collection["Origin.Long"])
-        //     // });
-        //     this.setState({
-        //         data: dataArray
-        //     });
-        // })
+
 
 
     }
@@ -63,7 +73,6 @@ export default class MapView extends Component {
     componentDidMount() {
         // this.map = L.map('map');
         this.updateMap();
-
 
         // csv("./final-bezier-data.csv", (error, data) => {
         //     let dataArray = [];
@@ -151,24 +160,10 @@ export default class MapView extends Component {
         // })
     }
 
-    handleButtons(event) {
-        console.log(event.target.value);
-        // this.setState({
-        //     type: event.target.value
-        // });
-        // this.updateMap();
-        // this.map.off();
-        // this.map.remove();
-    }
-
     updateMap() {
-
-        // this.map.off();
-        // this.map.remove();
-
-        if (this.state.type === "Origin") {
+        if (this.state.type === "origin-view") {
+            console.log("orig")
             csv("./origin-data.csv", (error, data) => {
-                console.log(data)
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                 });
@@ -178,18 +173,32 @@ export default class MapView extends Component {
                     .setView([-1.2858, 20], 2);
 
                 data.forEach((datum) => {
+                    let opacity;
+                    switch (this.state.originFilterType) {
+                        case "totalFilter":
+                            opacity = datum.total * 0.01;
+                            break;
+                        case "ratingFilter":
+                            opacity = datum.avgRating * 0.25;
+                            break;
+                        case "percentFilter":
+                            opacity = datum.avgPercent / 120;
+                            break;
+                    }
+
                     let position = [parseFloat(datum.latitude), parseFloat(datum.longitude)];
                     let circle = new L.circleMarker(position, {
                         color: "transparent",
                         fill: true,
                         fillColor: '#7F524E',
-                        fillOpacity: datum.count * 0.01,
+                        fillOpacity: opacity,
                         radius: 5
                     }).addTo(this.map);
                     let popupText = "<b>Country of Origin:</b> " + datum["Bean.Origin"] + "<br>" +
-                        "<b>Total # Bars:</b> " + datum.count + "<br>" +
-                        "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum["avg.rating"])) / 100;
-                    circle.bindPopup(popupText)
+                        "<b>Total # Bars:</b> " + datum.total + "<br>" +
+                        "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.avgRating)) / 100 + "<br>" +
+                        "<b>Average Cocoa Percent:</b> " + Math.round(10 * parseFloat(datum.avgPercent)) / 10  + "%";
+                        circle.bindPopup(popupText);
 
                     circle.on('mouseover', (event) => {
                         event.target.openPopup();
@@ -201,7 +210,7 @@ export default class MapView extends Component {
                     circle.on('mouseout', (event) => {
                         event.target.closePopup();
                         event.target.setStyle({
-                            fillOpacity: datum.count * 0.01
+                            fillOpacity: opacity
                         });
                     });
 
@@ -209,10 +218,9 @@ export default class MapView extends Component {
 
             })
 
-        } else if (this.state.type === "Destination"){
+        } else if (this.state.type === "destination-view"){
+            console.log("dest")
             csv("./destination-data.csv", (error, data) => {
-                let dataArray = [];
-                console.log(data)
 
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                     attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
@@ -223,18 +231,46 @@ export default class MapView extends Component {
                     .setView([-1.2858, 20], 2);
 
                 data.forEach((datum) => {
+                    let opacity;
+                    switch (this.state.originFilterType) {
+                        case "totalFilter":
+                            opacity = datum.total * 0.01;
+                            break;
+                        case "ratingFilter":
+                            opacity = datum.avgRating * 0.30;
+                            break;
+                        case "percentFilter":
+                            opacity = datum.avgPercent / 100;
+                            break;
+                    }
+
                     let position = [parseFloat(datum.latitude), parseFloat(datum.longitude)];
                     let circle = new L.circleMarker(position, {
                         color: "transparent",
                         fill: true,
-                        fillColor: 'brown',
-                        fillOpacity: 0.5,
-                        radius: datum.count * 0.1
+                        fillColor: '#909479',
+                        fillOpacity: opacity,
+                        radius: 5
                     }).addTo(this.map);
                     let popupText = "<b>Country of Destination:</b> " + datum["Company.Location"] + "<br>" +
-                        "<b>Total # Bars:</b> " + datum.count + "<br>" +
-                        "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum["avg.rating"])) / 100;
-                    circle.bindPopup(popupText)
+                        "<b>Total # Bars:</b> " + datum.total + "<br>" +
+                        "<b>Average Rating:</b> " + Math.round(100 * parseFloat(datum.avgRating)) / 100 + "<br>" +
+                        "<b>Average Cocoa Percent:</b> " + Math.round(10 * parseFloat(datum.avgPercent)) / 10  + "%";
+                    circle.bindPopup(popupText);
+
+                    circle.on('mouseover', (event) => {
+                        event.target.openPopup();
+                        event.target.setStyle({
+                            fillOpacity: 1
+                        });
+                    });
+
+                    circle.on('mouseout', (event) => {
+                        event.target.closePopup();
+                        event.target.setStyle({
+                            fillOpacity: opacity
+                        });
+                    });
                 })
             });
         } else {
@@ -293,40 +329,55 @@ export default class MapView extends Component {
 
     }
 
-    renderCircles() {
-        if (this.state.plotData !== null) {
-            console.log(this.state.plotData);
-            this.state.plotData.map((origin, i) => {
-                return (
-                    <CircleMarker radius={10} key={i} center={[55.5, 50]}>
-                        <Popup>
-                            <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
-                        </Popup>
-                    </CircleMarker>
-                )
-            })
-
-        }
+    handleViewMode(event) {
+        this.map.off();
+        this.map.remove();
+        this.setState({
+            type: event.target.value
+        }, this.updateMap);
+        console.log(this.map);
     }
 
+
     handleOriginFilter(event) {
-        console.log(event.target.value)
+        this.map.off();
+        this.map.remove();
+        this.setState({
+            originFilterType: event.target.value
+        }, this.updateMap);
     }
 
     updateControlCenter() {
-        if (this.state.type === "Origin") {
+        if ((this.state.type === "origin-view") || (this.state.type === "destination-view")) {
             return (
                 <div>
-                    <p>This map shows the country of origin that produced the chocolate bars
-                        from the 1700 individual bars that were expertly rated in this
-                        <a href="http://flavorsofcacao.com/index.html"> dataset</a>.
-                    </p>
-                    <p>Total Number of Bars Exported Legend:</p>
+                    {
+                        this.state.type === "origin-view" ?
+                            (<p>This map shows the country of origin that produced the chocolate bars
+                                    from the 1700 individual bars that were expertly rated in this
+                                    <a href="http://flavorsofcacao.com/index.html"> dataset</a>.
+                                </p>
+                            ) :
+                            (<p>This map shows the country where the chocolate bars
+                                    from the 1700 individual bars that were expertly rated in this
+                                    <a href="http://flavorsofcacao.com/index.html"> dataset</a> were
+                                    imported to.
+                                </p>)
+                    }
+                    <p>{this.originValueMapping[this.state.originFilterType].text} of Bars Exported Legend:</p>
                     <div className="legend-wrapper">
-                        <p>0</p>
-                        <div className="legend-scale">
+                        <p>
+                            {this.state.type === "origin-view" ?
+                                    this.originValueMapping[this.state.originFilterType].min
+                                    : this.destinationValueMapping[this.state.originFilterType].min}
+                        </p>
+                        <div className={"legend-scale" + " " + (this.state.type === "origin-view" ? "legend-scale-origin" : "legend-scale-destination")}>
                         </div>
-                        <p>220</p>
+                        <p>
+                            {this.state.type === "origin-view" ?
+                                this.originValueMapping[this.state.originFilterType].max
+                                : this.destinationValueMapping[this.state.originFilterType].max}
+                        </p>
                     </div>
                     <p className="card-section">
                         Filter By:
@@ -335,8 +386,8 @@ export default class MapView extends Component {
                         <button
                             className="btn visual-button"
                             type="radio"
-                            name="total-filter"
-                            value="total-filter"
+                            name="totalFilter"
+                            value="totalFilter"
                             onClick={this.handleOriginFilter}
                         >
                             Total
@@ -344,8 +395,8 @@ export default class MapView extends Component {
                         <button
                             className="btn visual-button"
                             type="radio"
-                            name="rating-filter"
-                            value="rating-filter"
+                            name="ratingFilter"
+                            value="ratingFilter"
                             onClick={this.handleOriginFilter}
                         >
                             Rating
@@ -353,8 +404,8 @@ export default class MapView extends Component {
                         <button
                             className="btn visual-button"
                             type="radio"
-                            name="percent-filter"
-                            value="percent-filter"
+                            name="percentFilter"
+                            value="percentFilter"
                             onClick={this.handleOriginFilter}
                         >
                             Cocao Percent
@@ -362,7 +413,7 @@ export default class MapView extends Component {
                     </div>
                 </div>
             );
-        } else if (this.state.type === "Destination") {
+        } else if (this.state.type === "destination-view") {
             return (
                 <p>This map shows the country where the chocolate bars
                     from the 1700 individual bars that were expertly rated in this
@@ -394,25 +445,25 @@ export default class MapView extends Component {
                                         <button
                                             className="btn visual-button"
                                             type="radio"
-                                            name="Origin"
-                                            value="Origin"
-                                            onClick={this.handleButtons}
+                                            name="origin-view"
+                                            value="origin-view"
+                                            onClick={this.handleViewMode}
                                         >Origin
                                         </button>
                                         <button
                                             className="btn visual-button"
                                             type="radio"
-                                            name="Destination"
-                                            value="Destination"
-                                            onClick={this.handleButtons}
+                                            name="destination-view"
+                                            value="destination-view"
+                                            onClick={this.handleViewMode}
                                         >Destination
                                         </button>
                                         <button
                                             className="btn visual-button"
                                             type="radio"
-                                            name="Transition"
-                                            value="Transition"
-                                            onClick={this.handleButtons}
+                                            name="transition-view"
+                                            value="transition-view"
+                                            onClick={this.handleViewMode}
                                         >Transition
                                         </button>
                                 </div>
