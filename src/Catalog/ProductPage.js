@@ -16,7 +16,7 @@ export default class ProductPage extends Component {
         console.log(product);
 
         let content;
-        if (product.length == 0) {
+        if (product.length === 0) {
             content = (<p><strong>Product not found.</strong> Please return to our <Link to="/catalog" >Catalog</Link></p>);
         } else {
             product = product[0];
