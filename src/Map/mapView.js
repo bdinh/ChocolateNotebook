@@ -3,16 +3,13 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map';
 import './mapview.css';
 import { json, select, csv } from 'd3';
-import { Map, Marker, Popup, TileLayer, Circle, CircleMarker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L, { map, getPanes, overlayPane, geo, svg, LatLng,
     initPathRoot, path, collection, circleMarker, remove, off } from 'leaflet';
 import $ from 'jquery';
-// import L from 'leaflet';
 import { bindAll } from 'lodash'
 import  '../../node_modules/leaflet-curve/leaflet.curve';
 import '../../node_modules/leaflet-arc/bin/leaflet-arc.min';
-import '../../node_modules/leaflet.polyline.snakeanim/L.Polyline.SnakeAnim'
 
 export default class MapView extends Component {
     constructor(props) {
@@ -80,7 +77,6 @@ export default class MapView extends Component {
     }
 
     componentDidMount() {
-        // this.map = L.map('map');
         this.updateMap();
         // var line = L.polyline(latlngs, {snakingSpeed: 200});
             // line.addTo(map).snakeIn();
@@ -304,7 +300,6 @@ export default class MapView extends Component {
     }
 
     handleViewMode(event) {
-        console.log(event.target.id);
         this.map.off();
         this.map.remove();
         this.setState({
@@ -333,8 +328,6 @@ export default class MapView extends Component {
     }
 
     handleCountryFilter(event) {
-        // console.log(this.state);
-        // console.log(event.target.value);
         this.map.off();
         this.map.remove();
         this.setState({
