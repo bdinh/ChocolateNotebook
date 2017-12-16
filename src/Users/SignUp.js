@@ -23,10 +23,6 @@ class SignUp extends Component {
     ])
   }
 
-  componentDidMount() {
-      $('#nav').hide();
-  }
-
   handleSignUp(event) {
     event.preventDefault(); //don't submit
     this.props.signUpCallback(this.state.email, this.state.password);
@@ -91,7 +87,10 @@ class SignUp extends Component {
   }
 
   render() {
-    const {
+
+      $('nav.navbar').hide();
+
+      const {
         errorMessage
     } = this.props;
     if (this.state.loading) {

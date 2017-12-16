@@ -3,24 +3,23 @@ import $ from "jquery";
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map';
 import './landing.css'
-import { Link  } from 'react-router-dom';
 
-
+// Landing page component of our application
 export default class LandingView extends Component {
     constructor(props) {
         super(props);
     }
 
-
     render() {
-        $('#nav').hide();
+        $('nav.navbar').show();
 
         return(
         <div className="landing-body">
             <div className="landing-image">
                 <div className="landing-text-container">
                     <p className="hero-text quote">
-                        “All you need is love. But a little chocolate now and then doesn't hurt.”                 </p>
+                        “All you need is love. But a little chocolate now and then doesn't hurt.”
+                    </p>
                     <p className="hero-text cited">- Charles M. Schulz</p>
                 </div>
             </div>

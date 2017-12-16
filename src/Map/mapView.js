@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map';
 import './mapview.css';
-import { json, select, csv } from 'd3';
+import { csv } from 'd3';
 import 'leaflet/dist/leaflet.css';
-import L, { map, getPanes, overlayPane, geo, svg, LatLng,
-    initPathRoot, path, collection, circleMarker, remove, off } from 'leaflet';
+import L, { map, LatLng,
+      circleMarker, remove, off } from 'leaflet';
 import $ from 'jquery';
 import { bindAll } from 'lodash'
 import  '../../node_modules/leaflet-curve/leaflet.curve';
 import '../../node_modules/leaflet-arc/bin/leaflet-arc.min';
 
+// Main wrapper component that encapsulates the map view and control center component in order to rerender the
+// map base on the buttons selected
 export default class MapView extends Component {
     constructor(props) {
         super(props);
@@ -74,8 +76,8 @@ export default class MapView extends Component {
         this.updateMap();
     }
 
+    // Helper function that updates the type and data of map to be displayed
     updateMap() {
-
             if (this.state.type === "origin-view") {
             csv("./origin-data.csv", (error, data) => {
                 let mapboxTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -273,6 +275,7 @@ export default class MapView extends Component {
 
     }
 
+    // Handles the view mode to be displayed
     handleViewMode(event) {
             let eventTriggered = event.target.id;
             setTimeout(function() {
@@ -284,7 +287,7 @@ export default class MapView extends Component {
             }.bind(this), 0);
     }
 
-
+    // Handles the scale of data to be displayed
     handleOriginFilter(event) {
             let eventTriggered = event.target.id;
             setTimeout(function () {
@@ -296,6 +299,7 @@ export default class MapView extends Component {
             }.bind(this), 0)
     }
 
+    // Handles the view mode in the transition map
     handleTransitionView(event) {
             $('#AllFilter').addClass('active');
             $('#' + this.state.transitionViewSelected).removeClass('active');
@@ -307,6 +311,7 @@ export default class MapView extends Component {
             }, this.updateMap);
     }
 
+    // Handles the country to be displayed in the transition view
     handleCountryFilter(event) {
             this.map.off();
             this.map.remove();
